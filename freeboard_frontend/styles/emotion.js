@@ -75,7 +75,7 @@ export const HouseWrapper = styled.div`
   flex-direction: row;
 `
 
-export const Housecode = styled.input`
+export const HouseCode = styled.input`
   width: 77px;
   height: 52px;
   padding-left: 16px;
@@ -163,4 +163,8 @@ export const SubmitButton = styled.button`
   font-weight: 500;
   margin-left: 12px;
   margin-right: 12px;
+`
+
+export const ErrorMessage = styled.div`
+color:red;
 `
