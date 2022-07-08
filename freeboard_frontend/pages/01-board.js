@@ -21,80 +21,93 @@ import {
   ButtonWrapper,
   SubmitButton,
 } from "../styles/emotion";
+
 import { useState } from "react";
 import { ErrorMessage } from "../styles/emotion";
+import { useMutation, gql } from '@apollo/client';
+
+const CREATE_BOARD = gql`
+mutation createBoard($writer: String,  $title: String, $contents: String) {
+  createBoard(writer: $writer, title:$title, contents:$contents) {
+    _id
+    number
+    message
+  }
+}
+`
+
 
 export default function Board() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [contents, setContents] = useState("");
+  const [createBoard] = useMutation(CREATE_BOARD)
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
+  const [contentsError, setContentsError] = useState("");
+
+//게시물 등록하기 기능 구현(createBoard), 확인 시 fetchBoard 활용 
+const onClickGraphqlApi = async() => {
+  const result = await createBoard({
+    variables: {
+      writer: writer,
+     //createboard에는 패스워드 없음 
+      title: title,
+      contents: contents
+    }
+  })
+  console.log(result)
+  console.log(result.data.createBoard.message)
+}
+  
 
   function onChangeWriter(event) {
     setWriter(event.target.value);
-    //console.log(writer)
+    if (writer === "") {// 작성 시 빨간글씨 즉시 제거 
+      setWriterError("");
+    }
   }
 
   function onChangePassword(event) {
     setPassword(event.target.value);
+    if (password === "") {
+      setPasswordError("");
+    }
   }
 
   function onChangeTitle(event) {
     setTitle(event.target.value);
+    if (title === "") {
+      setTitleError("");
+    }
   }
 
   function onChangeContent(event) {
-    setContent(event.target.value);
+    setContents(event.target.value);
+    if (contents === "") {
+      setContentsError("");
+    }
   }
 
   function onBlankConfirm() {
-    if((writer.length === 0) && (password.length===0) && (title.length===0)){
-      setWriterError("이름을 적어주세요.");
-      setPasswordError("비밀번호를 입력해주세요.");
-      setTitleError("제목을 작성해주세요.");
-      setContentError("내용을 작성해주세요.");
+    if (!writer) {
+      setWriterError("작성자를 입력해주세요.");
     }
-    if (writer.length === 0) {
-      //(writer.value=="") {
-      setWriterError("이름을 적어주세요.");
-    } else if (password.length === 0) {
+    if (!password) {
       setPasswordError("비밀번호를 입력해주세요.");
-      if (writer.length >= 1) setWriterError("");
-    } else if (title.length === 0) {
-      setTitleError("제목을 작성해주세요.");
-      if (password.length >= 1) setPasswordError("");
-    } else if (content.length === 0) {
-      setContentError("내용을 작성해주세요.");
-      if (title.length >= 1) setTitleError("");
-    } else {
-      alert("게시글이 등록되었습니다.");
-      setWriterError("");
-      setPasswordError("");
-      setTitleError("");
-      setContentError("");
     }
-
-    // if (writer.length === 0) {
-    //   setWriterError("이름을 적어주세요.");
-    // } 
-    // if (password.length === 0) {
-    //   setPasswordError("비밀번호를 입력해주세요.");
-    // } 
-    // if (title.length === 0) {
-    //   setTitleError("제목을 작성해주세요.");
-    
-    // } 
-    // if (content.length === 0) {
-    //   setContentError("내용을 작성해주세요.");
-    // } 
-    // if(writer.length >=1 && password.length >= 1 && title.length >=1 && content.length >= 1) {
-    //   alert("게시글이 등록되었습니다.");
-    // }
+    if (!title) {
+      setTitleError("제목을 입력해주세요.");
+    }
+    if (!contents) {
+      setContentsError("내용을 입력해주세요.");
+    }
+    if (writer && password && title && contents) {
+        alert("게시글이 등록되었습니다.");
+    }
   }
 
   return (
@@ -135,7 +148,7 @@ export default function Board() {
           placeholder="내용을 작성해주세요."
           onChange={onChangeContent}
         />
-        <ErrorMessage>{contentError}</ErrorMessage>
+        <ErrorMessage>{contentsError}</ErrorMessage>
       </InputWrapper>
       <InputWrapper>
         <Label>주소</Label>
@@ -165,7 +178,8 @@ export default function Board() {
       </OptionWrapper>
       <ButtonWrapper>
         <SubmitButton>
-          <button onClick={onBlankConfirm}>등록하기</button>
+          {/* <button onClick={onBlankConfirm}>등록하기</button> */}
+          <button onClick={onClickGraphqlApi}>게시물 등록하기</button>
         </SubmitButton>
       </ButtonWrapper>
     </Wrapper>
