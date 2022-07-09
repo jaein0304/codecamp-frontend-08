@@ -30,7 +30,7 @@ export default function GraphqlMutationPage() {
             }
         }) //await 없으면 promise 
         //router.push("/05-08-dynamic-routed-board-query/" + result(data.createBoard.number))
-        router.push(`/05-08-dynamic-routed-board-query/${result(data.createBoard.number)}` ) //템플릿 리터럴(Template Literal)
+        router.push(`/05-08-dynamic-routed-board-query/${result.data.createBoard.number}` ) //템플릿 리터럴(Template Literal)
         console.log(result.data.createBoard.number)
         console.log(result.data.createBoard.message)
     } catch(error) {
