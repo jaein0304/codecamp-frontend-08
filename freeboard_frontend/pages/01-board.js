@@ -20,79 +20,65 @@ import {
   RadioLabel,
   ButtonWrapper,
   SubmitButton,
+  ErrorMessage,
 } from "../styles/emotion";
 
 import { useState } from "react";
-import { ErrorMessage } from "../styles/emotion";
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const CREATE_BOARD = gql`
-mutation createBoard($writer: String,  $title: String, $contents: String) {
-  createBoard(writer: $writer, title:$title, contents:$contents) {
-    _id
-    number
-    message
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+     _id
+    }
   }
-}
-`
-
+`;
 
 export default function Board() {
+  const router = useRouter();
+
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [createBoard] = useMutation(CREATE_BOARD)
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
 
-//게시물 등록하기 기능 구현(createBoard), 확인 시 fetchBoard 활용 
-const onClickGraphqlApi = async() => {
-  const result = await createBoard({
-    variables: {
-      writer: writer,
-     //createboard에는 패스워드 없음 
-      title: title,
-      contents: contents
-    }
-  })
-  console.log(result)
-  console.log(result.data.createBoard.message)
-}
-  
+  const [createBoard] = useMutation(CREATE_BOARD);
 
-  function onChangeWriter(event) {
+  const onChangeWriter = (event) => {
     setWriter(event.target.value);
-    if (writer === "") {// 작성 시 빨간글씨 즉시 제거 
+    if (event.target.value !== "") {
       setWriterError("");
     }
-  }
+  };
 
-  function onChangePassword(event) {
+  const onChangePassword = (event) => {
     setPassword(event.target.value);
-    if (password === "") {
+    if (event.target.value !== "") {
       setPasswordError("");
     }
-  }
+  };
 
-  function onChangeTitle(event) {
+  const onChangeTitle = (event) => {
     setTitle(event.target.value);
-    if (title === "") {
+    if (event.target.value !== "") {
       setTitleError("");
     }
-  }
+  };
 
-  function onChangeContent(event) {
+  const onChangeContents = (event) => {
     setContents(event.target.value);
-    if (contents === "") {
+    if (event.target.value !== "") {
       setContentsError("");
     }
-  }
+  };
 
-  function onBlankConfirm() {
+  const onBlankConfirm = async () => {
     if (!writer) {
       setWriterError("작성자를 입력해주세요.");
     }
@@ -106,9 +92,24 @@ const onClickGraphqlApi = async() => {
       setContentsError("내용을 입력해주세요.");
     }
     if (writer && password && title && contents) {
-        alert("게시글이 등록되었습니다.");
+      try {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: writer,
+              password : password, 
+              title : title,
+              contents: contents,
+            },
+          },
+        });
+        console.log(result.data.createBoard._id)
+        router.push(`/board-detail-query/${result.data.createBoard._id}`) 
+      } catch (error) {
+        console.log(error.message);
+      }
     }
-  }
+  };
 
   return (
     <Wrapper>
@@ -146,7 +147,7 @@ const onClickGraphqlApi = async() => {
         <Label>내용</Label>
         <Contents
           placeholder="내용을 작성해주세요."
-          onChange={onChangeContent}
+          onChange={onChangeContents}
         />
         <ErrorMessage>{contentsError}</ErrorMessage>
       </InputWrapper>
@@ -177,9 +178,9 @@ const onClickGraphqlApi = async() => {
         <RadioLabel htmlFor="image">사진</RadioLabel>
       </OptionWrapper>
       <ButtonWrapper>
-        <SubmitButton>
+        <SubmitButton onClick={onBlankConfirm}>게시물 등록하기
           {/* <button onClick={onBlankConfirm}>등록하기</button> */}
-          <button onClick={onClickGraphqlApi}>게시물 등록하기</button>
+          {/* <button onClick={onBlankConfirm}>게시물 등록하기</button> */}
         </SubmitButton>
       </ButtonWrapper>
     </Wrapper>
