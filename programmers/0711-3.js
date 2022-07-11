@@ -7,9 +7,9 @@ function solution(phone_number) {
   for(let i=0; i<phone_number.length; i++){
    // console.log(phone_number[i]) 
       if(i>=phone_number.length-4)
-          console.log(phone_number[i])
+          answer = console.log(phone_number[i])
       else 
-          console.log('*')
+          answer = console.log('*')
   }
   return answer;
 }
@@ -29,4 +29,36 @@ function solution(phone_number) {
        answer += phone_number[i]
   }
   return answer;
+}
+
+let str = ''
+
+// str.padStart(6, 'a') //aaaaaa 
+// 뒤의 4자리는 제외하고 앞은 다 별표 
+// let str = 'abcde'
+//str.slice(1,4) // bc
+
+function solution(phone_number) {
+	let answer = '';
+  //길이값
+	answer += answer.padStart(phone_number.length-4, '*')
+  // index 값
+  answer +=phone_number.slice(phone_number.length-4, phone_number.length)
+  console.log(answer)
+}
+
+// 다른 방법 
+// let str = ''
+// str.padStart(6, 'a') //aaaaaa 
+// 뒤의 4자리는 제외하고 앞은 다 별표 
+// let str = 'abcde'
+//str.slice(1,4) // bc
+
+function solution(phone_number) {
+	let answer = '';
+  //길이값
+	answer += answer.padStart(phone_number.length-4, '*')
+  // index 값
+  answer += phone_number.slice(phone_number.length-4)
+  return answer
 }

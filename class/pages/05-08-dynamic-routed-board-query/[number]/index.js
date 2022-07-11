@@ -23,6 +23,9 @@ export default function StaticRoutedPage(){
     return (
         <>
             <div>{router.query.number}번 게시글 이동이 완료되었습니다.</div>
+            <div>작성자 : {data ? data.fetchBoard.writer : "받아오는 중입니다."}</div>
+            <div>제목 : {data && data.fetchBoard.title}</div>
+            <div>내용 : {data?.fetchBoard.contents}</div>
         </>
     )
 }
