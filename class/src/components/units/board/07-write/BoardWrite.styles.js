@@ -5,9 +5,7 @@ export const RedInput = styled.input`
 `
 
 export const RedButton = styled.button`
-    border-color: red;
-
+    //const myColor = "yellow"
+    border-radius: 10px;
+    background-color: ${(props)=>props.qqq ? "yellow" : "default"}; 
 `
-
-// export default function QQQ() {
-// }

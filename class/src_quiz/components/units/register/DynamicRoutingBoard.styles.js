@@ -20,18 +20,18 @@ export const LavenderButton = styled.button`
     border-radius: 20px;
     border-radius: 20px solid #fff0f5;;
     //background-color: #e6e6fa;
-    background-color: ${(props) => props.test === true ? "red" : "blue"};
+    background-color: ${(props) => props.Register === true ? "yellow" : "gray"};
     
 `
 
-export const Test = styled.button`
-    /* font-size: ${(props) => props.fontsize} */
-    background-color: ${(props) => props.test === true ? "red" : "blue"};
-`
+// export const Test = styled.button`
+//     /* font-size: ${(props) => props.fontsize} */
+//     background-color: ${(props) => props.test === true ? "red" : "blue"};
+// `
 
-export const RegisterButton = styled.button`
-    background-color: ${(props) => props.Register === true ? "yellow" : "black" };
-`
+// export const RegisterButton = styled.button`
+//     background-color: ${(props) => props.Register === true ? "yellow" : "black" };
+// `
 
 // export default function QQQ() {
 // }
