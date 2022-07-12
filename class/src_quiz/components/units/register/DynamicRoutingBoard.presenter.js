@@ -12,7 +12,7 @@ export default function DynamicRoutingUI(props) {
             작성자  <Routing_S.BlackInput type="text" onChange={props.onChangeWriter}/><br />
             제목  <Routing_S.BlackInput type="text"onChange={props.onChangeTitle}/><br />
             내용  <Routing_S.BlackInput type="text"onChange={props.onChangeContents}/><br />
-            <Routing_S.LavenderButton onClick={props.Register}>비활성화 버튼</Routing_S.LavenderButton>
+                <Routing_S.LavenderButton color={props.myColor}  onClick={props.Register}>비활성화 버튼</Routing_S.LavenderButton>
         </Routing_S.Wrapper>
         </>
     )

@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 50px;
 
 `
 
@@ -16,11 +16,11 @@ export const BlackInput = styled.input`
 
 export const LavenderButton = styled.button` 
     width: 100px;
-    height: 100px;
+    height: 50px;
     border-radius: 20px;
     border-radius: 20px solid #fff0f5;;
     //background-color: #e6e6fa;
-    background-color: ${(props) => props.Register === true ? "yellow" : "gray"};
+    background-color: ${(props) => props.color === true ? "yellow" : "default"};
     
 `
 

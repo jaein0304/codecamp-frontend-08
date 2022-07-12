@@ -60,7 +60,7 @@ export default function BoardWrite() {
         }
     };
 
-    //내꺼, 다 안쓰고 한꺼번에 점검하는 함수는 없나?
+    //내꺼, 다 안쓰고 한꺼번에 점검하는 함수는 없나?..ing
     const onChangeButton2 = (event) => {
         if(onChangeWriter(event.target.value) && onChangeTitle(event.target.value) && onChangeButton(event.target.value))
             setMyColor(true)

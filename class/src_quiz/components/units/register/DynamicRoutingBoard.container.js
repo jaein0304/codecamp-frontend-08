@@ -6,6 +6,7 @@ import DynamicRoutingUI from './DynamicRoutingBoard.presenter'
 
 export default function DynamicRouting() {
     const router = useRouter()
+    const [myColor, setMyColor] = useState(false);
 
     const [writer, setWriter] = useState("")
     const [title, setTitle] = useState("")
@@ -41,7 +42,6 @@ export default function DynamicRouting() {
     //     }
     // }
 
-
     //공백 시 버튼 비활성화 
     const onRegister = (event) => {
         setMyRegister(event.target.value)
@@ -52,24 +52,31 @@ export default function DynamicRouting() {
 
     const onChangeWriter = (event) => {
         setWriter(event.target.value)
+         if (event.target.value && title && contents) setMyColor(true);
+         else setMyColor(false);
       
     }
 
     const onChangeTitle= (event) => {
         setTitle(event.target.value)
+         if (writer && event.target.value && contents) setMyColor(true);
+         else setMyColor(false);
     }
 
     const onChangeContents= (event) => {
         setContents(event.target.value)
+        if (writer && title && event.target.value) setMyColor(true);
+        else setMyColor(false);
     }
 
-     return ( 
-            <DynamicRoutingUI 
-            onClickGraphqlApi={onClickGraphqlApi}
-            onChangeWriter={onChangeWriter}
-            onChangeTitle={onChangeTitle}
-            onChangeContents={onChangeContents}
-            Register={onRegister}
-            />
-    )
+     return (
+       <DynamicRoutingUI
+         onClickGraphqlApi={onClickGraphqlApi}
+         onChangeWriter={onChangeWriter}
+         onChangeTitle={onChangeTitle}
+         onChangeContents={onChangeContents}
+         Register={onRegister}
+         myColor={myColor}
+       />
+     );
 }
