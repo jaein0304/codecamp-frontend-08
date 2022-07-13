@@ -1,4 +1,4 @@
-//상세보기 /boards/new/[number]
+//상세보기 /boards/[number]
 
 import { useQuery, gql } from '@apollo/client'
 import { useRouter } from 'next/router'
