@@ -45,3 +45,27 @@ function solution(n) {
   // 쉬운방법
   return (n + "").split("").reduce((acc, curr) => acc + parseInt(curr), 0);
 }
+
+//멘토님 코드 
+function solution(n) {
+  n = String(n); // 문자열로 변환
+  let answer = 0;
+  for (let i = 0; i < n.length; i++) {
+    // console.log(n[i]) //   각각 가져오고 있음
+    answer += Number(n[i]);
+  }
+  return answer;
+}
+
+// typeof 연산자는 피연산자의 평가 전 자료형을 나타내는 문자열을 반환합니다.
+// console.log(typeof 42); // number 
+
+//for 대체할 수 있는 메서드
+function solution(n) {
+  const answer = String(n)
+    .split("")
+    .reduce((acc, cur) => {
+      return Number(acc) + Number(cur); //Number(acc + cur); 이렇게 하면 안된다 
+    }, 0); //초기값 0 안넣어주면 실패 
+  return answer;
+}
