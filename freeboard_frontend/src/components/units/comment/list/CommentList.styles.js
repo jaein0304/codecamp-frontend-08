@@ -3,12 +3,12 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   color: #424242;
-  display: block;
-  flex-direction: column;
+  display: block; // 
+  flex-direction: row;
   font-family: "Noto Sans KR";
   font-size: 15px;
   line-height: 15px;
-  margin-top: 40px;
+  /* margin-top: 10px; */
 `;
 
 export const IdWrapper = styled.div`
@@ -16,8 +16,8 @@ export const IdWrapper = styled.div`
 `
 export const CommentWrapper = styled.div`
   color: #424242;
-  display: block;
-  flex-direction: column;
+  display: flex; //block (x)
+    /* flex-direction: row; */
   font-family: "Noto Sans KR";
   font-size: 15px;
   line-height: 15px;
@@ -28,21 +28,21 @@ export const CommentWrapper = styled.div`
 `;
 
 export const ProfileWrapper = styled.div`
-  padding-left: 42px;
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
-  /* padding-right: 810px; */
-  padding-top: 40px;
+  width: 4%;
+  height: 100%;
   /* background-color: black; */
 `;
 
-export const RightWrapper = styled.div`
+export const DataWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  /* background-color: pink; */
 `;
 
-export const Profile = styled.div`
+export const Profile = styled.img`
   width: 30px;
   height: 30px;
   cursor: pointer;
@@ -50,9 +50,8 @@ export const Profile = styled.div`
 `;
 
 export const Writer = styled.div`
-  width: 180px;
-  height: 52px;
-  padding-left: 16px;
+  width: 100%;
+  height: 30px;
   /* background-color: beige; */
 `;
 
@@ -75,3 +74,26 @@ export const CreatedAt = styled.div`
   color: rgb(130,140,148);
   /* background-color: aliceblue; */
 `
+
+export const ButtonWrapper = styled.div`
+  width:5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  float: right;
+  /* background-color: bisque; */
+`
+
+export const EditButton = styled.img`
+  width: 25px;
+  height: 25px;
+  float: right;
+  /* cursor: pointer;  */
+`
+
+export const DeleteButton = styled.img`
+  width: 25px;
+  height: 25px;
+  float: right;
+  cursor: pointer;
+`;
