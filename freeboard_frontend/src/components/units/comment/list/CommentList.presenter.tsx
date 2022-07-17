@@ -1,7 +1,8 @@
 import { getDate } from "../../../../commons/libraries/utils";
 import * as S from "./CommentList.styles";
+import { IBoardCommentListUIProps } from "./CommentList.types";
 
-export default function BoardCommentListUI(props) {
+export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
   return (
     <>
       {props.data?.fetchBoardComments.map((el) => (
@@ -19,9 +20,9 @@ export default function BoardCommentListUI(props) {
             <S.ButtonWrapper>
               <S.EditButton src="/img-board-detail/ic_comment_write.png" />
               <S.DeleteButton
-                src="/img-board-detail/ic_comment_delete.png"
-                id={el._id}
-                onClick={props.OnClickDelete}
+                    src="/img-board-detail/ic_comment_delete.png"
+                    id={el._id}
+                    onClick={props.OnClickDelete}
               />
             </S.ButtonWrapper>
           </S.CommentWrapper>

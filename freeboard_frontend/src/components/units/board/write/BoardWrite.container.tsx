@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardWriteUI from './BoardWrite.presenter'
 import { CREATE_BOARD, UPDATE_BOARD } from './BoardWrite.queries'
+import { IBoardWriteProps } from "./BoardWrite.types";
 
 /* 게시판 등록하기 페이지 */
 
-export default function BoardWrite(props){
+export default function BoardWrite(props: IBoardWriteProps){
   const router = useRouter()
-  const [isActive, setIsActive] = useState(false);
+  
+  const [buttonColor, setButtonColor] = useState(false);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -23,55 +25,55 @@ export default function BoardWrite(props){
   const [createBoard] = useMutation(CREATE_BOARD)
   const [updateBoard] = useMutation(UPDATE_BOARD);
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
     if(event.target.value !== ""){
       setWriterError("")
     }
 
     if (event.target.value && password && title && contents) {
-      setIsActive(true);
+      setButtonColor(true);
     } else {
-      setIsActive(false);
+      setButtonColor(false);
     }
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    if(event.target.value !== ""){
-      setPasswordError("")
+    if (event.target.value !== "") {
+      setPasswordError("");
     }
 
     if (writer && event.target.value && title && contents) {
-      setIsActive(true);
+      setButtonColor(true);
     } else {
-      setIsActive(false);
+      setButtonColor(false);
     }
   };
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
-    if(event.target.value !== ""){
-      setTitleError("")
+    if (event.target.value !== "") {
+      setTitleError("");
     }
 
     if (writer && password && event.target.value && contents) {
-      setIsActive(true);
+      setButtonColor(true);
     } else {
-      setIsActive(false);
+      setButtonColor(false);
     }
   };
 
-  const onChangeContents = (event) => {
+  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
     setContents(event.target.value);
-    if(event.target.value !== ""){
-      setContentsError("")
+    if (event.target.value !== "") {
+      setContentsError("");
     }
 
     if (writer && password && title && event.target.value) {
-      setIsActive(true);
+      setButtonColor(true);
     } else {
-      setIsActive(false);
+      setButtonColor(false);
     }
   };
 
@@ -103,7 +105,7 @@ export default function BoardWrite(props){
         console.log(result.data.createBoard._id)
         router.push(`/boards/${result.data.createBoard._id}`)
       } catch(error) {
-        alert(error.message)
+        alert("안만들어져용")
       }
     }
   };
@@ -122,24 +124,24 @@ export default function BoardWrite(props){
       })
       router.push(`/boards/${result.data.updateBoard._id}`)
     } catch(error) {
-      alert(error.message)
+      alert("수정이안돼용")
     }
   };
 
   return (
     <BoardWriteUI
-        isActive={isActive}
-        writerError={writerError}
-        passwordError={passwordError}
-        titleError={titleError}
-        contentsError={contentsError}
-        onChangeWriter={onChangeWriter}
-        onChangePassword={onChangePassword}
-        onChangeTitle={onChangeTitle}
-        onChangeContents={onChangeContents}
-        onClickSubmit={onClickSubmit}
-        onClickUpdate={onClickUpdate}
-        isEdit={props.isEdit}
+      writerError={writerError}
+      passwordError={passwordError}
+      titleError={titleError}
+      contentsError={contentsError}
+      onChangeWriter={onChangeWriter}
+      onChangePassword={onChangePassword}
+      onChangeTitle={onChangeTitle}
+      onChangeContents={onChangeContents}
+      onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
+      isEdit={props.isEdit}
+      buttonColor={buttonColor}
     />
-  )
+  );
 }

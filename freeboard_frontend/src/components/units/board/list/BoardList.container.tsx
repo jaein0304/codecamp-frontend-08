@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { FETCH_BOARDS } from "./BoardList.queries";
 import { useRouter } from "next/router";
 
+
 export default function BoardList() {
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARDS);
@@ -11,8 +12,8 @@ export default function BoardList() {
     router.push("/boards/new");
   };
 
-  const onClickMoveToBoardDetail = (event) => {
-    router.push(`/boards/${event.target.id}`);
+  const onClickMoveToBoardDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
+    router.push(`/boards/${(event.target as HTMLButtonElement).id}`);
   };
 
   return (

@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/units/comment/write/CommentWrite.container.js"  ],
   "exclude": [
     "node_modules"
   ]

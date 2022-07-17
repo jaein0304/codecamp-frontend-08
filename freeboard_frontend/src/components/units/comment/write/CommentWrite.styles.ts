@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
+import { ICommentSubmitButtonProps } from "./CommentWrite.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  /* height: 1847px; */
+  /* height: 300px; */
   border: 1px solid black;
   margin: 100px;
   padding-top: 80px;
@@ -13,7 +14,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   border: none;
-  box-shadow: 0px 0px 10px gray;
 `;
 
 export const Title = styled.div`
@@ -23,22 +23,23 @@ export const Title = styled.div`
 `;
 
 export const WriterWrapper = styled.div`
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* padding-right: 810px; */
   padding-top: 40px;
 `;
 
 export const Writer = styled.input`
-  width: 486px;
+  width: 180px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
 export const Password = styled.input`
-  width: 486px;
+  width: 180px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
@@ -52,6 +53,7 @@ export const Label = styled.div`
 
 export const InputWrapper = styled.div`
   padding-top: 40px;
+  padding-right: 25px;
 `;
 
 export const Subject = styled.input`
@@ -62,8 +64,8 @@ export const Subject = styled.input`
 `;
 
 export const Contents = styled.textarea`
-  width: 996px;
-  height: 480px;
+  width: 1200px;
+  height: 161px;
   padding-left: 16px;
   padding: 14px;
   border: 1px solid #bdbdbd;
@@ -156,17 +158,17 @@ export const CancelButton = styled.button`
 `;
 
 export const SubmitButton = styled.button`
-  width: 179px;
+  width: 91px;
   height: 52px;
   border: none;
   font-size: 16px;
   font-weight: 500;
-  margin-left: 12px;
-  margin-right: 12px;
+  color: white;
+  /* background-color: black; */
+  margin-left: 1110px;
   cursor: pointer;
 
-  background-color: ${(props) =>
-    props.isActive ? "yellow" : "none"};
+  background-color: ${(props: ICommentSubmitButtonProps) => (props.submitButton ? "violet" : "black")};
 `;
 
 export const Error = styled.div`

@@ -20,7 +20,7 @@ export const Row = styled.div`
   height: 52px;
   line-height: 52px;
   border-bottom: 1px solid gray;
-
+  
   :hover {
     color: blue;
   }
@@ -34,6 +34,7 @@ export const ColumnHeaderBasic = styled.div`
 export const ColumnHeaderTitle = styled.div`
   width: 70%;
   text-align: center;
+
 `;
 
 export const ColumnBasic = styled.div`
@@ -41,7 +42,7 @@ export const ColumnBasic = styled.div`
   text-align: center;
 `;
 
-export const ColumnTitle = styled.div`
+export const ColumnTitle = styled.button`
   width: 70%;
   text-align: center;
   cursor: pointer;
@@ -50,6 +51,13 @@ export const ColumnTitle = styled.div`
     color: blue;
   }
 `;
+
+// //
+// export const ListButton = styled.button`
+//   width: 70%;
+//   text-align: center;
+//   cursor: pointer;
+// `;
 
 export const Footer = styled.div`
   display: flex;

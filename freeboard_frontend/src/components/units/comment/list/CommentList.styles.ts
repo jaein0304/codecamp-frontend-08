@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 // https://ohou.se/projects/110465/detail?affect_type=ProjectSelfIndex&affect_id=0
+// 오늘의집 UI 댓글쪽 참고 
 
 export const Wrapper = styled.div`
   color: #424242;

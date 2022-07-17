@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
+import { ISubmitButtonProps } from "./BoardWrite.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  /* height: 300px; */
+  /* height: 1847px; */
   border: 1px solid black;
   margin: 100px;
   padding-top: 80px;
@@ -13,6 +14,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   border: none;
+  box-shadow: 0px 0px 10px gray;
 `;
 
 export const Title = styled.div`
@@ -22,23 +24,22 @@ export const Title = styled.div`
 `;
 
 export const WriterWrapper = styled.div`
-  /* width: 100%; */
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* padding-right: 810px; */
   padding-top: 40px;
 `;
 
 export const Writer = styled.input`
-  width: 180px;
+  width: 486px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
 export const Password = styled.input`
-  width: 180px;
+  width: 486px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
@@ -52,7 +53,6 @@ export const Label = styled.div`
 
 export const InputWrapper = styled.div`
   padding-top: 40px;
-  padding-right: 25px;
 `;
 
 export const Subject = styled.input`
@@ -62,9 +62,9 @@ export const Subject = styled.input`
   border: 1px solid #bdbdbd;
 `;
 
-export const Contents = styled.textarea`
-  width: 1200px;
-  height: 161px;
+export const Contents = styled.input`
+  width: 996px;
+  height: 480px;
   padding-left: 16px;
   padding: 14px;
   border: 1px solid #bdbdbd;
@@ -157,17 +157,15 @@ export const CancelButton = styled.button`
 `;
 
 export const SubmitButton = styled.button`
-  width: 91px;
+  width: 179px;
   height: 52px;
   border: none;
   font-size: 16px;
   font-weight: 500;
-  color: white;
-  /* background-color: black; */
-  margin-left: 1110px;
+  margin-left: 12px;
+  margin-right: 12px;
   cursor: pointer;
-
-  background-color: ${(props) => (props.isActive ? "violet" : "black")};
+  background-color: ${(props: ISubmitButtonProps) => (props.submitButton ? "yellow" : "default")};
 `;
 
 export const Error = styled.div`

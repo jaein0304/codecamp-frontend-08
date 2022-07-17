@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardCommentUI from './CommentWrite.presenter'
 import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from './CommentWrite.queries'
+import { IBoardCommentWriteProps } from "./CommentWrite.types";
 
-export default function BoardCommentWrite(props){
-  const router = useRouter()
+
+export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
+  const router = useRouter();
+
   const [isActive, setIsActive] = useState(false);
+  // const [buttonColor, setButtonColor] = useState(false);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -21,10 +25,10 @@ export default function BoardCommentWrite(props){
   const [updateBoardUpdateComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   //작성자
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
-    if(event.target.value !== ""){
-      setWriterError("")
+    if (event.target.value !== "") {
+      setWriterError("");
     }
 
     if (event.target.value && password && contents) {
@@ -35,10 +39,10 @@ export default function BoardCommentWrite(props){
   };
 
   //비밀번호
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    if(event.target.value !== ""){
-      setPasswordError("")
+    if (event.target.value !== "") {
+      setPasswordError("");
     }
 
     if (writer && event.target.value && contents) {
@@ -48,11 +52,11 @@ export default function BoardCommentWrite(props){
     }
   };
 
-//내용
-  const onChangeContents = (event) => {
+  //내용
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
-    if(event.target.value !== ""){
-      setContentsError("")
+    if (event.target.value !== "") {
+      setContentsError("");
     }
 
     if (writer && password && event.target.value) {
@@ -63,9 +67,9 @@ export default function BoardCommentWrite(props){
   };
 
   //점수
-  const onChangeRating = (event) => {
+  const onChangeRating = (event: ChangeEvent<HTMLInputElement>) => {
     setRating(event.target.value);
-  }
+  };
 
   const onClickSubmit = async () => {
     if (!writer) {
@@ -89,16 +93,19 @@ export default function BoardCommentWrite(props){
             },
             boardId: String(router.query.boardId),
           },
+          // refetchQueries: [
+          //   {
+          //     query: FETCH_BOARD_COMMENTS,
+          //     variables: { boardId: router.query.boardId },
+          //   },
+          // ], //작동해ㅐㅐㅐㅐ
         });
+        alert("댓글이 등록되었습니다.");
         console.log("댓글 등록 ");
         console.log(result);
-        // console.log(result.data.createBoard._id);
-        // console.log(result.data.createBoard._id)
-        // router.push(`/boards/${router.query.boardId}`);
-        // router.push(`/comments/${result.data.createBoardComment._id}`)
-      } catch(error) {
+      } catch (error) {
         // alert(error.message)
-        alert("등록이 안됐어용")
+        alert("등록이 안됐어용");
       }
     }
   };
@@ -107,19 +114,20 @@ export default function BoardCommentWrite(props){
     try {
       const result = await updateBoardUpdateComment({
         variables: {
-          boardCommentId: router.query.boardCommentId,
-          password: password,
           updateBoardUpdateInput: {
-            title: title,
-            contents: contents,
+            writer,
+            contents,
+            rating,
           },
+          password: password,
+          boardCommentId: router.query.boardCommentId,
         },
       });
       router.push(`/comments/${result.data.updateBoardUpdateComment._id}`);
     } catch(error) {
-      alert(error.message)
+      alert("업데이트 오류")
     }
-  };
+  }; 
 
   return (
     <BoardCommentUI
