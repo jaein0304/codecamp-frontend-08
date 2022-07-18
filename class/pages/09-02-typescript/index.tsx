@@ -12,16 +12,16 @@ export default function TypeScriptPage() {
 
     //숫자 타입
     let ddd: number = 10
-    ddd = "철수"
+    // ddd = "철수"
 
     //불린 타입
     let eee: boolean = true
     eee = false
-    eee = "false" // true (문자열안에 뭐 하나라도 있으면 true)
+    // eee = "false" // true (문자열안에 뭐 하나라도 있으면 true)
 
     //배열 타입
-    let fff: number[] = [1, 2, 3, 4, 5, "안녕"] //안녕 x
-    let ggg: string[] = ["철수", "영희", "훈이", 10] //10 x
+    // let fff: number[] = [1, 2, 3, 4, 5, "안녕"] //안녕 x
+    // let ggg: string[] = ["철수", "영희", "훈이", 10] //10 x
     let hhh: (string | number)[] = ["철수", "영희", "훈이", 10]; //가능
     
     //객체 타입
