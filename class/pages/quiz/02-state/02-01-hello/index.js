@@ -1,6 +1,6 @@
 export default function HelloButton() {
   function press() {
-    let hello = "반갑습니다";
+    const hello = "반갑습니다";
     document.getElementById("greeting").innerText = hello;
   }
 

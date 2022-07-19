@@ -1,6 +1,9 @@
 import { useMutation, gql } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
-import { IMutation, IMutationCreateBoardArgs } from "../../src/commons/types/generated/types";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+} from "../../src/commons/types/generated/types";
 
 const CREATE_BOARD = gql`
   mutation createBoard($writer: String, $title: String, $contents: String) {
@@ -16,17 +19,20 @@ export default function GraphqlMutationPage() {
   const [writer, setWriter] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [createBoard] = useMutation<Pick<IMutation,"createBoard">,IMutationCreateBoardArgs>(CREATE_BOARD);
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
 
   const onClickGraphqlApi = async () => {
     const result = await createBoard({
       variables: {
-        writer: writer,
-        title: title,
-        contents: contents,
+        writer,
+        title,
+        contents,
       },
     });
-    
+
     console.log(result);
     console.log(result.data?.createBoard?.message);
   };

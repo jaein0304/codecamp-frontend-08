@@ -1,7 +1,6 @@
 import { Rate } from "antd";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { RetweetOutlined } from "@ant-design/icons";
 
 const MyStar = styled(Rate)`
   font-size: 50px;
@@ -11,15 +10,14 @@ const desc = ["1점", "2점", "3점", "4점", "5점"];
 
 export default function StarPage() {
   const [value, setValue] = useState(0);
-  
-  // if (value)
-  //   alert(value) 
 
-  const handleChange = (value) => {
+  // if (value)
+  //   alert(value)
+
+  const handleChange = (value: any) => {
     setValue(value);
     alert(value + "점");
-    
-  }
+  };
 
   return (
     <>

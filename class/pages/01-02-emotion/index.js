@@ -3,7 +3,7 @@ export default function EmotionPage() {
     // JavaScript 쓰는 곳 
 
     return (
-        //HTML 쓰는 곳 
+        // HTML 쓰는 곳 
         <Wrapper>
             안녕하세요! 
             <EmailInput type="text"/>

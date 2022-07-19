@@ -1,4 +1,5 @@
-//수정하기 /boards/[number]/edit
+/* eslint-disable import/no-duplicates */
+// 수정하기 /boards/[number]/edit
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { gql } from "@apollo/client";
@@ -15,17 +16,16 @@ import BoardWrite from "../../../../src/components/units/board/09-write/BoardWri
 // like: Int
 // createdAt: Date
 // }
-const FETCH_BOARD = gql` 
-query fetchBoard($number: Int) {
-  fetchBoard(number: $number) {
-    number
-    writer
-    title
-    contents
+const FETCH_BOARD = gql`
+  query fetchBoard($number: Int) {
+    fetchBoard(number: $number) {
+      number
+      writer
+      title
+      contents
+    }
   }
-}
-`
-
+`;
 
 export default function GraphqlMutationPage() {
   const router = useRouter();

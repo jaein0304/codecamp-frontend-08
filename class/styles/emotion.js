@@ -13,12 +13,12 @@ export const ErrorMessage = styled.div`
 `;
 
 export const BackWrapper = styled.div`
-  width: 640px; //640 × 1138
-  //height: 1138px;
+  width: 640px;
+  // height: 1138px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url("../img/background.png"); //class/public/img/background.png //background-image 아님!
+  background: url("../img/background.png"); // class/public/img/background.png // background-image 아님!
 `;
 
 export const Container = styled.div`
@@ -129,15 +129,15 @@ export const KakaoButton = styled.div`
 export const KakaoName = styled.div`
   font-size: 20px;
   color: #fae100;
-   display: flex;
+  display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 `;
 export const KakaoIcon = styled.div`
   background: url("../img/kakao.png");
   width: 33px;
   height: 30px;
-  margin-right:300px;
+  margin-right: 300px;
 `;
 export const UnderPadding = styled.div`
   padding: 50px;

@@ -1,11 +1,9 @@
-import { useMutation } from '@apollo/client'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import BoardWriteUI from './BoardWrite.presenter'
-import { CREATE_BOARD, UPDATE_BOARD } from './BoardWrite.queries'
-
-
-
+/* eslint-disable no-undef */
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import BoardWriteUI from "./BoardWrite.presenter";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 
 export default function BoardWrite(props) {
   const router = useRouter();
@@ -17,8 +15,8 @@ export default function BoardWrite(props) {
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
 
-  //등록
-  /*createBoard(
+  // 등록
+  /* createBoard(
 writer: String
 title: String
 contents: String
@@ -32,11 +30,11 @@ contents: String
     router.push(`/08-05-boards/${result.data.createBoard.number}`); //
   };
 
-  //수정
+  // 수정
   const onClickUpdate = async () => {
     const result = await updateBoard({
       variables: {
-        number: Number(router.query.number), //숫자로 변경 안하면 Received status code 400
+        number: Number(router.query.number), // 숫자로 변경 안하면 Received status code 400
         writer,
         title,
         contents,
@@ -45,7 +43,7 @@ contents: String
     console.log(result);
     console.log(result.data.updateBoard.message);
     router.push(`/08-05-boards/${result.data.updateBoard.number}`); //
-    //->result.data.updateBoard.number 로 해도 상관없음
+    // ->result.data.updateBoard.number 로 해도 상관없음
   }; // 이미 넘버를 가지고 있기 때문에,
 
   const onChangeWriter = (event) => {
@@ -66,7 +64,7 @@ contents: String
     else setMyColor(false);
   };
 
-  //내꺼
+  // 내꺼
   const onChangeButton = () => {
     if (writer && title && contents) {
       onClickGraphqlApi(true);
@@ -77,15 +75,15 @@ contents: String
     }
   };
 
-  //내꺼, 다 안쓰고 한꺼번에 점검하는 함수는 없나?..ing
-  const onChangeButton2 = (event) => {
-    if (
-      onChangeWriter(event.target.value) &&
-      onChangeTitle(event.target.value) &&
-      onChangeButton(event.target.value)
-    )
-      setMyColor(true);
-  };
+  // 내꺼, 다 안쓰고 한꺼번에 점검하는 함수는 없나?..ing
+  // const onChangeButton2 = (event) => {
+  //   if (
+  //     onChangeWriter(event.target.value) &&
+  //     onChangeTitle(event.target.value) &&
+  //     onChangeButton(event.target.value)
+  //   )
+  //     setMyColor(true);
+  // };
 
   return (
     <>

@@ -2,7 +2,7 @@ import { useMutation, gql } from "@apollo/client"
  import { useState } from "react"
  import { useRouter } from 'next/router'
 
-/*createProduct(
+/* createProduct(
 seller: String
 createProductInput: CreateProductInput!
 ): Return 
@@ -17,7 +17,7 @@ type CreateProductInput {
 name: String
 detail: String
 price: Int
-}*/
+} */
 
 const CREATE_PRODUCT = gql`
 mutation createProduct($seller: String, $createProductInput: CreateProductInput!){
@@ -29,15 +29,15 @@ mutation createProduct($seller: String, $createProductInput: CreateProductInput!
   }
 `
 export default function CreateProductPage() {
-    const router = useRouter() //4번
+    const router = useRouter() // 4번
     const [seller, setSeller] = useState("")
     const [name, setName] = useState("")
     const [detail, setDetail] = useState("")
     const [price, setPrice] = useState(0)
-    const [createProduct] = useMutation(CREATE_PRODUCT) //2번
+    const [createProduct] = useMutation(CREATE_PRODUCT) // 2번
 
     const onClickRegistration = async () => {
-        //3번
+        // 3번
         try {
         const result = await createProduct({
             variables: {
@@ -50,11 +50,11 @@ export default function CreateProductPage() {
             }
     })
     router.push(`/quiz/05-mutation/query/${result.data.createProduct._id}`) 
-    //._id로바꾸니까 주소 넘어감 ! 원래는 []안에있는 폴더 이름 넣었음
-    //router.push(`https://www.naver.com`)
-    console.log(result) //성공
+    // ._id로바꾸니까 주소 넘어감 ! 원래는 []안에있는 폴더 이름 넣었음
+    // router.push(`https://www.naver.com`)
+    console.log(result) // 성공
     console.log(result.data.createProduct.message)
-    } catch(error) { //변수로 error 선언 
+    } catch(error) { // 변수로 error 선언 
         console.log(error.message);
         console.log("실패")
     }

@@ -1,24 +1,23 @@
 import axios from "axios";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function RestGetPage() {
-
-  const [title, setTitle] = useState()
+  const [title, setTitle] = useState();
 
   const onClickRestApiAsync = () => {
-    const result = axios.get("https://koreanjson.com/posts/1"); //조회
+    const result = axios.get("https://koreanjson.com/posts/1"); // 조회
     console.log(result);
-  }
+  };
 
-  const onClickRestApiSync = async() =>{
-    const result = await axios.get("https://koreanjson.com/posts/1"); //조회
+  const onClickRestApiSync = async () => {
+    const result = await axios.get("https://koreanjson.com/posts/1"); // 조회
     console.log(result);
-    console.log(result.data.title)
-    //document.getElementById("qqq").innerText = result.data.title
-    setTitle(result.data.title)
-  }
+    console.log(result.data.title);
+    // document.getElementById("qqq").innerText = result.data.title
+    setTitle(result.data.title);
+  };
 
-  /*function onClickRestApiAsync() {
+  /* function onClickRestApiAsync() {
     const result = axios.get("https://koreanjson.com/posts/1"); //조회
     console.log(result);
   }
@@ -35,7 +34,7 @@ export default function RestGetPage() {
     <>
       <button onClick={onClickRestApiAsync}>REST-API 비동기 요청</button>
       <button onClick={onClickRestApiSync}>REST-API 동기 요청</button>
-      {/* <div id="qqq"></div> */} 
+      {/* <div id="qqq"></div> */}
       <div>{title}</div>
     </>
   );

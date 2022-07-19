@@ -20,22 +20,18 @@ export default function SignupStatePage() {
     setCheckPassword(event.target.value);
   }
 
-
   function onClickSignup() {
     // 검증하기
     if (email.includes("@") === false && password !== checkPassword) {
       setEmailError("이메일이 올바르지 않습니다.");
       setPasswordError("비밀번호가 서로 다릅니다.");
-
     } else if (email.includes("@") === false) {
       setEmailError("이메일이 올바르지 않습니다.");
       setPasswordError("");
-
     } else if (password !== checkPassword) {
       setPasswordError("비밀번호가 서로 다릅니다.");
       setEmailError("");
-      //console.log("test")
-
+      // console.log("test")
     } else {
       alert("회원가입 되었습니다.");
     }

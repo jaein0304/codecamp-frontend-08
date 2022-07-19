@@ -1,4 +1,3 @@
-
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -18,14 +17,14 @@ export default function ProductWrite(props) {
   const [createProduct] = useMutation(CREATE_PRODUCT);
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
 
-  //등록
+  // 등록
   const onClickCreate = async () => {
     const result = await createProduct({
       variables: {
         seller,
         createProductInput: {
-          name: name,
-          detail: detail,
+          name,
+          detail,
           price: Number(price),
         },
       },
@@ -34,19 +33,18 @@ export default function ProductWrite(props) {
     console.log(result.data.createProduct.message);
     // router.push(`/quiz/08-01-product/${router.query.id}`);
     router.push(`/quiz/08-01-product/${result.data.createProduct._id}`); //
-  };;
+  };
 
-  //수정
+  // 수정
   const onClickUpdate = async () => {
     const result = await updateProduct({
       variables: {
         productId: router.query.id,
-        updateProductInput: { 
+        updateProductInput: {
           name,
           detail,
-          price: Number(price)
-        }
-        
+          price: Number(price),
+        },
       },
     });
     console.log(result);

@@ -1,7 +1,5 @@
-import { ChangeEvent } from 'react';
-import * as S from './BoardWrite.styles'
-import { IBoardWriteUIProps } from './BoardWrite.types';
-
+import * as S from "./BoardWrite.styles";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
@@ -10,7 +8,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
       <S.RedInput
         type="text"
         onChange={props.onChangeWriter}
-        defaultValue={props.data?.fetchBoard.writer || ""} //데이터가 없을 수도 있기 때문에, 옵셔널 체이닝을 해줘야 함
+        defaultValue={props.data?.fetchBoard.writer || ""} // 데이터가 없을 수도 있기 때문에, 옵셔널 체이닝을 해줘야 함
       />
       <br />
       제목 :{" "}
@@ -36,4 +34,3 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
     </>
   );
 }
-

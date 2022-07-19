@@ -41,27 +41,26 @@ export default function MapFruitsPage() {
   console.log(data);
 
   /* ========================= */
-  //삭제버튼 클릭시 실행 될 함수
+  // 삭제버튼 클릭시 실행 될 함수
   const onClickDelete = (event) => {
     deleteProduct({
       variables: { productId: event.target.id },
       refetchQueries: [{ query: FETCH_PRODUCTS }], // #5. refetchQueries를 활용하여 표를 업데이트 해주세요.
     });
-    //console.log(event.target); // 꿀팁..!
+    // console.log(event.target); // 꿀팁..!
     console.log("지우고있니");
-     //return event.target.id ? true : false;
+    // return event.target.id ? true : false;
   };
 
   // 체크박스 함수
-  const onCheckBox = (event) => {
-    return event.target.id ? onClickDelete(true) : onClickDelete(false);
-    
-    // let result = "";
-    // if (event.target.checked) result = event.target.value;
-    // else result = "";
-  };
+  // const onCheckBox = (event) => {
+  //   return event.target.id ? onClickDelete(true) : onClickDelete(false);
 
-  
+  // let result = "";
+  // if (event.target.checked) result = event.target.value;
+  // else result = "";
+  // };
+
   return (
     <>
       {data?.fetchProducts.map((el) => (

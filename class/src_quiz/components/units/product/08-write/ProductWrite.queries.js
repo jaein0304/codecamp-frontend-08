@@ -1,7 +1,10 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const CREATE_PRODUCT = gql`
-  mutation createProduct( $seller: String $createProductInput: CreateProductInput!) {
+  mutation createProduct(
+    $seller: String
+    $createProductInput: CreateProductInput!
+  ) {
     createProduct(seller: $seller, createProductInput: $createProductInput) {
       _id
       number
@@ -10,14 +13,14 @@ export const CREATE_PRODUCT = gql`
   }
 `;
 
-/*updateProduct(
+/* updateProduct(
 productId: ID
 updateProductInput: UpdateProductInput!
 ): Return 
 number: Int
 writer: String
 title: String
-contents: String*/
+contents: String */
 
 // export const UPDATE_PRODUCT = gql`
 //   mutation updateProduct($productId: ID, $UpdateProductInput:updateProductInput!) {
@@ -31,15 +34,17 @@ contents: String*/
 // `
 
 export const UPDATE_PRODUCT = gql`
-  mutation updateProduct($productId: ID, $updateProductInput:UpdateProductInput!) {
-      updateProduct (
-      productId: $productId, 
-      updateProductInput: $updateProductInput) {
-          _id
-          number
-          message
-      }
+  mutation updateProduct(
+    $productId: ID
+    $updateProductInput: UpdateProductInput!
+  ) {
+    updateProduct(
+      productId: $productId
+      updateProductInput: $updateProductInput
+    ) {
+      _id
+      number
+      message
     }
-  
-
+  }
 `;

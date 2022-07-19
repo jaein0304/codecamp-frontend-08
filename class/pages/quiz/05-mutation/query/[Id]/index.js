@@ -18,10 +18,10 @@ export default function DynamicRoutedPage() {
   console.log(router);
 
   const { data } = useQuery(FETCH_PRODUCT, {
-    variables: { productId: router.query.Id }, //설정된값 : 내가설정한폴더이름값
-    //variables: { productId: "4310b681-47ea-43e9-8493-2eee7e93286d"}
+    variables: { productId: router.query.Id }, // 설정된값 : 내가설정한폴더이름값
+    // variables: { productId: "4310b681-47ea-43e9-8493-2eee7e93286d"}
   });
-  //console.log(router.query);
+  // console.log(router.query);
   console.log(data);
 
   return (

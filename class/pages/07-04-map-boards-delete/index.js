@@ -40,7 +40,7 @@ export default function MapFruitsPage() {
 
   console.log(data);
 
-  //삭제버튼 클릭시 실행 될 함수
+  // 삭제버튼 클릭시 실행 될 함수
   const onClickDelete = (event) => {
     deleteBoard({
       variables: { number: Number(event.target.id) },
