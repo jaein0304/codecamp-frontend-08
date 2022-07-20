@@ -4,7 +4,8 @@ import { Global } from "@emotion/react";
 import "antd/dist/antd.css"; // 이부분이 import가 되어야 css를 가져올 수 있음 여기에 하면 모든 페이지에 적용됨
 import { AppProps } from "next/app";
 import { globalStyles } from "../src/commons/styles/globalStyles";
-import Layout from "../src/components/commons/layout";
+// import Layout from "../src/components/commons/layout";
+import Layout from "../src_quiz/components/commons/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
