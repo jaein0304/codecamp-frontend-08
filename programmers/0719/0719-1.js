@@ -30,10 +30,9 @@ function solution(n) {
   const answer = n
     .toString()
     .split("")
-    .reverse()
     .map((num) => {
       // console.log(num)
       return Number(num)
     })
-  return number
+  return answer
 }
