@@ -9,3 +9,12 @@ function solution(num) {
   }
   return -1
 }
+
+// 중첩 삼항
+function solution(num) {
+  let answer, a
+  for (let i = 1; i < 500; i++) {
+    return num != 1 ? (num = num % 2 === 0 ? num / 2 : num * 3 + 1) : (answer = i - 1)
+  }
+  return -1
+}
