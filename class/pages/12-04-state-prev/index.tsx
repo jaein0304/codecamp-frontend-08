@@ -3,17 +3,16 @@ import { useState } from "react";
 export default function StatePrevPage() {
   const [count, setCount] = useState(0);
 
-    function counterUp() {
+  function counterUp() {
     //   setCount(count + 1);
     //   setCount(count + 1);
     //   setCount(count + 1);
     //   setCount(count + 1); // 1
 
-        
-      setCount(prev => prev + 1)
-      setCount(prev => prev + 1)
-      setCount(prev => prev + 1)
-      setCount(prev => prev + 1) // 4
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1); // 4
   }
 
   function counterDown() {

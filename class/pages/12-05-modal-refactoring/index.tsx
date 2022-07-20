@@ -6,21 +6,25 @@ export default function ModalAlertPage() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onToggleModal = () => {
-    setIsModalVisible(prev => !prev);
+    setIsModalVisible((prev) => !prev);
   };
 
-
   const onCompletePostcode = (data: any) => {
-    console.log(data) 
-    console.log(data.address)
+    console.log(data);
+    console.log(data.address);
     onToggleModal();
-  }
+  };
 
   return (
     <>
-       <Button onClick={onToggleModal}>3번 리팩토링</Button>
+      <Button onClick={onToggleModal}>3번 리팩토링</Button>
       {isModalVisible && (
-        <Modal title="제목이에오" visible={true} onOk={onToggleModal} onCancel={onToggleModal}>
+        <Modal
+          title="제목이에오"
+          visible={true}
+          onOk={onToggleModal}
+          onCancel={onToggleModal}
+        >
           <DaumPostcodeEmbed onComplete={onCompletePostcode} />
         </Modal>
       )}
