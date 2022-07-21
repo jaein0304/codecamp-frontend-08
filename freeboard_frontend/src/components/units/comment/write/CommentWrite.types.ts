@@ -1,10 +1,20 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardCommentWriteProps {
-    isEdit: boolean;
+  data: Pick<IQuery, "fetchBoard">;
+  isEdit: boolean;
 }
 
 export interface IBoardCommentUIProps {
+  // container의 setRating에 마우스를 가져다대면 어떤 선언을 해야하는지 알 수 있음
+  // 0720
+  setRating: Dispatch<SetStateAction<number>>;
+  data?: Pick<IQuery, "fetchBoard">;
+  writer: string;
+  password: string;
+  contents: string;
+  //
   isActive: boolean;
   isEdit: boolean;
   writerError: string;
@@ -19,5 +29,5 @@ export interface IBoardCommentUIProps {
 }
 
 export interface ICommentSubmitButtonProps {
-    submitButton: boolean;
+  submitButton: boolean;
 }

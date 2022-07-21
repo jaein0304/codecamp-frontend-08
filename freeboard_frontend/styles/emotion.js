@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
+import styled from "@emotion/styled"
 
 export const Wrapper = styled.div`
-//세로폭 설정 하지 말기, 전체 틀 
+  // 세로폭 설정 하지 말기, 전체 틀
   width: 1200px;
   border: 1px solid black;
   margin: 100px;
@@ -16,13 +16,13 @@ export const Wrapper = styled.div`
   box-shadow: 0px 0px 10px gray;
 `
 
-//게시물 등록 
+// 게시물 등록
 export const Title = styled.div`
   font-size: 36px;
   font-weight: bold;
 `
 
-//작성자, 비밀번호 사이 
+// 작성자, 비밀번호 사이
 export const WriterWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -107,7 +107,7 @@ export const Youtube = styled.input`
 export const ImageWrapper = styled.div`
   width: 996px;
   padding-top: 40px;
-`;
+`
 
 export const UploadButton = styled.button`
   width: 78px;
@@ -119,8 +119,7 @@ export const UploadButton = styled.button`
   white-space: pre-wrap;
 `
 
-export const UploadText = styled.div`
-`
+export const UploadText = styled.div``
 
 export const OptionWrapper = styled.div`
   width: 996px;
@@ -142,7 +141,7 @@ export const ButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   padding-top: 80px;
-`;
+`
 
 export const CancelButton = styled.button`
   width: 179px;
@@ -167,5 +166,5 @@ export const SubmitButton = styled.button`
 `
 
 export const ErrorMessage = styled.div`
-color:red;
+  color: red;
 `

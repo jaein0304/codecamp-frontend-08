@@ -1,15 +1,20 @@
 import { ChangeEvent, useState } from "react";
-import { useMutation } from '@apollo/client'
-import { useRouter } from 'next/router'
-import BoardWriteUI from './BoardWrite.presenter'
-import { CREATE_BOARD, UPDATE_BOARD } from './BoardWrite.queries'
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import BoardWriteUI from "./BoardWrite.presenter";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { IBoardWriteProps } from "./BoardWrite.types";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 /* 게시판 등록하기 페이지 */
 
-export default function BoardWrite(props: IBoardWriteProps){
-  const router = useRouter()
-  
+export default function BoardWrite(props: IBoardWriteProps) {
+  const router = useRouter();
+
   const [buttonColor, setButtonColor] = useState(false);
 
   const [writer, setWriter] = useState("");
@@ -22,13 +27,20 @@ export default function BoardWrite(props: IBoardWriteProps){
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
 
-  const [createBoard] = useMutation(CREATE_BOARD)
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+
+  const [updateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
-    if(event.target.value !== ""){
-      setWriterError("")
+    if (event.target.value !== "") {
+      setWriterError("");
     }
 
     if (event.target.value && password && title && contents) {
@@ -95,17 +107,17 @@ export default function BoardWrite(props: IBoardWriteProps){
         const result = await createBoard({
           variables: {
             createBoardInput: {
-              writer: writer,
-              password: password,
-              title: title,
-              contents: contents
-            }
-          }
-        })
-        console.log(result.data.createBoard._id)
-        router.push(`/boards/${result.data.createBoard._id}`)
-      } catch(error) {
-        alert("안만들어져용")
+              writer,
+              password,
+              title,
+              contents,
+            },
+          },
+        });
+        console.log(result.data?.createBoard._id);
+        router.push(`/boards/${result.data?.createBoard._id}`);
+      } catch (error) {
+        alert("안만들어져용");
       }
     }
   };
@@ -114,20 +126,20 @@ export default function BoardWrite(props: IBoardWriteProps){
     try {
       const result = await updateBoard({
         variables: {
-          boardId: router.query.boardId,
-          password: password,
+          boardId: String(router.query.boardId),
+          password,
           updateBoardInput: {
-            title: title,
-            contents: contents
+            title,
+            contents,
           },
         },
-      })
-      router.push(`/boards/${result.data.updateBoard._id}`)
-    } catch(error) {
-      alert("수정이안돼용")
+      });
+      router.push(`/boards/${result.data?.updateBoard._id}`);
+    } catch (error) {
+      alert("수정이안돼용");
     }
   };
-
+  console.log(props.data);
   return (
     <BoardWriteUI
       writerError={writerError}
@@ -142,6 +154,7 @@ export default function BoardWrite(props: IBoardWriteProps){
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
       buttonColor={buttonColor}
+      data={props.data} // defaultValue 값 넣어주기
     />
   );
 }

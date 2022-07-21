@@ -18,3 +18,18 @@ function solution(num) {
   }
   return -1
 }
+
+// 멘토님 코드
+function solution(num) {
+  let answer = 0
+  const result = new Array(500).fill(1).forEach((el) => {
+    if (num !== 1) {
+      num % 2 === 0 ? (num = num / 2) : (num = num * 3 + 1)
+      answer++
+      // console.log(answer, num)
+    }
+  })
+  console.log(answer)
+}
+
+// forEach는 중간에 멈출 수가 없음, 이번에는 메서드보다는 중간에 멈출 수 있는 for문이 더 효율적

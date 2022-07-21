@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
+import { Modal, Rate } from "antd";
 // https://ohou.se/projects/110465/detail?affect_type=ProjectSelfIndex&affect_id=0
-// 오늘의집 UI 댓글쪽 참고 
+// 오늘의집 UI 댓글쪽 참고
 
 export const Wrapper = styled.div`
   color: #424242;
-  display: block; // 
+  display: block; //
   flex-direction: row;
   font-family: "Noto Sans KR";
   font-size: 15px;
@@ -13,12 +14,12 @@ export const Wrapper = styled.div`
 `;
 
 export const IdWrapper = styled.div`
-/* background-color: brown; */
-`
+  /* background-color: brown; */
+`;
 export const CommentWrapper = styled.div`
   color: #424242;
   display: flex; //block (x)
-    /* flex-direction: row; */
+  /* flex-direction: row; */
   font-family: "Noto Sans KR";
   font-size: 15px;
   line-height: 15px;
@@ -63,7 +64,10 @@ export const Contents = styled.div`
   margin-top: 8px;
   margin-bottom: 8px;
   /* background-color: violet; */
-`
+`;
+
+// div x
+export const Rating = styled(Rate)``;
 
 export const CreatedAt = styled.div`
   width: 100%;
@@ -71,26 +75,26 @@ export const CreatedAt = styled.div`
   flex-wrap: wrap;
   align-items: center;
   text-align: left;
-  font-size:15px;
-  color: rgb(130,140,148);
+  font-size: 15px;
+  color: rgb(130, 140, 148);
   /* background-color: aliceblue; */
-`
+`;
 
 export const ButtonWrapper = styled.div`
-  width:5%;
+  width: 5%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   float: right;
   /* background-color: bisque; */
-`
+`;
 
 export const EditButton = styled.img`
   width: 25px;
   height: 25px;
   float: right;
   /* cursor: pointer;  */
-`
+`;
 
 export const DeleteButton = styled.img`
   width: 25px;
@@ -98,3 +102,10 @@ export const DeleteButton = styled.img`
   float: right;
   cursor: pointer;
 `;
+
+export const PasswordModal = styled(Modal)`
+  width: 100%;
+  margin-top: 10px;
+`;
+
+export const PasswordInput = styled.input``;

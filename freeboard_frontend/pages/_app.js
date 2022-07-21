@@ -1,18 +1,18 @@
-import '../styles/globals.css'
-import { ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
+import "../styles/globals.css";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import "antd/dist/antd.css"; // ant를 쓰기위한 import
 
 function MyApp({ Component, pageProps }) {
-
   const client = new ApolloClient({
     uri: "http://backend08.codebootcamp.co.kr/graphql",
-    cache: new InMemoryCache() // RAM에다 저장한다
-  })
+    cache: new InMemoryCache(), // RAM에다 저장한다
+  });
 
   return (
-    <ApolloProvider client={client}> 
-  <Component {...pageProps}/> 
+    <ApolloProvider client={client}>
+      <Component {...pageProps} />
     </ApolloProvider>
-    ) //여기 Component는 우리가 접속한 페이지 컴포넌트
+  ); // 여기 Component는 우리가 접속한 페이지 컴포넌트
 }
 
-export default MyApp
+export default MyApp;

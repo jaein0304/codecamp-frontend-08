@@ -1,14 +1,15 @@
-import { MouseEvent } from "react";
-import { ChangeEvent, MouseEventHandler } from "react";
+import { MouseEvent, ChangeEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
-
-//container
+// container
 export interface IBoardWriteProps {
   isEdit: boolean;
+  data?: Pick<IQuery, "fetchBoard">;
 }
 
-//presenter
+// presenter
 export interface IBoardWriteUIProps {
+  data?: Pick<IQuery, "fetchBoard">;
   isEdit: boolean;
   buttonColor: boolean;
   passwordError: string;
@@ -23,8 +24,7 @@ export interface IBoardWriteUIProps {
   onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-
-//styles
+// styles
 export interface ISubmitButtonProps {
   submitButton: boolean;
 }
