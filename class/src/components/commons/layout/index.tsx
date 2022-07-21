@@ -28,14 +28,14 @@ export default function Layout(props: ILayoutProps) {
       <div style={{ display: "flex" }}>
         <div
           style={{
-            width: "100px",
+            width: "30%",
             height: "700px",
             backgroundColor: "orange",
           }}
         >
           사이드바 sidebar
         </div>
-        <div>{props.children}</div>
+        <div style={{ width: "70%" }}>{props.children}</div>
       </div>
 
       <LayoutFooter />
