@@ -10,13 +10,15 @@ export const FETCH_BOARD = gql`
       createdAt
       likeCount
       dislikeCount
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
-
-/* likeBoard(
-boardId: ID!
-): Int! */
 
 export const LIKE_BOARD = gql`
   mutation likeBoard($boardId: ID!) {

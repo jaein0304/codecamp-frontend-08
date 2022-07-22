@@ -1,4 +1,6 @@
+// import { Pagination } from "antd";
 import { getDate } from "../../../../commons/libraries/utils";
+import PaginationContainer from "../../../commons/pagination/Pagination.container";
 import * as S from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardList.types";
 
@@ -14,11 +16,10 @@ export default function BoardListUI(props: IBoardListUIProps) {
       </S.Row>
       {props.data?.fetchBoards.map((el) => (
         <S.Row key={el._id}>
-          <S.ColumnBasic>{String(el._id).slice(-4).toUpperCase()}</S.ColumnBasic>
-          <S.ColumnTitle
-              id={el._id}
-              onClick={props.onClickMoveToBoardDetail}
-            >
+          <S.ColumnBasic>
+            {String(el._id).slice(-4).toUpperCase()}
+          </S.ColumnBasic>
+          <S.ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
             {el.title}
           </S.ColumnTitle>
           <S.ColumnBasic>{el.writer}</S.ColumnBasic>
@@ -27,6 +28,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
       ))}
       <S.TableBottom />
       <S.Footer>
+        <PaginationContainer refetch={props.refetch} count={props.count} />
         <S.Button onClick={props.onClickMoveToBoardNew}>
           <S.PencilIcon src="/images/board/list/write.png" />
           게시물 등록하기

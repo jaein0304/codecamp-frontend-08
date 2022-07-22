@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { IBoardWriteProps } from "./BoardWrite.types";
+import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
 import {
   IMutation,
   IMutationCreateBoardArgs,
@@ -16,11 +16,16 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter();
 
   const [buttonColor, setButtonColor] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [zipcode, setZipcode] = useState(""); // 우편번호
+  const [address, setAddress] = useState(""); // 주소
+  const [addressDetail, setAddressDetail] = useState(""); // 상세주소
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -37,6 +42,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
 
+  // 작성자
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
     if (event.target.value !== "") {
@@ -50,6 +56,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
+  // 비밀번호
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     if (event.target.value !== "") {
@@ -63,6 +70,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
+  // 제목
   const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
@@ -76,6 +84,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
+  // 내용
   const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
     setContents(event.target.value);
     if (event.target.value !== "") {
@@ -89,6 +98,27 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
+  // 유튜브
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
+
+  // 주소
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+
+  const onClickAddressSearch = () => {
+    setIsOpen(true);
+  };
+
+  const onCompleteAddressSearch = (data: any) => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
+  };
+
+  // 등록
   const onClickSubmit = async () => {
     if (!writer) {
       setWriterError("작성자를 입력해주세요.");
@@ -111,10 +141,18 @@ export default function BoardWrite(props: IBoardWriteProps) {
               password,
               title,
               contents,
+              youtubeUrl,
+              boardAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
             },
           },
         });
         console.log(result.data?.createBoard._id);
+        // console.log(result);
+
         router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
         alert("안만들어져용");
@@ -123,23 +161,50 @@ export default function BoardWrite(props: IBoardWriteProps) {
   };
 
   const onClickUpdate = async () => {
+    if (
+      !title &&
+      !contents &&
+      !youtubeUrl &&
+      !address &&
+      !addressDetail &&
+      !zipcode
+    ) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
+
+    if (!password) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
+    const updateBoardInput: IUpdateBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
+
     try {
+      if (typeof router.query.boardId !== "string") return;
       const result = await updateBoard({
         variables: {
-          boardId: String(router.query.boardId),
+          boardId: router.query.boardId,
           password,
-          updateBoardInput: {
-            title,
-            contents,
-          },
+          updateBoardInput,
         },
       });
       router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
-      alert("수정이안돼용");
+      if (error instanceof Error) alert(error.message);
     }
   };
-  console.log(props.data);
+
   return (
     <BoardWriteUI
       writerError={writerError}
@@ -152,9 +217,17 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
+      onChangeYoutubeUrl={onChangeYoutubeUrl}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
       isEdit={props.isEdit}
-      buttonColor={buttonColor}
       data={props.data} // defaultValue 값 넣어주기
+      buttonColor={buttonColor}
+      isOpen={isOpen}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
     />
   );
 }

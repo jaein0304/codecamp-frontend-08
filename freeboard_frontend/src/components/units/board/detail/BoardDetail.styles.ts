@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import ReactPlayer from "react-player";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -43,6 +44,12 @@ export const Info = styled.div`
   justify-content: center;
 `;
 
+export const IconWrapper = styled.div`
+  text-align: center;
+`;
+export const LinkIcon = styled.img``;
+export const LocationIcon = styled.img``;
+
 export const Writer = styled.div``;
 
 export const CreatedAt = styled.div``;
@@ -60,6 +67,10 @@ export const Contents = styled.div`
   padding-top: 40px;
   padding-bottom: 120px;
 `;
+export const Youtube = styled(ReactPlayer)`
+  margin: auto;
+`;
+
 export const GoodWrapper = styled.div`
   display: flex;
   flex-direction: row;

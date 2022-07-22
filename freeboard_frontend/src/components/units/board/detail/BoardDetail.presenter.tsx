@@ -1,6 +1,7 @@
 import { getDate } from "../../../../commons/libraries/utils";
 import * as S from "./BoardDetail.styles";
 import { IBoardDetailUIProps } from "./BoardDetail.types";
+import { Tooltip } from "antd";
 
 export default function BoardDetailUI(props: IBoardDetailUIProps) {
   return (
@@ -16,10 +17,29 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
               </S.CreatedAt>
             </S.Info>
           </S.AvatarWrapper>
+          <S.IconWrapper>
+            <S.LinkIcon src="/images/board/detail/link.png" />
+            <Tooltip
+              placement="topRight"
+              title={`${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
+            >
+              <S.LocationIcon src="/images/board/detail/location.png" />
+            </Tooltip>
+          </S.IconWrapper>
         </S.Header>
         <S.Body>
           <S.Title>{props.data?.fetchBoard?.title}</S.Title>
-          <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
+          <S.Contents>
+            {`${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
+            {props.data?.fetchBoard?.contents}
+          </S.Contents>
+          {props.data?.fetchBoard.youtubeUrl && (
+            <S.Youtube
+              url={props.data?.fetchBoard.youtubeUrl}
+              width="600px"
+              height="400px"
+            />
+          )}
           <S.GoodWrapper>
             <S.LikeWrapper>
               <S.Like
