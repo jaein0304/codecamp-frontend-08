@@ -116,13 +116,12 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       } catch (error) {
         alert("등록이 안됐어용");
       }
-      setWriter("");
+      setWriter(""); // 작성한 댓글 등록 시 초기화
       setPassword("");
       setContents("");
+      setRating(0);
     }
-    setWriter("");
-    setPassword("");
-    setContents("");
+    // setWriter(""); // 여기다 선언해도 초기화 가능
   };
 
   // 댓글 수정 버튼
@@ -165,6 +164,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       writer={writer}
       password={password}
       contents={contents}
+      rating={rating}
       setRating={setRating}
     />
   );

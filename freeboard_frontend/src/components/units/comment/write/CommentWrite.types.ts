@@ -14,7 +14,7 @@ export interface IBoardCommentUIProps {
   writer: string;
   password: string;
   contents: string;
-  //
+  rating: number;
   isActive: boolean;
   isEdit: boolean;
   writerError: string;
@@ -30,4 +30,5 @@ export interface IBoardCommentUIProps {
 
 export interface ICommentSubmitButtonProps {
   submitButton: boolean;
+  isActive: boolean;
 }

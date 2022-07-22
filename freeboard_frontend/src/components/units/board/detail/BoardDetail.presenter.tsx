@@ -20,6 +20,24 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
         <S.Body>
           <S.Title>{props.data?.fetchBoard?.title}</S.Title>
           <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
+          <S.GoodWrapper>
+            <S.LikeWrapper>
+              <S.Like
+                onClick={props.onClickUpToLike}
+                src="/img-board-detail/ic_thumb_up-24px.png"
+              />
+              <S.LikeCount>{props.data?.fetchBoard.likeCount}</S.LikeCount>
+            </S.LikeWrapper>
+            <S.LikeWrapper>
+              <S.DisLike
+                onClick={props.onClickUpToDisLike}
+                src="/img-board-detail/ic_thumb_down-24px.png"
+              />
+              <S.DisLikeCount>
+                {props.data?.fetchBoard.dislikeCount}
+              </S.DisLikeCount>
+            </S.LikeWrapper>
+          </S.GoodWrapper>
         </S.Body>
       </S.CardWrapper>
       <S.BottomWrapper>

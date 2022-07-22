@@ -4,4 +4,6 @@ export interface IBoardDetailUIProps {
   data?: Pick<IQuery, "fetchBoard">;
   onClickMoveToBoardList: () => void;
   onClickMoveToBoardEdit: () => void;
+  onClickUpToLike: () => void;
+  onClickUpToDisLike: () => void;
 }

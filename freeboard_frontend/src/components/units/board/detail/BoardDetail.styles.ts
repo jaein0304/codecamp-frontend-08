@@ -60,6 +60,39 @@ export const Contents = styled.div`
   padding-top: 40px;
   padding-bottom: 120px;
 `;
+export const GoodWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* justify-content: space-around; */
+  margin-top: 15%;
+`;
+
+export const LikeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Like = styled.img`
+  width: 40px;
+  margin-right: 100px;
+  cursor: pointer;
+`;
+
+export const LikeCount = styled.div`
+  width: 40px;
+  color: yellow;
+`;
+
+export const DisLike = styled.img`
+  width: 40px;
+  cursor: pointer;
+`;
+
+export const DisLikeCount = styled.div`
+  width: 40px;
+  color: gray;
+`;
 
 export const BottomWrapper = styled.div`
   display: flex;
