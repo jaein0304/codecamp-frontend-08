@@ -49,6 +49,7 @@ export default function PaginationContainer() {
 
   const onClickNextPage = () => {
     if (startPage + 10 <= lastPage) {
+      // startPage + 0 <= lastPage && lastPage <= startPage + 9
       setStartPage((prev) => prev + 10);
       refetch({ page: startPage + 10 });
       setCurrentPage(currentPage - 10);
