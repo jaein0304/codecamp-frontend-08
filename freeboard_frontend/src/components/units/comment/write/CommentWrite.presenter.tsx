@@ -5,13 +5,19 @@ export default function BoardCommentUI(props: IBoardCommentUIProps) {
   return (
     <S.Wrapper>
       {/* <S.Title>{props.isEdit ? "댓글수정" : "댓글등록"}</S.Title> */}
+      {props.isEdit && (
+        <>
+          <S.EditIcon src="/images/board/list/write.png" />
+          <span>댓글</span>
+        </>
+      )}
       <S.WriterWrapper>
         <S.InputWrapper>
           <S.Writer
             type="text"
             placeholder="작성자"
             onChange={props.onChangeWriter}
-            // defaultValue={props.data?.fetchBoard.writer || ""}
+            defaultValue={props.data?.fetchBoard.writer || ""}
             value={props.writer}
           />
           <S.Error>{props.writerError}</S.Error>

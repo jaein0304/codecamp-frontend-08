@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardCommentUI from "./CommentWrite.presenter";
@@ -11,18 +11,19 @@ import { FETCH_BOARD_COMMENTS } from "../list/CommentList.queries";
 import {
   IMutation,
   IMutationCreateBoardCommentArgs,
+  IMutationUpdateBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
 
 export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
   const router = useRouter();
 
   const [isActive, setIsActive] = useState(false);
-  // const [buttonColor, setButtonColor] = useState(false);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(0);
+  const [boardCommentId, setBoardCommentId] = useState();
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -33,8 +34,10 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
     IMutationCreateBoardCommentArgs
   >(CREATE_BOARD_COMMENT);
 
-  // 댓글 수정할 때 뮤테이션 넣어주기, 아직미완
-  const [updateBoardUpdateComment] = useMutation(UPDATE_BOARD_COMMENT);
+  const [updateBoardComment] = useMutation<
+    Pick<IMutation, "updateBoardComment">,
+    IMutationUpdateBoardCommentArgs
+  >(UPDATE_BOARD_COMMENT);
 
   // 작성자
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -123,28 +126,33 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
     }
     // setWriter(""); // 여기다 선언해도 초기화 가능
   };
-
-  // 댓글 수정 버튼
-  const onClickUpdate = async () => {
+  /* ============= 댓글 수정 버튼 함수 ing.. ============= */
+  // 수정 버튼 누를 때 데이터 넘겨주기
+  const onClickUpdate = async (event: MouseEvent<HTMLImageElement>) => {
     try {
-      const result = await updateBoardUpdateComment({
+      await updateBoardComment({
         variables: {
-          updateBoardUpdateInput: {
-            writer,
+          updateBoardCommentInput: {
             contents,
             rating,
           },
           password,
-          boardCommentId: router.query.boardCommentId,
+          // boardCommentId: String(boardCommentId),
+          boardCommentId: props.el?._id,
+          // boardCommentId: String(router.query.boardCommentId),
         },
+        refetchQueries: [
+          {
+            query: UPDATE_BOARD_COMMENT,
+            variables: { boardId: router.query.boardId },
+          },
+        ],
       });
-      router.push(`/comments/${result.data.updateBoardUpdateComment._id}`);
+      console.log(boardCommentId);
+      // setIsOpenUpdateModal(false);
     } catch (error) {
-      alert("업데이트 오류");
+      alert("비밀번호가 틀렸습니다.");
     }
-    setWriter("");
-    setPassword("");
-    setContents("");
   };
 
   return (

@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
   border: none;
 `;
 
+export const EditIcon = styled.img``;
 export const Title = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 36px;

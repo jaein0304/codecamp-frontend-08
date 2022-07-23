@@ -25,7 +25,7 @@ export interface IBoardCommentUIProps {
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeRating: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
-  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickUpdate: (event: MouseEvent<HTMLImageElement>) => void;
 }
 
 export interface ICommentSubmitButtonProps {

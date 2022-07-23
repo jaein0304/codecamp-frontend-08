@@ -16,9 +16,12 @@ import {
 export default function BoardCommentList() {
   const router = useRouter();
 
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  // const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
+  // const [isEdit, setIsEdit] = useState(false);
+
   const [password, setPassword] = useState();
   const [boardCommentId, setBoardCommentId] = useState();
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
   const [deleteBoardComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
@@ -32,15 +35,14 @@ export default function BoardCommentList() {
     variables: {
       boardId: String(router.query.boardId),
     },
-    // refetchQueries: [
-    //   {
-    //     query: FETCH_BOARD_COMMENTS,
-    //     variables: { boardId: router.query.boardId },
-    //   },
-    // ],
   });
 
-  // 댓글 삭제 버튼 함수
+  /* ============= 댓글 수정 눌렀을 때 ing.. ============= */ // 피료없음
+  // const onClickMoveToBoardCommentUpdate = () => {
+  //   router.push(`/boards/${router.query.boardCommentId}`); // 여기 수정 하기 (6:28)
+  // };
+
+  /* ============= 댓글 삭제 버튼 함수 ============= */
   const onClickDelete = async (event: MouseEvent<HTMLImageElement>) => {
     // const password = prompt("비밀번호 입력"); // 이거 모달창
 
@@ -82,6 +84,7 @@ export default function BoardCommentList() {
       onClickDelete={onClickDelete}
       onClickDeleteModal={onClickDeleteModal}
       onInputDeletePassword={onInputDeletePassword}
+      // onClickMoveToBoardCommentUpdate={onClickMoveToBoardCommentUpdate}
     />
   );
 }

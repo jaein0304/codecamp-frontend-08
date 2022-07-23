@@ -93,7 +93,7 @@ export const EditButton = styled.img`
   width: 25px;
   height: 25px;
   float: right;
-  /* cursor: pointer;  */
+  cursor: pointer;
 `;
 
 export const DeleteButton = styled.img`

@@ -18,7 +18,11 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
               <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>
             </S.DataWrapper>
             <S.ButtonWrapper>
-              <S.EditButton src="/img-board-detail/ic_comment_write.png" />
+              <S.EditButton
+                src="/img-board-detail/ic_comment_write.png"
+                id={el._id}
+                onClick={props.onClickUpdate}
+              />
               <S.DeleteButton
                 src="/img-board-detail/ic_comment_delete.png"
                 id={el._id}
@@ -28,6 +32,7 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
           </S.CommentWrapper>
         </S.Wrapper>
       ))}
+
       {props.isOpenDeleteModal && (
         <S.PasswordModal visible={true} onOk={props.onClickDelete}>
           <div>비밀번호 입력: </div>
