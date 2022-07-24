@@ -1,11 +1,18 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import {
+  IMutation,
+  IMutationDeleteBoardArgs,
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
 import BoardDetailUI from "./BoardDetail.presenter";
-import { FETCH_BOARD, LIKE_BOARD, DISLIKE_BOARD } from "./BoardDetail.queries";
+import {
+  FETCH_BOARD,
+  LIKE_BOARD,
+  DISLIKE_BOARD,
+  DELETE_BOARD,
+} from "./BoardDetail.queries";
 
 export default function BoardDetail() {
   const router = useRouter();
@@ -14,10 +21,17 @@ export default function BoardDetail() {
     FETCH_BOARD,
     { variables: { boardId: String(router.query.boardId) } }
   );
+
+  const [deleteBoard] = useMutation<
+    Pick<IMutation, "deleteBoard">,
+    IMutationDeleteBoardArgs
+  >(DELETE_BOARD);
+
   const [likeBoard] = useMutation<
     Pick<IQuery, "fetchBoard">,
     IQueryFetchBoardArgs
   >(LIKE_BOARD);
+
   const [dislikeBoard] = useMutation<
     Pick<IQuery, "fetchBoard">,
     IQueryFetchBoardArgs
@@ -54,9 +68,22 @@ export default function BoardDetail() {
     });
   };
 
-  // 게시물 삭제 버튼 만들기
-  const onClickMoveToBoardDelete = () => {};
-
+  // 게시물 삭제 버튼
+  const onClickBoardDelete = async () => {
+    try {
+      await deleteBoard({
+        variables: { boardId: String(router.query.boardId) },
+        refetchQueries: [
+          {
+            query: DELETE_BOARD,
+            variables: { boardId: router.push("/boards/") },
+          },
+        ],
+      });
+    } catch (error) {
+      alert("삭제되었습니다.");
+    }
+  };
   return (
     <BoardDetailUI
       data={data}
@@ -64,6 +91,7 @@ export default function BoardDetail() {
       onClickMoveToBoardEdit={onClickMoveToBoardEdit}
       onClickUpToLike={onClickUpToLike}
       onClickUpToDisLike={onClickUpToDisLike}
+      onClickBoardDelete={onClickBoardDelete}
     />
   );
 }

@@ -43,7 +43,7 @@ export default function BoardCommentList() {
   // };
 
   /* ============= 댓글 삭제 버튼 함수 ============= */
-  const onClickDelete = async (event: MouseEvent<HTMLImageElement>) => {
+  const onClickDelete = async (event: MouseEvent<HTMLElement>) => {
     // const password = prompt("비밀번호 입력"); // 이거 모달창
 
     try {
@@ -68,7 +68,6 @@ export default function BoardCommentList() {
 
   // 댓글 삭제 알림 (modal)
   const onClickDeleteModal = (event: MouseEvent<HTMLImageElement>) => {
-    setBoardCommentId(event.target.id);
     setIsOpenDeleteModal(true);
   };
 

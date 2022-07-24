@@ -28,7 +28,16 @@ export default function Layout(props: ILayoutProps) {
         >
           사이드바
         </div>
-        <div style={{ width: "70%" }}>{props.children}</div>
+        <div style={{ width: "80%" }}>{props.children}</div>
+        <div
+          style={{
+            width: "10%",
+            height: "auto",
+            backgroundColor: "pink",
+          }}
+        >
+          사이드바
+        </div>
       </div>
 
       <LayoutFooter />

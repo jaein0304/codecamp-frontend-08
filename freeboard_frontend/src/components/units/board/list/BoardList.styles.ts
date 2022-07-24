@@ -1,8 +1,15 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 1500px;
   margin: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid red; */
+  /* text-align: center; */
+  /* display: grid;
+  place-content: center; */
 `;
 
 export const TableTop = styled.div`
@@ -20,7 +27,7 @@ export const Row = styled.div`
   height: 52px;
   line-height: 52px;
   border-bottom: 1px solid gray;
-  
+
   :hover {
     color: blue;
   }
@@ -34,7 +41,6 @@ export const ColumnHeaderBasic = styled.div`
 export const ColumnHeaderTitle = styled.div`
   width: 70%;
   text-align: center;
-
 `;
 
 export const ColumnBasic = styled.div`
@@ -46,6 +52,8 @@ export const ColumnTitle = styled.button`
   width: 70%;
   text-align: center;
   cursor: pointer;
+  background-color: white;
+  border: none;
 
   :hover {
     color: blue;
