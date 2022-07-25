@@ -1,5 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
 import styled from "@emotion/styled";
+// import _ from "lodash";
 import { useState, MouseEvent } from "react";
 import {
   IQuery,
@@ -47,6 +48,7 @@ export default function CommentEditPage2() {
   const onClickEdit = (event: MouseEvent<HTMLButtonElement>) => {
     if (!(event.target instanceof HTMLButtonElement)) return;
 
+    // const aaa = _.cloneDeep(myIndex)
     const aaa = [...myIndex];
     aaa[Number(event.target.id)] = true;
     setMyIndex(aaa);

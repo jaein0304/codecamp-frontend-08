@@ -2,9 +2,9 @@ import { SmileTwoTone } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 const MyIcon = styled(SmileTwoTone)`
-    font-size: 100px;
-    color: pink;
-`
+  font-size: 100px;
+  color: pink;
+`;
 
 export default function LibraryIconPage() {
   return <MyIcon />;
