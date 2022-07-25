@@ -68,6 +68,7 @@ export default function BoardCommentList() {
 
   // 댓글 삭제 알림 (modal)
   const onClickDeleteModal = (event: MouseEvent<HTMLImageElement>) => {
+    setBoardCommentId(event.target.id);
     setIsOpenDeleteModal(true);
   };
 
