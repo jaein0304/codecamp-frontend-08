@@ -28,7 +28,7 @@ export default function Layout(props: ILayoutProps) {
         >
           사이드바
         </div> */}
-        <div style={{ width: "80%" }}>{props.children}</div>
+        <div style={{ width: "100%" }}>{props.children}</div>
         {/* <div
           style={{
             width: "10%",

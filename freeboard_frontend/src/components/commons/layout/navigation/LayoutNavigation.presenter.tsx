@@ -2,7 +2,10 @@ import { Fragment } from "react";
 import { MenuItem, Wrapper } from "./LayoutNavigation.styles";
 import { ILayoutNavigationUIProps } from "./LayoutNavigation.types";
 
-const NAVIGATION_MENUS = [{ name: "게시판", page: "/boards" }];
+const NAVIGATION_MENUS = [
+  { name: "게시판목록", page: "/boards" },
+  { name: "API", page: "/boardApi" },
+];
 
 export default function LayoutNavigationUI(props: ILayoutNavigationUIProps) {
   return (
