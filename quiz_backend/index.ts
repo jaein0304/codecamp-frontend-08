@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm"
 import { Product } from "./Product.postgres"
 import { ApolloServer, gql } from "apollo-server"
+import { argsToArgsConfig } from "graphql/type/definition"
 
 // DOCS
 const typeDefs = gql`
@@ -44,6 +45,11 @@ const resolvers = {
     fetchProducts: async () => {
       const result = await Product.find()
       console.log(result)
+      return result
+    },
+
+    fetchProduct: async () => {
+      const result = await Product.find()
       return result
     },
   },
