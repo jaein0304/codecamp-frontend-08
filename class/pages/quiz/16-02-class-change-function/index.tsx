@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function MyComponent() {
   const router = useRouter();
   const [count, setCount] = useState(0);
 
-  const inputRef = createRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>();
 
   useEffect(() => {
     console.log("컴포넌트가 마운트됐습니다~");
