@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
-      <Global styles={globalStyles} />
+      {/* <Global styles={globalStyles} /> */}
       <Layout>
         <Component {...pageProps} />
       </Layout>

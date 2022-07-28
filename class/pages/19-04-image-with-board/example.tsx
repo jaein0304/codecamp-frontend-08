@@ -1,6 +1,7 @@
 import { ChangeEvent, useRef, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { checkFileValidation } from "../../src/commons/libraries/fileValidation";
+// import { checkFileValidation } from "../../src/commons/libraries/fileValidation";
+import { validationFile } from "../../src/commons/libraries/validationFile";
 import { Modal } from "antd";
 
 const CREATE_BOARD = gql`
@@ -62,7 +63,7 @@ export default function GraphqlMutationPage() {
     const file = event.target.files?.[0];
     console.log(file);
 
-    const isValid = checkFileValidation(file);
+    const isValid = validationFile(file);
     if (!isValid) return;
 
     try {
