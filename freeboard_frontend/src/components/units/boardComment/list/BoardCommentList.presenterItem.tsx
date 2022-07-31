@@ -69,7 +69,7 @@ export default function BoardCommentListUIItem(
       {!isEdit && (
         <S.ItemWrapper>
           <S.FlexWrapper>
-            <S.Avatar src="/images/avatar.png" />
+            <S.Avatar src="/images/boardComment/list/ic_profile-24px.png/" />
             <S.MainWrapper>
               <S.WriterWrapper>
                 <S.Writer>{props.el?.writer}</S.Writer>

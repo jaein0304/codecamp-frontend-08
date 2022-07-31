@@ -4,7 +4,7 @@ import { ILayoutNavigationUIProps } from "./LayoutNavigation.types";
 
 const NAVIGATION_MENUS = [
   { name: "게시판목록", page: "/boards" },
-  { name: "API", page: "/boardApi" },
+  { name: "API", page: "/openApi" },
 ];
 
 export default function LayoutNavigationUI(props: ILayoutNavigationUIProps) {

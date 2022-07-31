@@ -5,13 +5,13 @@ export default function LayoutBannerUI(props: ILayoutBannerProps) {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 2000,
     // fade: true,
     // cssEase: "linear",
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 5000, // 5초
   };
 
   return (
@@ -20,12 +20,6 @@ export default function LayoutBannerUI(props: ILayoutBannerProps) {
       <SliderWrapper>
         <Slider {...settings}>
           <Image src="/img/hello.png" />
-          {/* <Image src="/img/slider-1.png" />
-          <Image src="/img/slider-2.png" />
-          <Image src="/img/slider-3.png" />
-          <Image src="/img/slider-4.png" />
-          <Image src="/img/slider-5.png" />
-        <Image src="/img/slider-6.png" /> */}
           <Image src="/img/emoticon_1.gif" />
           <Image src="/img/emoticon_2.gif" />
           <Image src="/img/emoticon_3.gif" />
