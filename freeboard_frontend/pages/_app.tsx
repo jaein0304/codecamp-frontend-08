@@ -1,4 +1,4 @@
-// import "../styles/globals.css";
+import "../styles/styles.css";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import "antd/dist/antd.css"; // ant를 쓰기위한 import
 import Layout from "../src/components/commons/layout";

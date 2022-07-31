@@ -12,4 +12,8 @@ export const globalStyles = css`
     font-family: "myFont";
     src: url("/fonts/Maplestory OTF Light.otf");
   }
+
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 `;

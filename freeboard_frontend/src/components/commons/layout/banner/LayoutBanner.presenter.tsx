@@ -1,6 +1,7 @@
 import { SliderWrapper, Wrapper, Image } from "./LayoutBanner.styles";
 import Slider from "react-slick";
 import { ILayoutBannerProps } from "./LayoutBanner.types";
+
 export default function LayoutBannerUI(props: ILayoutBannerProps) {
   const settings = {
     dots: true,
@@ -16,7 +17,7 @@ export default function LayoutBannerUI(props: ILayoutBannerProps) {
 
   return (
     <Wrapper>
-      Banner
+      Banner{" "}
       <SliderWrapper>
         <Slider {...settings}>
           <Image src="/img/hello.png" />
