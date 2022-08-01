@@ -20,6 +20,7 @@ export interface IBoardWriteUIProps {
   zipcode: string;
   address: string;
   addressDetail: string;
+  fileUrls: string[];
 
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -31,6 +32,7 @@ export interface IBoardWriteUIProps {
   onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickAddressSearch: () => void;
   onCompleteAddressSearch: (data: any) => void;
+  onChangeFileUrls: (fileUrls: string, index: number) => void;
 }
 
 // styles
@@ -47,4 +49,5 @@ export interface IUpdateBoardInput {
     address?: string;
     addressDetail?: string;
   };
+  images?: string[];
 }

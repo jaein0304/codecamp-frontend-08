@@ -33,6 +33,16 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
             {`${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
             {props.data?.fetchBoard?.contents}
           </S.Contents>
+          <S.ImageWrapper>
+            {props.data?.fetchBoard.images
+              ?.filter((el: string) => el)
+              .map((el: string) => (
+                <S.Image
+                  key={el}
+                  src={`https://storage.googleapis.com/${el}`}
+                />
+              ))}
+          </S.ImageWrapper>
           {props.data?.fetchBoard.youtubeUrl && (
             <S.Youtube
               url={props.data?.fetchBoard.youtubeUrl}

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
@@ -26,6 +26,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [zipcode, setZipcode] = useState(""); // 우편번호
   const [address, setAddress] = useState(""); // 주소
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -117,6 +118,17 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setZipcode(data.zonecode);
     setIsOpen(false);
   };
+  const onChangeFileUrls = (fileUrl: string, index: number) => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  };
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrls([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
 
   // 등록
   const onClickSubmit = async () => {
@@ -147,6 +159,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
                 address,
                 addressDetail,
               },
+              images: [...fileUrls],
             },
           },
         });
@@ -161,13 +174,18 @@ export default function BoardWrite(props: IBoardWriteProps) {
   };
 
   const onClickUpdate = async () => {
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
     if (
       !title &&
       !contents &&
       !youtubeUrl &&
       !address &&
       !addressDetail &&
-      !zipcode
+      !zipcode &&
+      !isChangedFiles
     ) {
       alert("수정한 내용이 없습니다.");
       return;
@@ -189,6 +207,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       if (addressDetail)
         updateBoardInput.boardAddress.addressDetail = addressDetail;
     }
+    if (isChangedFiles) updateBoardInput.images = fileUrls;
 
     try {
       if (typeof router.query.boardId !== "string") return;
@@ -221,6 +240,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeAddressDetail={onChangeAddressDetail}
       onClickAddressSearch={onClickAddressSearch}
       onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeFileUrls={onChangeFileUrls}
       isEdit={props.isEdit}
       data={props.data} // defaultValue 값 넣어주기
       buttonColor={buttonColor}
@@ -228,6 +248,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       zipcode={zipcode}
       address={address}
       addressDetail={addressDetail}
+      fileUrls={fileUrls}
     />
   );
 }

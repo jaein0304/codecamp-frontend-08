@@ -8,6 +8,8 @@ import {
   IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
 import { MouseEvent } from "react";
+import _ from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardList() {
   const router = useRouter();
