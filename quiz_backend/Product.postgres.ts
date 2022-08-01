@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, DeleteDateColumn } from "typeorm"
 
 // 테이블 생성기
 @Entity()
@@ -21,6 +21,6 @@ export class Product extends BaseEntity {
   @CreateDateColumn()
   createdAt!: Date
 
-  @Column({ type: "text" })
+  @DeleteDateColumn()
   deletedAt!: Date
 }

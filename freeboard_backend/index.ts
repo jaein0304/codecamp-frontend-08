@@ -1,8 +1,7 @@
 // 여기가 API 메인 소스코드
-
 import { DataSource } from "typeorm"
 import { Board } from "./Board.postgres"
-import { ApolloServer, gql } from "apollo-server" // 원본 : const { ApolloServer, gql } = require("apollo-server")
+import { ApolloServer, gql } from "apollo-server"
 
 // DOCS
 const typeDefs = gql`
@@ -21,12 +20,13 @@ const typeDefs = gql`
 
   type Query {
     fetchBoards: [Board]
+    fetchBoard: [Board]
   }
 
   type Mutation {
-    # createBoard(writer: String, title: String, contents: String): String #연습용 example 방식
     createBoard(createBoardInput: CreateBoardInput!): String
-    #실무용 backend08 방식
+    updateBoard(updateBoardInput: updateBoardInput!): String
+    deleteBoard(boardId: ID): String
   }
 `
 
@@ -44,26 +44,13 @@ const resolvers = {
     createBoard: async (_: any, args: any) => {
       await Board.insert({
         ...args.createBoardInput,
-        // writer: args.createBoardInput.writer,
-        // title: args.createBoardInput.title,
-        // contents: args.createBoardInput.contents,
       })
-      // args.writer
-      // args.title
-      // args.contents
 
-      // 만약 수정하게 된다면
-      // Board.update({ number: 3 }, { writer: "영희" }) // 3번 게시글의 작성자 영희로 바꿔줘
-
-      // 만약 삭제한다면
-      // Board.delete({number: 3}) => // 3번 게시글 삭제
-      // Board.update({number: 3}, {isDeleted: true}) => // 실무에서는 실제로 삭제하지 않음
-      // Board.update({number: 3}, {deletedAt: new Date()}) => // (실무) 삭제 날짜
       return "게시물 등록에 성공했습니다"
     },
-    /* updateBoard: () => {
-
-    } */
+    updateBoard: async (_: any, args: any) => {
+      await Board.update({ _id: args.boardId }, { ...args.updateBoardInput, deletedAt: "" })
+    },
   },
 }
 
