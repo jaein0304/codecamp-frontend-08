@@ -48,7 +48,7 @@ export default function MapFruitsPage() {
   }; */
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
     if (!(event.target instanceof HTMLSpanElement)) return;
-    refetch({ search, page: Number(event.target.id) });
+    refetch({ page: Number(event.target.id) });
   };
 
   return (

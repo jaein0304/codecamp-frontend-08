@@ -11,10 +11,8 @@ import { AppProps } from "next/app";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 import Layout from "../src/components/commons/layout";
 import { createUploadLink } from "apollo-upload-client";
+import { RecoilRoot } from "recoil";
 
-// import Layout from "../src_quiz/components/commons/layout";
-
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -40,15 +38,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink]),
     cache: new InMemoryCache(), // RAM에다 저장한다
+    connectToDevTools: true, // 0802
   });
 
   return (
-    <ApolloProvider client={client}>
-      {/* <Global styles={globalStyles} /> */}
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <RecoilRoot>
+      <ApolloProvider client={client}>
+        {/* <Global styles={globalStyles} /> */}
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
+    </RecoilRoot>
   );
   // 여기 Component는 우리가 접속한 페이지 컴포넌트
 }
