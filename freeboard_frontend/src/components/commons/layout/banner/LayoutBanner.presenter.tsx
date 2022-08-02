@@ -15,7 +15,7 @@ export default function LayoutBannerUI(props: ILayoutBannerProps) {
     autoplay: true,
     autoplaySpeed: 1000, // 초
   };
-
+  const arr = ["8586/E6MHUKQjWm2upGGwOXZX9ZP4NbaaUk1EAxCvbuJWJACfuReS.jpg"];
   return (
     <S.Wrapper>
       <S.HeadTitle>Popular Games</S.HeadTitle>

@@ -3,15 +3,22 @@ import { MouseEvent } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
 
 export interface IBoardListUIProps {
   data?: Pick<IQuery, "fetchBoards">;
+  count?: number;
+  keyword: string;
+
   onClickMoveToBoardNew: () => void;
-  //   onClickMoveToBoardDetail: (MouseEventHandler) => void;
+  onChangeKeyword: (value: string) => void;
   onClickMoveToBoardDetail: (event: MouseEvent<HTMLButtonElement>) => void;
+
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-  count?: number;
+  refetchBoardsCount: (
+    variables?: Partial<IQueryFetchBoardsCountArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
 }

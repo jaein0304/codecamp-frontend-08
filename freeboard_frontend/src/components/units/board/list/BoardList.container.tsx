@@ -7,19 +7,19 @@ import {
   IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 import _ from "lodash";
-import { v4 as uuidv4 } from "uuid";
 
 export default function BoardList() {
   const router = useRouter();
+  const [keyword, setKeyword] = useState("");
 
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
 
-  const { data: dataBoardsCount } = useQuery<
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);
@@ -32,13 +32,20 @@ export default function BoardList() {
     router.push(`/boards/${(event.target as HTMLButtonElement).id}`);
   };
 
+  const onChangeKeyword = (value: string) => {
+    setKeyword(value);
+  };
+
   return (
     <BoardListUI
       data={data}
+      keyword={keyword}
       refetch={refetch}
+      refetchBoardsCount={refetchBoardsCount}
       count={dataBoardsCount?.fetchBoardsCount}
       onClickMoveToBoardNew={onClickMoveToBoardNew}
       onClickMoveToBoardDetail={onClickMoveToBoardDetail}
+      onChangeKeyword={onChangeKeyword}
     />
   );
 }

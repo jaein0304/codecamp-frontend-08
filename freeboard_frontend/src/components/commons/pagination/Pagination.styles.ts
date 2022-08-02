@@ -18,10 +18,11 @@ export const PageWrapper = styled.div`
   justify-content: center;
 `;
 export const PageButton = styled.button`
-  width: flex;
-  height: 30%;
-  margin: 20px;
-  margin-top: 5%;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  /* margin-top: 5%; */
   border-radius: 100px;
   border: 3px solid black;
   text-align: center;
@@ -33,10 +34,11 @@ export const PageButton = styled.button`
 `;
 
 export const SlideButton = styled.button`
-  margin: 5%;
+  /* margin: 5%; */
+  width: 30px;
   cursor: ${(props: ISlideButtonProps) =>
     props.isActive ? "default" : "pointer"};
-  border: 3px solid black;
+  /* border: 3px solid black; */
   border-radius: 100px;
   background-color: ${(props: ISlideButtonProps) =>
     props.isActive ? "white" : "pink"};

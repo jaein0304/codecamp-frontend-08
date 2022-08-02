@@ -1,12 +1,18 @@
-// import { Pagination } from "antd";
+import { Pagination } from "antd";
 import { getDate } from "../../../../commons/libraries/utils";
 import PaginationContainer from "../../../commons/pagination/Pagination.container";
 import * as S from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardList.types";
-
+import { v4 as uuidv4 } from "uuid";
+import SearchBar from "../../../commons/searchbar";
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <S.Wrapper>
+      <SearchBar
+        refetch={props.refetch}
+        refetchBoardsCount={props.refetchBoardsCount}
+        onChangeKeyword={props.onChangeKeyword}
+      />
       <S.TableTop />
       <S.Row>
         <S.ColumnHeaderBasic>ID</S.ColumnHeaderBasic>
@@ -20,7 +26,17 @@ export default function BoardListUI(props: IBoardListUIProps) {
             {String(el._id).slice(-4).toUpperCase()}
           </S.ColumnBasic>
           <S.ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
-            {el.title}
+            {el.title
+              .replaceAll(props.keyword, `@#$%${props.keyword}@#$%`)
+              .split("@#$%")
+              .map((el) => (
+                <span
+                  key={uuidv4()}
+                  style={{ color: props.keyword === el ? "red" : "black" }}
+                >
+                  {el}
+                </span>
+              ))}
           </S.ColumnTitle>
           <S.ColumnBasic>{el.writer}</S.ColumnBasic>
           <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
