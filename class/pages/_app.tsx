@@ -1,23 +1,13 @@
 // import "../styles/globals.css";
-import {
-  ApolloClient,
-  ApolloLink,
-  ApolloProvider,
-  InMemoryCache,
-} from "@apollo/client";
-import { Global } from "@emotion/react";
 import "antd/dist/antd.css"; // 이부분이 import가 되어야 css를 가져올 수 있음 여기에 하면 모든 페이지에 적용됨
 import { AppProps } from "next/app";
-import { globalStyles } from "../src/commons/styles/globalStyles";
 import Layout from "../src/components/commons/layout";
-import { createUploadLink } from "apollo-upload-client";
-import { RecoilRoot, useRecoilState } from "recoil";
+import { RecoilRoot } from "recoil";
 import { initializeApp } from "firebase/app";
 import ApolloSetting from "../src/components/commons/layout/apollo";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDcDpcYev0-Ar6LSN2hpgetzzYOK-m-wqc",

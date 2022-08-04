@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>클로저 실습</title>
+    <script>
+      function aaa() {
+        const apple = 10; // 클로저 변수
+
+        function bbb() {
+          const banana = 20; // 로컬 변수
+
+          console.log(apple); // 로컬 스코프에 apple이 없으니까 클로저를 가져옴 (scope chain), 클로저에도 없으면 전역변수로
+          console.log(banana);
+        }
+        bbb();
+
+        const qqq = 3;
+      }
+      aaa();
+    </script>
+  </head>
+  <body></body>
+</html>
