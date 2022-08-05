@@ -9,3 +9,11 @@ export const accessTokenState = atom({
   key: "accessTokenState",
   default: "", // 처음 토큰 초기 값 : 빈문자열
 });
+
+export const userInfoState = atom({
+  key: "userInfoState",
+  default: {
+    email: "",
+    name: "",
+  },
+});
