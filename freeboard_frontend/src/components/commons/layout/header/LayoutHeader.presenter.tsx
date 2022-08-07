@@ -72,7 +72,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
               Sign in
             </a>
             <a
-              href="#"
+              href="/login/sign-up/"
               className="
               ml-8 whitespace-nowrap 
               inline-flex 
