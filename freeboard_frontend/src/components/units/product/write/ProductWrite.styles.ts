@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { ISubmitButtonProps } from "./BoardWrite.types";
-import DaumPostcode from "react-daum-postcode";
+
 import { Modal } from "antd";
 
 export const Wrapper = styled.div`
@@ -24,7 +23,7 @@ export const Label = styled.div`
   font-weight: 500;
 `;
 
-export const Writer = styled.input`
+export const Name = styled.input`
   width: 486px;
   height: 52px;
   padding-left: 16px;

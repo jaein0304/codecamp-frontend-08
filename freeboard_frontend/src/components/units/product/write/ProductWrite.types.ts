@@ -1,14 +1,8 @@
 import { ChangeEvent } from "react";
 
 export interface IProductWriteUIProps {
-  inputsError: {
-    name: string;
-    remarks: string;
-    contents: string;
-    price: number;
-  };
-  onChangeInputs: (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  onClickSubmit: () => Promise<void>;
+  register: UseFormRegister<FieldValues>;
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  formState: FormState<FieldValues>;
+  onClickButton: (data: any) => void;
 }

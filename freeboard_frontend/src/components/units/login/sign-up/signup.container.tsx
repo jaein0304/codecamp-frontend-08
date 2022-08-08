@@ -20,7 +20,7 @@ const schema = yup.object({
   phone: yup
     .string()
     .required("휴대폰 번호를 입력해주세요.")
-    .matches(/^\d{3}-\d{3,4}-\d{4}$/, "휴대폰 형식에 알맞지 않습니다."),
+    .matches(/^\d{3}\d{3,4}\d{4}$/, "휴대폰 형식에 알맞지 않습니다."),
 });
 
 export default function SignUpPage() {
@@ -33,6 +33,7 @@ export default function SignUpPage() {
 
   const onClickButton = (data) => {
     console.log(data);
+    alert(data);
   };
 
   return (

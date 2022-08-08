@@ -8,84 +8,43 @@ import {
 } from "../../../../commons/types/generated/types";
 import ProductWriteUI from "./ProductWrite.presenter";
 import { CREATE_USE_ITEM } from "./ProductWrite.queries";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const initialInputs = { name: "", remarks: "", contents: "", price: 0 };
+const schema = yup.object({
+  name: yup
+    .string()
+    .max(30, "30자 이내로 입력해주세요.")
+    .required("상품이름을 입력해주세요"),
+  remarks: yup
+    .string()
+    .max(100, "100자 이내로 입력해주세요.")
+    .required("상품 목록을 입력해주세요"),
+  price: yup.number().required("가격을 입력해주세요."),
+  contents: yup
+    .string()
+    .max(1000, "1000자 이내로 입력해주세요.")
+    .required("내용을 입력해주세요."),
+});
+// const initialInputs = { name: "", remarks: "", contents: "", price: 0 };
 export default function ProductWrite() {
   const router = useRouter();
-  // const [isActive, setIsActive] = useState(false);
-  const [inputs, setInputs] = useState(initialInputs);
-  const [inputsError, setInputsError] = useState(initialInputs);
 
-  const [createUseditem] = useMutation<
-    Pick<IMutation, "createUseditem">,
-    IMutationCreateUseditemArgs
-  >(CREATE_USE_ITEM);
-
-  const onChangeInputs = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const _inputs = {
-      ...inputs,
-      [event.target.id]: event.target.value,
-    };
-    setInputs(_inputs);
-    console.log("0000");
-    if (event.target.value !== "") {
-      setInputsError({
-        ...inputsError,
-        [event.target.id]: "",
-      });
-    }
-
-    // if (Object.values(_inputs).every((el) => el)) {
-    //   setIsActive(true);
-    // } else {
-    //   setIsActive(false);
-    // }
-  };
-
-  const onClickSubmit = async () => {
-    console.log("1111");
-    // const errors = {
-    //   name: "이름을 입력해주세요.",
-    //   remarks: "상품설명을 입력해주세요.",
-    //   contents: "내용을 입력해주세요.",
-    //   price: "가격을 입력해주세요.",
-    // };
-    // (Object.keys(inputs) as Array<keyof typeof inputs>).forEach((el) => {
-    //   if (!inputs[el]) {
-    //     setInputsError({
-    //       ...inputsError,
-    //       [el]: errors[el],
-    //     });
-    //   }
-    // });
-    // if (Object.values(inputs).every((el) => el)) {
-    try {
-      Object.values(inputs).every((el) => el);
-      console.log("2222");
-      const result = await createUseditem({
-        variables: {
-          createUseditemInput: {
-            ...inputs,
-          },
-        },
-      });
-      console.log(result.data?.createUseditem._id);
-      console.log(result);
-      console.log("3333");
-      // router.push(`/product/${result.data?.createUseditem._id}`);
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
-    // }
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
+  const onClickButton = (data) => {
+    console.log(data);
   };
 
   return (
     <ProductWriteUI
-      inputsError={inputsError}
-      onChangeInputs={onChangeInputs}
-      onClickSubmit={onClickSubmit}
+      register={register}
+      handleSubmit={handleSubmit}
+      formState={formState}
+      onClickButton={onClickButton}
     />
   );
 }
