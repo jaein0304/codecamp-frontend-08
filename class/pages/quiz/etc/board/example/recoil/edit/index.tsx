@@ -1,6 +1,6 @@
 import BoardWrite, {
   isEditState,
-} from "../../../../../../src_quiz/components/units/example/BoardWrite.container";
+} from "../../../../../../../src_quiz/components/units/example/BoardWrite.container";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 
