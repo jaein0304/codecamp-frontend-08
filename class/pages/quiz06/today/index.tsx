@@ -1,8 +1,7 @@
-import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 import { IBoard } from "../../../src/commons/types/generated/types";
-
+import { getDate } from "../../../src/commons/libraries/units";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -28,7 +27,7 @@ export default function TodayBasketListPage() {
           <SubWrapper>{el._id}</SubWrapper>
           <SubWrapper>{el.writer}</SubWrapper>
           <SubWrapper>{el.title}</SubWrapper>
-          <SubWrapper>{el.createdAt}</SubWrapper>
+          <SubWrapper>{getDate(el.createdAt)}</SubWrapper>
         </Wrapper>
       ))}
     </>
