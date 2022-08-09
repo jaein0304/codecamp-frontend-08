@@ -47,7 +47,7 @@ export default function MapFruitsPage() {
       update(cache, { data }) {
         cache.modify({
           fields: {
-            fetchBoards: (prev) => {
+            fetchBoards: (prev, { readField }) => {
               const deletedId = data.deleteBoard;
               const filteredPrev = prev.filter(
                 (el) => readField("_id", el) !== deletedId // el._id가 안되므로 (_ref 밖에 없음), readField를 사용해 꺼내오기
