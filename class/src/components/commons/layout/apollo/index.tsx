@@ -7,9 +7,8 @@ import {
 import { createUploadLink } from "apollo-upload-client";
 import { ReactNode, useEffect } from "react";
 import { useRecoilState } from "recoil";
-// import { accessTokenState } from "../../../../commons/store";
-import { accessTokenState } from "../../../../../src_quiz/commons/store";
-import { userInfoState } from "../../../../commons/store";
+import { userInfoState, accessTokenState } from "../../../../commons/store";
+// import { accessTokenState } from "../../../../../src_quiz/commons/store";
 
 const APOLLO_CACHE = new InMemoryCache();
 
