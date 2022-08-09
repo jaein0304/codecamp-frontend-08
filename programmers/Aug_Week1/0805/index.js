@@ -45,3 +45,14 @@ function solution(nums) {
   })
   return answer.size
 }
+
+function solution(nums) {
+  const answer = new Set(nums).size
+
+  const limit = nums.length / 2
+
+  if (limit >= answer) {
+    return answer
+  }
+  return limit
+}
