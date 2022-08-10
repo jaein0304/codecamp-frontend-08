@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-
 import { Modal } from "antd";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -44,13 +45,13 @@ export const Title = styled.input`
   border: 1px solid #bdbdbd;
 `;
 
-export const Contents = styled.input`
-  width: 996px;
-  height: 480px;
-  padding-left: 16px;
-  padding: 14px;
-  border: 1px solid #bdbdbd;
-`;
+// export const Contents = styled.input`
+//   width: 996px;
+//   height: 480px;
+//   padding-left: 16px;
+//   padding: 14px;
+//   border: 1px solid #bdbdbd;
+// `;
 
 export const InputWrapper = styled.div`
   padding-top: 40px;
@@ -89,12 +90,12 @@ export const CancelButton = styled.button`
   margin-right: 12px;
   cursor: pointer;
 `;
-export const ButtonWrapper = styled.div`
+/* export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding-top: 80px;
-`;
+`; */
 
 export const SubmitButton = styled.button`
   width: 179px;
@@ -114,4 +115,10 @@ export const Error = styled.div`
   padding-top: 10px;
   font-size: 14px;
   color: red;
+`;
+export const Contents = styled(ReactQuill)`
+  width: auto;
+  height: auto;
+  margin-bottom: 40px;
+  border: 3px solid black;
 `;

@@ -39,38 +39,24 @@ export default function LoginPage() {
     try {
       const result = await loginUser({
         variables: { email, password },
-
-        /* refetchQueries: [
-          {
-            query: FETCH_USER_LOGGED_IN,
-            variables: { boardId: router.query.name },
-          },
-        ], */
       });
+
       const accessToken = result.data?.loginUser.accessToken;
       if (!accessToken) return;
 
-      // 2. 로그인 토큰으로 유저정보 받아오기
-      const resultUserInfo = await client.query({
-        query: FETCH_USER_LOGGED_IN,
-        context: {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-      });
-      const userInfo = resultUserInfo.data?.fetchUserLoggedIn;
+      // const resultUserInfo = await client.query({
+      //   query: FETCH_USER_LOGGED_IN,
+      //   context: { headers: { Authorization: `Bearer ${accessToken}` } },
+      // });
 
-      // 3. 글로벌 스테이트에 저장하기
+      // const userInfo = resultUserInfo.data?.fetchUserLoggedIn;
       setAccessToken(accessToken);
-      setUserInfo(userInfo);
+      // setUserInfo(userInfo);
 
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-
+      // localStorage.setItem("userInfo", JSON.stringify(userInfo));
       alert("로그인에 성공하였습니다");
       // router.push("./sign-confirm");
-      // alert(`${data?.fetchUserLoggedIn.name}님 환영합니다!`);
       router.push("/../mainpage");
     } catch (error) {
       alert("로그인을 먼저 해주세요.");
