@@ -2,6 +2,7 @@ import SignUpPageUI from "./signup.presenter";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
 
 const schema = yup.object({
   email: yup
@@ -24,16 +25,16 @@ const schema = yup.object({
 });
 
 export default function SignUpPage() {
-  // const onRegister = () => {
+  const router = useRouter();
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  // };
 
   const onClickButton = (data) => {
     console.log(data);
-    alert(data);
+    alert("회원가입을 축하합니다🎉");
+    router.push("/mainpage");
   };
 
   return (
