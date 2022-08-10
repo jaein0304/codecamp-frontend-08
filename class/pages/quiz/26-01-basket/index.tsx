@@ -15,6 +15,7 @@ const FETCH_BOARDS = gql`
       writer
       title
       contents
+      createdAt
     }
   }
 `;
@@ -36,8 +37,10 @@ export default function BasketPage(props) {
   const onClickBasket = (basket: IBoard) => () => {
     console.log(basket);
 
-    const baskets: Pick<IBoard, "contents" | "title" | "_id" | "writer">[] =
-      JSON.parse(localStorage.getItem("baskets") || "[]");
+    const baskets: Pick<
+      IBoard,
+      "contents" | "title" | "_id" | "writer" | "createdAt"
+    >[] = JSON.parse(localStorage.getItem("baskets") || "[]");
 
     const temp = baskets.filter((el) => el._id === basket._id);
     if (temp.length === 1) {

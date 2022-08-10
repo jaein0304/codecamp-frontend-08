@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
+import { getDate } from "../../../src/commons/libraries/units";
 import BasketPage from "../../quiz/26-01-basket";
 // import BasketPage from "./index";
 
@@ -33,6 +34,7 @@ export default function BoardWriteUI(props) {
           <SubWrapper>{el.writer}</SubWrapper>
           <SubWrapper>{el.title}</SubWrapper>
           <SubWrapper>{el.contents}</SubWrapper>
+          <SubWrapper>{getDate(el.createdAt)}</SubWrapper>
           <BasketPage el={el} />
         </Wrapper>
       ))}
