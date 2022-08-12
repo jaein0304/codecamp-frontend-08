@@ -5,6 +5,7 @@ import Layout from "../src/components/commons/layout";
 import { RecoilRoot } from "recoil";
 import { initializeApp } from "firebase/app";
 import ApolloSetting from "../src/components/commons/layout/apollo";
+import Head from "next/head";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,14 +24,22 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <RecoilRoot>
-      <ApolloSetting>
-        {/* <Global styles={globalStyles} /> */}
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ApolloSetting>
-    </RecoilRoot>
+    <>
+      {/*   <Head> 모든 페이지에서 카카오맵을 다운로드 받는 비효율적인 방법
+        <script
+          type="text/javascript"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc653075a49daa7a2446f11dbeae75f7"
+        ></script>
+      </Head> */}
+      <RecoilRoot>
+        <ApolloSetting>
+          {/* <Global styles={globalStyles} /> */}
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ApolloSetting>
+      </RecoilRoot>
+    </>
   );
   // 여기 Component는 우리가 접속한 페이지 컴포넌트
 }
