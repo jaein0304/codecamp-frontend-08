@@ -3,8 +3,8 @@ import ProductWrite from "../../../src/components/units/product/write/ProductWri
 
 // 상품 등록하기
 
-const ProductWritePage = () => {
+export default function ProductWritePage() {
   return <ProductWrite />;
-};
+}
 
-export default withAuth(ProductWritePage);
+// export default withAuth(ProductWritePage);

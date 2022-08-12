@@ -44,17 +44,17 @@ export default function LoginPage() {
       const accessToken = result.data?.loginUser.accessToken;
       if (!accessToken) return;
 
-      // const resultUserInfo = await client.query({
-      //   query: FETCH_USER_LOGGED_IN,
-      //   context: { headers: { Authorization: `Bearer ${accessToken}` } },
-      // });
+      const resultUserInfo = await client.query({
+        query: FETCH_USER_LOGGED_IN,
+        context: { headers: { Authorization: `Bearer ${accessToken}` } },
+      });
 
-      // const userInfo = resultUserInfo.data?.fetchUserLoggedIn;
+      const userInfo = resultUserInfo.data?.fetchUserLoggedIn;
       setAccessToken(accessToken);
-      // setUserInfo(userInfo);
+      setUserInfo(userInfo);
 
       localStorage.setItem("accessToken", accessToken);
-      // localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
       alert("로그인에 성공하였습니다");
       // router.push("./sign-confirm");
       router.push("/../mainpage");

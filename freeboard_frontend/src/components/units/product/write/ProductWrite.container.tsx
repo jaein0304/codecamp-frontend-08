@@ -5,14 +5,13 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@apollo/client";
 import { CREATE_USE_ITEM } from "./ProductWrite.queries";
-import { useAuth } from "../../../commons/hooks/useAuth";
-/* import { useRef } from "react";
-import dynamic from "next/dynamic"; */
+import {
+  IMutation,
+  IMutationCreateUseditemArgs,
+} from "../../../../commons/types/generated/types";
+import { useRef } from "react";
+import { Editor } from "@toast-ui/react-editor";
 
-/* const ToastEditor = dynamic(
-  () => import("../../../../..//src/commons/libraries/toast"),
-  { ssr: false }
-); */
 const schema = yup.object({
   name: yup
     .string()
@@ -30,27 +29,31 @@ const schema = yup.object({
 });
 
 export default function ProductWrite() {
-  // useAuth();
   const router = useRouter();
-  // const editorRef = useRef();
-  const [createUseditem] = useMutation(CREATE_USE_ITEM);
+  // 토스트
+  const editorRef = useRef<Editor>(null);
+
+  const [createUseditem] = useMutation<
+    Pick<IMutation, "createUseditem">,
+    IMutationCreateUseditemArgs
+  >(CREATE_USE_ITEM);
   const { register, handleSubmit, formState, setValue, trigger } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
 
+  // 내용 별도로
   const onChangeContents = (value: string) => {
-    /*   ToastEditor.prototype.getInstance().getHTML();
-    ToastEditor.prototype.getInstance().getMarkdown();
-    console.log(editorRef.current?.getInstance().getHTML());
-    console.log(editorRef.current?.getInstance().getMarkdown());
-    setHtml("<h1>HELLO WORLD</h1>");
-    console.log(editor.getHTML()); */
-    setValue("contents", value === "<p><br></p>" ? "" : value);
+    const inputs = editorRef.current?.getInstance().getHTML();
+    setValue("contents", inputs);
     trigger("contents");
+
+    // setValue("contents", value === "<p><br></p>" ? "" : value);
+    // trigger("contents");
   };
 
   const onClickButton = async (data) => {
+    // console.log("check");
     try {
       const result = await createUseditem({
         variables: {
@@ -63,11 +66,13 @@ export default function ProductWrite() {
           },
         },
       });
+      console.log("asd");
       console.log(result);
-      console.log(result.data?.createUseditemInput._id);
-      // router.push(`./detail/${result.data.createUseditemInput._id}`);
+      console.log(result.data?.createUseditem._id);
+      router.push(`./${result.data?.createUseditem._id}`);
     } catch (error) {
       alert("상품이 등록되지 않았습니다.");
+      console.log(error);
     }
   };
   return (
@@ -77,6 +82,7 @@ export default function ProductWrite() {
       formState={formState}
       onClickButton={onClickButton}
       onChangeContents={onChangeContents}
+      editorRef={editorRef}
     />
   );
 }
