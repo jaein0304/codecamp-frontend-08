@@ -18,7 +18,7 @@ const solutions = [
   {
     name: "상품목록",
     // description: "Speak directly to your customers in a more meaningful way.",
-    href: "#",
+    href: "http://localhost:3000/products/",
     icon: ClipboardCheckIcon,
   },
 ];

@@ -3,14 +3,18 @@ import ProductWriteUI from "./ProductWrite.presenter";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@apollo/client";
-import { CREATE_USE_ITEM } from "./ProductWrite.queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { CREATE_USE_ITEM, UPDATE_USE_ITEM } from "./ProductWrite.queries";
 import {
   IMutation,
   IMutationCreateUseditemArgs,
+  IMutationUpdateUseditemArgs,
+  IUpdateUseditemInput,
 } from "../../../../commons/types/generated/types";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
+import { IProductWriteProps } from "./ProductWrite.types";
+import { FETCH_USED_ITEM } from "../detail/ProductDetail.queries";
 
 const schema = yup.object({
   name: yup
@@ -28,41 +32,47 @@ const schema = yup.object({
     .required("내용을 입력해주세요."),
 });
 
-export default function ProductWrite() {
+export default function ProductWrite(props: IProductWriteProps) {
   const router = useRouter();
+
   // 토스트
-  const editorRef = useRef<Editor>(null);
+  const editorRef = useRef<Editor>();
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs
   >(CREATE_USE_ITEM);
+
+  const [updateUseditem] = useMutation<
+    Pick<IMutation, "updateUseditem">,
+    IMutationUpdateUseditemArgs
+  >(UPDATE_USE_ITEM);
+  /* 
+  const { data } = useQuery(FETCH_USED_ITEM, {
+    variables: {
+      useditemId: router.query.productId,
+    },
+  }); */
   const { register, handleSubmit, formState, setValue, trigger } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
 
-  // 내용 별도로
+  // 내용 별도
   const onChangeContents = (value: string) => {
     const inputs = editorRef.current?.getInstance().getHTML();
     setValue("contents", inputs);
     trigger("contents");
-
-    // setValue("contents", value === "<p><br></p>" ? "" : value);
-    // trigger("contents");
   };
 
+  // 상품 등록
   const onClickButton = async (data) => {
     // console.log("check");
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
-            name: data.name,
-            remarks: data.remarks,
-            price: data.price,
-            contents: data.contents,
-            // {...data} 로 바꾸기
+            ...data,
           },
         },
       });
@@ -75,6 +85,24 @@ export default function ProductWrite() {
       console.log(error);
     }
   };
+  // 상품 수정
+  const onClickUpdate = async (data) => {
+    try {
+      const result = await updateUseditem({
+        variables: {
+          updateUseditemInput: {
+            ...data,
+          },
+          useditemId: String(router.query.productId),
+        },
+      });
+      alert("상품수정이 완료되었습니다.");
+      router.push(`./product/detail/${result.data?.updateUseditem._id}`);
+    } catch (error) {
+      alert("상품수정이 완료되지 않았습니다.");
+      console.log(error);
+    }
+  };
   return (
     <ProductWriteUI
       register={register}
@@ -82,7 +110,10 @@ export default function ProductWrite() {
       formState={formState}
       onClickButton={onClickButton}
       onChangeContents={onChangeContents}
+      onClickUpdate={onClickUpdate}
       editorRef={editorRef}
+      isEdit={props.isEdit}
+      // data={props.data}
     />
   );
 }

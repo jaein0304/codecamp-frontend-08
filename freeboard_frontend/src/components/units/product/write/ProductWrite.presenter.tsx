@@ -3,15 +3,14 @@ import * as S from "./ProductWrite.styles";
 import { v4 as uuidv4 } from "uuid";
 import dynamic from "next/dynamic";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 // prettier-ignore
 const ToastEditor = dynamic(() => import("../../../../..//src/commons/libraries/toast"), { ssr: false });
 
 export default function ProductWriteUI(props: IProductWriteUIProps) {
   return (
     <>
-      {" "}
       <S.Wrapper>
+        <S.Label>{props.isEdit ? "게시글 수정" : "게시글 등록"}</S.Label>
         <form onSubmit={props.handleSubmit(props.onClickButton)}>
           <S.InputWrapper>
             <S.Label>상품이름</S.Label>
@@ -45,16 +44,16 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
           </S.InputWrapper>
           <S.InputWrapper>
             <S.Label>내용</S.Label>
-            {/* <S.Contents id="contents" onChange={props.onChangeContents} /> */}
-            {/* <S.Contents
-            id="contents"
-            type="textarea"
-            placeholder="내용을 입력해주세요."
-            {...props.register("contents")}
-          ></S.Contents> */}
             <S.Error>{props.formState.errors.contents?.message}</S.Error>
           </S.InputWrapper>
-          <S.SubmitButton>등록하기</S.SubmitButton>
+          <S.SubmitButton
+            // type="submit"
+            // name={props.isEdit ? "수정하기" : "등록하기"}
+            onClick={props.isEdit ? props.onClickUpdate : props.onClickButton}
+            // isActive={props.isEdit ? true : props.isActive}
+          >
+            {props.isEdit ? "수정하기" : "등록하기"}
+          </S.SubmitButton>
         </form>
         <ToastEditor
           editorRef={props.editorRef}

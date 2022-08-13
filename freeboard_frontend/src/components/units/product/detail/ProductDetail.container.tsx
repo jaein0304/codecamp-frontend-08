@@ -7,7 +7,6 @@ import {
   IQueryFetchUseditemArgs,
 } from "../../../../commons/types/generated/types";
 import { useAuth } from "../../../commons/hooks/useAuth";
-import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import ProductDetailUI from "./ProductDetail.presenter";
 import { DELETE_USED_ITEM, FETCH_USED_ITEM } from "./ProductDetail.queries";
 
@@ -26,17 +25,23 @@ export default function ProductDetail() {
     variables: { useditemId: String(router.query.productId) },
   });
 
-  // 25-03-custom-hooks 참고하기
-  const { onClickMoveToPage } = useMoveToPage();
-
+  // 상품 삭제
   const onClickDelete = async () => {
-    if (typeof router.query.boardId !== "string") return;
+    console.log("삭제버튼클릭");
+    if (typeof router.query.productId !== "string") return;
     try {
+      console.log("삭제중...👀");
       await deleteUsedItem({
         variables: { useditemId: String(router.query.productId) },
+        // refetchQueries: [
+        //   {
+        //     query: DELETE_USED_ITEM,
+        //     variables: { boardId: router.push("/products/") },
+        //   },
+        // ],
       });
       alert("상품이 정상적으로 삭제되었습니다.");
-      router.push("/mainpage"); // 상품목록 완성 시 경로 바꾸기
+      router.push("/products");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -45,8 +50,8 @@ export default function ProductDetail() {
   return (
     <ProductDetailUI
       data={data}
-      // onClickMoveToPage={onClickMoveToPage}
       onClickDelete={onClickDelete}
+      // isEdit={undefined}
     />
   );
 }
