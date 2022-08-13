@@ -33,15 +33,15 @@ export default function ProductDetail() {
       console.log("삭제중...👀");
       await deleteUsedItem({
         variables: { useditemId: String(router.query.productId) },
-        // refetchQueries: [
-        //   {
-        //     query: DELETE_USED_ITEM,
-        //     variables: { boardId: router.push("/products/") },
-        //   },
-        // ],
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM,
+            variables: { boardId: router.push("/products/") },
+          },
+        ],
       });
       alert("상품이 정상적으로 삭제되었습니다.");
-      router.push("/products");
+      // router.push("/products");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

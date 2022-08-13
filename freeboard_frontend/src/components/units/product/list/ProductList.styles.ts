@@ -201,9 +201,6 @@ export const ProductTitle = styled.div`
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
-  /* identical to box height */
-
-  /* Black */
 
   color: #000000;
 `;
@@ -284,11 +281,8 @@ export const ProductPrice = styled.div`
   font-weight: bold;
   font-size: 24px;
   line-height: 36px;
-  /* identical to box height */
 
   text-align: right;
-
-  /* Black */
 
   color: #000000;
 `;

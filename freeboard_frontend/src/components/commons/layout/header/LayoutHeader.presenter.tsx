@@ -2,7 +2,11 @@ import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ILayoutHeaderProps } from "./LayoutHeader.types";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { PencilAltIcon, ClipboardCheckIcon } from "@heroicons/react/outline";
+import {
+  PencilAltIcon,
+  ClipboardCheckIcon,
+  CreditCardIcon,
+} from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -20,6 +24,12 @@ const solutions = [
     // description: "Speak directly to your customers in a more meaningful way.",
     href: "http://localhost:3000/products/",
     icon: ClipboardCheckIcon,
+  },
+  {
+    name: "상품결제",
+    // description: "상품결제",
+    href: "http://localhost:3000/products/payment",
+    icon: CreditCardIcon,
   },
 ];
 export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
