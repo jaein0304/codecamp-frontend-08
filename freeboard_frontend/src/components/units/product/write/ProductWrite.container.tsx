@@ -87,6 +87,7 @@ export default function ProductWrite(props: IProductWriteProps) {
       console.log(error);
     }
   };
+
   // 상품 수정
   const onClickUpdate = async (data) => {
     console.log("1111");

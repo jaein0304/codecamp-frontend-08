@@ -5,6 +5,7 @@ import {
   IMutation,
   IMutationCreateUseditemQuestionArgs,
 } from "../../../../commons/types/generated/types";
+import { FETCH_USED_ITEM_QUESTIONS } from "../list/ProductCommentList.queries";
 import ProductCommentWriteUI from "./ProductCommentWrite.presenter";
 import { CREATE_USED_ITEM_QUESTION } from "./ProductCommentWrite.queries";
 
@@ -27,6 +28,12 @@ export default function ProductCommentWrite() {
             contents,
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM_QUESTIONS,
+            variables: { useditemId: router.query.productId },
+          },
+        ],
       });
       alert("댓글이 등록되었습니다.");
     } catch (error) {

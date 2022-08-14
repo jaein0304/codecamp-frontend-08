@@ -9,8 +9,6 @@ import {
 export default function ProductCommentList() {
   const router = useRouter();
 
-  // const [deleteUseditemQuestion] = useMutation(DELETE_USED_ITEM_QUESTION);
-
   const { data, fetchMore } = useQuery(FETCH_USED_ITEM_QUESTIONS, {
     variables: {
       useditemId: router.query.productId,

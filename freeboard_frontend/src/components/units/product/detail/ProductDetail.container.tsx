@@ -24,10 +24,12 @@ export default function ProductDetail() {
   >(FETCH_USED_ITEM, {
     variables: { useditemId: String(router.query.productId) },
   });
+
   // 상품 수정으로 가기
   const onClickMoveToEdit = () => {
     router.push(`/products/${router.query.productId}/edit`);
   };
+
   // 상품 삭제
   const onClickDelete = async () => {
     console.log("삭제버튼클릭");
@@ -39,12 +41,12 @@ export default function ProductDetail() {
         refetchQueries: [
           {
             query: FETCH_USED_ITEM,
-            variables: { boardId: router.push("/products/") },
+            // variables: { ProductId: router.push("/products/") },
           },
         ],
       });
       alert("상품이 정상적으로 삭제되었습니다.");
-      // router.push("/products");
+      router.push("/products");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
