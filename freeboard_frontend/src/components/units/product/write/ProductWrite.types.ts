@@ -9,6 +9,7 @@ import {
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IProductWriteUIProps {
+  myLat: any;
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   formState: FormState<FieldValues>;

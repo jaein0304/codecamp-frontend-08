@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import dynamic from "next/dynamic";
 
 // prettier-ignore
-const ToastEditor = dynamic(() => import("../../../../..//src/commons/libraries/toast"), { ssr: false });
+const ToastEditor = dynamic(() => import("../../../../..//src/commons/libraries/toast"),
+  { ssr: false });
 
 export default function ProductWriteUI(props: IProductWriteUIProps) {
   return (
@@ -46,20 +47,26 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
             <S.Label>내용</S.Label>
             <S.Error>{props.formState.errors.contents?.message}</S.Error>
           </S.InputWrapper>
+          <ToastEditor
+            editorRef={props.editorRef}
+            onChangeContent={props.onChangeContents}
+            defaultValue={""}
+          />
           <S.SubmitButton
             // type="submit"
             // name={props.isEdit ? "수정하기" : "등록하기"}
-            onClick={props.isEdit ? props.onClickUpdate : props.onClickButton}
+            onClick={props.handleSubmit(
+              props.isEdit ? props.onClickUpdate : props.onClickButton
+            )}
             // isActive={props.isEdit ? true : props.isActive}
           >
             {props.isEdit ? "수정하기" : "등록하기"}
           </S.SubmitButton>
         </form>
-        <ToastEditor
-          editorRef={props.editorRef}
-          onChangeContent={props.onChangeContents}
-          defaultValue={""}
-        />
+
+        <S.GPSWrapper>
+          <S.GPS id="map"></S.GPS>
+        </S.GPSWrapper>
       </S.Wrapper>
     </>
   );

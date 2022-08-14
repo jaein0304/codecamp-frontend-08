@@ -122,3 +122,14 @@ export const Contents = styled(ReactQuill)`
   margin-bottom: 40px;
   border: 3px solid black;
 `;
+
+export const GPSWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 30px;
+`;
+export const GPS = styled.div`
+  width: 500px;
+  height: 400px;
+`;

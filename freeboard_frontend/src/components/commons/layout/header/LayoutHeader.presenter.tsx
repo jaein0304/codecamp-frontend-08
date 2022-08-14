@@ -28,7 +28,7 @@ const solutions = [
   {
     name: "상품결제",
     // description: "상품결제",
-    href: "http://localhost:3000/products/payment",
+    href: "http://localhost:3000/payment",
     icon: CreditCardIcon,
   },
 ];
