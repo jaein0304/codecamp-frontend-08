@@ -1,0 +1,67 @@
+import * as S from "./ProductCommentList.styles";
+import { DELETE_USED_ITEM_QUESTION } from "./ProductCommentList.queries";
+import { IBoardCommentListUIItemProps } from "./ProductCommentList.types";
+import router from "next/router";
+
+import { useMutation } from "@apollo/client";
+import {
+  IMutation,
+  IMutationDeleteUseditemQuestionArgs,
+} from "../../../../commons/types/generated/types";
+
+export default function ProductCommentListUIItem(
+  props: IBoardCommentListUIItemProps
+) {
+  const [deleteUseditemQuestion] = useMutation<
+    Pick<IMutation, "deleteUseditemQuestion">,
+    IMutationDeleteUseditemQuestionArgs
+  >(DELETE_USED_ITEM_QUESTION);
+
+  const onClickDelete = async () => {
+    try {
+      await deleteUseditemQuestion({
+        variables: {
+          useditemQuestionId: props.el?._id,
+        },
+        refetchQueries: [
+          {
+            query: DELETE_USED_ITEM_QUESTION,
+            variables: { useditemId: router.query.productId },
+          },
+        ],
+      });
+      alert("댓글이 삭제되었습니다.");
+    } catch (error) {
+      alert("댓글이 삭제되지 않았습니다.");
+    }
+  };
+  return (
+    <>
+      <S.Wrapper>
+        <S.CommentListWrapper>
+          <S.CommentWrapper>
+            <S.UserInfoWrapper>
+              <S.UserInfo>
+                <S.UserName>{props.el?.user?.name}</S.UserName>
+                <S.Comment>{props.el?.contents}</S.Comment>
+                <S.CreatedAt>
+                  {props.el?.createdAt.slice(0, 10) + " "}
+                  {props.el?.createdAt.slice(11, 19)}
+                </S.CreatedAt>
+              </S.UserInfo>
+            </S.UserInfoWrapper>
+            <S.ButtonWrapper>
+              <S.Button
+                onClick={onClickDelete}
+                src="/img-board-detail/ic_comment_delete.png"
+              />
+            </S.ButtonWrapper>
+          </S.CommentWrapper>
+        </S.CommentListWrapper>
+        <S.LineWrapper>
+          <S.Line />
+        </S.LineWrapper>
+      </S.Wrapper>
+    </>
+  );
+}

@@ -38,11 +38,12 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
         </S.Contents>
       </S.InputWrapper>
       <S.Button onClick={onClickMoveToPage("/products")}>상품목록</S.Button>
-      <S.Button
+      {/* <S.Button
         onClick={onClickMoveToPage(`/products/${router.query.productId}/edit`)}
       >
         수정하기
-      </S.Button>
+      </S.Button> */}
+      <S.Button onClick={props.onClickMoveToEdit}>수정하기</S.Button>
       <S.Button onClick={props.onClickDelete}>삭제하기</S.Button>
     </S.Wrapper>
   );

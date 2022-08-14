@@ -24,11 +24,14 @@ export default function ProductDetail() {
   >(FETCH_USED_ITEM, {
     variables: { useditemId: String(router.query.productId) },
   });
-
+  // 상품 수정으로 가기
+  const onClickMoveToEdit = () => {
+    router.push(`/products/${router.query.productId}/edit`);
+  };
   // 상품 삭제
   const onClickDelete = async () => {
     console.log("삭제버튼클릭");
-    if (typeof router.query.productId !== "string") return;
+    // if (typeof router.query.productId !== "string") return;
     try {
       console.log("삭제중...👀");
       await deleteUsedItem({
@@ -51,6 +54,7 @@ export default function ProductDetail() {
     <ProductDetailUI
       data={data}
       onClickDelete={onClickDelete}
+      onClickMoveToEdit={onClickMoveToEdit}
       // isEdit={undefined}
     />
   );
