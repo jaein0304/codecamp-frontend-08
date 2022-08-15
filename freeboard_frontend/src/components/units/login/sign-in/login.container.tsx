@@ -9,7 +9,11 @@ import {
   IQuery,
 } from "../../../../commons/types/generated/types";
 import LoginPageUI from "./login.presenter";
-import { FETCH_USER_LOGGED_IN, LOGIN_USER } from "./login.queries";
+import {
+  FETCH_USER_LOGGED_IN,
+  LOGIN_USER,
+  LOGIN_USER_EXAMPLE,
+} from "./login.queries";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -23,6 +27,8 @@ export default function LoginPage() {
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
   >(LOGIN_USER);
+
+  const [loginUserExample] = useMutation(LOGIN_USER_EXAMPLE);
 
   const { data, refetch } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
@@ -42,7 +48,11 @@ export default function LoginPage() {
       });
 
       const accessToken = result.data?.loginUser.accessToken;
-      if (!accessToken) return;
+      console.log(accessToken);
+      if (!accessToken) {
+        alert("로그인에 실패했습니다. 다시 시도해주세요.");
+        return;
+      }
 
       const resultUserInfo = await client.query({
         query: FETCH_USER_LOGGED_IN,
@@ -54,15 +64,16 @@ export default function LoginPage() {
       setUserInfo(userInfo);
 
       localStorage.setItem("accessToken", accessToken);
+      // localStorage.setItem("refreshToken", "true");
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
       alert("로그인에 성공하였습니다");
-      // router.push("./sign-confirm");
       router.push("/../mainpage");
     } catch (error) {
       alert("로그인을 먼저 해주세요.");
     }
   };
-
+  /* */
   return (
     <LoginPageUI
       onChangeEmail={onChangeEmail}
