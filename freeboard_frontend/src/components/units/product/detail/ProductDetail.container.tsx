@@ -23,6 +23,7 @@ export default function ProductDetail() {
     IQueryFetchUseditemArgs
   >(FETCH_USED_ITEM, {
     variables: { useditemId: String(router.query.productId) },
+    fetchPolicy: "network-only", // 이걸 사용한다
   });
 
   // 상품 수정으로 가기

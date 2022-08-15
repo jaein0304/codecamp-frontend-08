@@ -1,10 +1,7 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import ProductCommentListUI from "./ProductCommentList.presenter";
-import {
-  DELETE_USED_ITEM_QUESTION,
-  FETCH_USED_ITEM_QUESTIONS,
-} from "./ProductCommentList.queries";
+import { FETCH_USED_ITEM_QUESTIONS } from "./ProductCommentList.queries";
 
 export default function ProductCommentList() {
   const router = useRouter();

@@ -28,19 +28,12 @@ export default function ProductList() {
     IQueryFetchUseditemsArgs
   >(FETCH_USEDITEMS, {
     variables: { page: 1, isSoldout: false },
+    fetchPolicy: "network-only", // 서버 데이터만 사용, 항상 최신 데이터를 다룬다
   });
 
   const { data: soldOutData } = useQuery(FETCH_USEDITEMS, {
     variables: { page: 1, isSoldout: true },
   });
-  // function onClickMoveToProduct(event) {
-  //   router.push(`/market/market-detail/${event.currentTarget.id}`);
-  // }
-
-  // const getDebounce = _.debounce((data: any) => {
-  //   refetch({ search: data, page: 1 });
-  //   setMyKeyword(data);
-  // }, 500);
 
   function onChangeSearch(event) {
     setMySearch(event.target.value);

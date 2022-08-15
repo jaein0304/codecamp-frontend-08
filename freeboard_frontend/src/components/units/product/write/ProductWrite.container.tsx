@@ -51,6 +51,11 @@ export default function ProductWrite(props: IProductWriteProps) {
     IMutationUpdateUseditemArgs
   >(UPDATE_USE_ITEM);
 
+  const { data } = useQuery(FETCH_USED_ITEM, {
+    variables: {
+      useditemId: router.query.productId,
+    },
+  });
   // const [myLat, setMyLat] = useState(null);
   // const [myLng, setMyLng] = useState(null);
   // const [myAddress, setMyAddress] = useState("");
@@ -127,7 +132,7 @@ export default function ProductWrite(props: IProductWriteProps) {
       window.kakao.maps.load(function () {
         const mapContainer = document.getElementById("map");
         const mapOption = {
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+          center: new window.kakao.maps.LatLng(35.1892, 126.8279),
           level: 3,
         };
         const map = new window.kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -173,6 +178,7 @@ export default function ProductWrite(props: IProductWriteProps) {
       isEdit={props.isEdit}
       // data={props.data}
       // myAddress={myAddress}
+      data={data}
     />
   );
 }

@@ -10,6 +10,9 @@ import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IProductWriteUIProps {
   myLat: any;
+  isEdit: boolean;
+  isActive: boolean;
+  data: any;
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   formState: FormState<FieldValues>;
@@ -18,8 +21,6 @@ export interface IProductWriteUIProps {
   onClickButton: (data: any) => void;
   onClickUpdate: (data: any) => Promise<void>;
   onChangeContents: (value: string) => void;
-  isEdit: boolean;
-  isActive: boolean;
 }
 
 export interface IProductWriteProps {

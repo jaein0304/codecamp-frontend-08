@@ -25,21 +25,21 @@ export const Label = styled.div`
 `;
 
 export const Name = styled.input`
-  width: 486px;
+  width: 100%;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
 export const Remark = styled.input`
-  width: 486px;
+  width: 100%;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
-export const Title = styled.input`
-  width: 486px;
+export const Price = styled.input`
+  width: 100%;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
@@ -54,6 +54,7 @@ export const Title = styled.input`
 // `;
 
 export const InputWrapper = styled.div`
+  /* width: 100%; */
   padding-top: 40px;
 `;
 

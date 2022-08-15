@@ -24,7 +24,7 @@ export const UPDATE_USE_ITEM = gql`
   }
 `;
 
-/* export const FETCH_USED_ITEM = gql`
+export const FETCH_USED_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
     fetchUseditem(useditemId: $useditemId) {
       _id
@@ -37,4 +37,3 @@ export const UPDATE_USE_ITEM = gql`
     }
   }
 `;
- */

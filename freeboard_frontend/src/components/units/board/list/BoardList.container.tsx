@@ -17,7 +17,9 @@ export default function BoardList() {
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
-  >(FETCH_BOARDS);
+  >(FETCH_BOARDS, {
+    fetchPolicy: "network-only", // 서버 데이터만 사용, 항상 최신 데이터를 다룬다
+  });
 
   const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,

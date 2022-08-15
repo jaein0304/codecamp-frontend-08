@@ -53,9 +53,12 @@ export default function ProductListUI(props) {
           <S.SearchWrapper>
             <S.SearchBox
               type="text"
-              placeholder="제품을 검색해주세요"
+              placeholder="🔎 제품을 검색해주세요."
               onChange={props.onChangeSearch}
             />
+            <button onClick={props.onClickSearch} name="검색">
+              검색
+            </button>
           </S.SearchWrapper>
         </S.ProductSearchWrapper>
 
