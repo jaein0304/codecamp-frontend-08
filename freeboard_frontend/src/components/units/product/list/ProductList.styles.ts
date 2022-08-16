@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import InfiniteScroll from "react-infinite-scroller";
 
 export const Wrapper = styled.div`
-  /* width: 700px; */
+  width: 1920px;
   padding-top: 80px;
   padding-bottom: 405px;
   display: flex;
@@ -153,7 +153,7 @@ export const SearchButton = styled.button`
 `;
 export const ProductListWrapper = styled.div`
   margin-top: 40px;
-  width: 1920px;
+  width: 50%;
   height: 1000px;
   overflow: auto;
 `;
@@ -172,7 +172,7 @@ export const ProductRow = styled.div`
   cursor: pointer;
 `;
 export const Line = styled.hr`
-  width: 1920px;
+  width: 100%;
   height: 1px;
 
   background-color: #4f4f4f;
@@ -276,14 +276,10 @@ export const Money = styled.img`
   margin-right: 10px;
 `;
 export const ProductPrice = styled.div`
-  font-family: Noto Sans CJK KR;
-  font-style: normal;
   font-weight: bold;
   font-size: 24px;
   line-height: 36px;
-
   text-align: right;
-
   color: #000000;
 `;
 export const ButtonWrapper = styled.div`

@@ -36,7 +36,7 @@ export default function ApolloSetting(props: IApolloSettingProps) {
     getAccessToken().then((newAccessToken) => {
       setAccessToken(newAccessToken);
     });
-  });
+  }, []);
 
   // https://www.apollographql.com/docs/react/data/error-handling/
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {

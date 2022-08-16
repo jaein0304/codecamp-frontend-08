@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Modal } from "antd";
+import { stubTrue } from "lodash";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -107,6 +108,7 @@ export const SubmitButton = styled.button`
   font-weight: 500;
   margin-left: 12px;
   margin-right: 12px;
+  margin-top: 20px;
   cursor: pointer;
   background-color: ${(props: ISubmitButtonProps) =>
     props.submitButton ? " rgb(218, 64, 13)" : "default"};
@@ -133,4 +135,18 @@ export const GPSWrapper = styled.div`
 export const GPS = styled.div`
   width: 500px;
   height: 400px;
+`;
+
+export const ImgWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+
+export const Img = styled.img`
+  width: 100px;
+  height: 100px;
+  margin-left: 30px;
+  margin-right: 30px;
+  cursor: pointer;
 `;

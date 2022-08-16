@@ -45,6 +45,7 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
       </S.Button> */}
       <S.Button onClick={props.onClickMoveToEdit}>수정하기</S.Button>
       <S.Button onClick={props.onClickDelete}>삭제하기</S.Button>
+      <S.Button onClick={props.onClickBuy}>구매하기</S.Button>
     </S.Wrapper>
   );
 }

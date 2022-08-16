@@ -4,4 +4,5 @@ export interface IProductDetailUIProps {
   data?: Pick<IQuery, "fetchUseditem">;
   onClickDelete: () => Promise<void>;
   onClickMoveToEdit: () => void;
+  onClickBuy: () => void;
 }

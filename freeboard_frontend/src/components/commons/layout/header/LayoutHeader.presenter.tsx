@@ -53,12 +53,12 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
             >
               BOARD LIST
             </a>
-            <a
+            {/* <a
               href="http://localhost:3000/#"
               className="text-base font-medium text-white hover:text-yellow-200"
             >
               FIREBASE(안함)
-            </a>
+            </a> */}
             <a
               href="http://localhost:3000/openApi"
               className="text-base font-medium text-white hover:text-yellow-200"
@@ -66,10 +66,10 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
               API
             </a>
             <a
-              href="#"
+              href="http://localhost:3000/mypage"
               className="text-base font-medium text-white hover:text-yellow-200"
             >
-              뭐할까용
+              MyPage
             </a>
           </Popover.Group>
           <Popover className="relative">
@@ -130,7 +130,21 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
               </>
             )}
           </Popover>
+
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+            <a
+              href="/basket/"
+              className=" 
+              ml-8 whitespace-nowrap 
+              inline-flex 
+              items-center 
+              justify-center 
+              px-4 py-2 border border-transparent
+              rounded-md shadow-sm text-base 
+              font-medium text-white hover:bg-indigo-700 hover:text-white"
+            >
+              Cart
+            </a>
             <a
               href="/login/sign-in/"
               className=" 

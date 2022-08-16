@@ -67,9 +67,13 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
             {props.isEdit ? "수정하기" : "등록하기"}
           </S.SubmitButton>
         </form>
-
         <S.GPSWrapper>
           <S.GPS id="map"></S.GPS>
+          <S.ImgWrapper>
+            <S.Img src="/images/images.webp"></S.Img>
+            <S.Img src="/images/images.webp"></S.Img>
+            <S.Img src="/images/images.webp"></S.Img>
+          </S.ImgWrapper>
         </S.GPSWrapper>
       </S.Wrapper>
     </>

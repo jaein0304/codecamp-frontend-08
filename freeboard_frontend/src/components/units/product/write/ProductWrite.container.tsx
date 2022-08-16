@@ -37,9 +37,8 @@ declare const window: typeof globalThis & {
 };
 export default function ProductWrite(props: IProductWriteProps) {
   const router = useRouter();
-
-  // 토스트
-  const editorRef = useRef<Editor>();
+  const editorRef = useRef<Editor>(); // 토스트
+  const [files, setFiles] = useState(["", "", ""]);
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
@@ -71,6 +70,7 @@ export default function ProductWrite(props: IProductWriteProps) {
     setValue("contents", inputs);
     trigger("contents");
   };
+  
 
   // 상품 등록
   const onClickButton = async (data) => {

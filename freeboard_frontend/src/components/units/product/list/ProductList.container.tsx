@@ -86,16 +86,16 @@ export default function ProductList() {
     localStorage.setItem("baskets", JSON.stringify(baskets));
   };
 
-  function onClickMoveToMarketWrite() {
+  const onClickMoveToMarketWrite = () => {
     router.push("/market/market-write");
-  }
+  };
 
-  function onClickSoldOutList() {
+  const onClickSoldOutList = () => {
     setSoldOut(true);
-  }
-  function onClickNotSoldOutList() {
+  };
+  const onClickNotSoldOutList = () => {
     setSoldOut(false);
-  }
+  };
   return (
     <ProductListUI
       data={data}

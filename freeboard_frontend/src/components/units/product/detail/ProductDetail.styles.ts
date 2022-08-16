@@ -28,6 +28,11 @@ export const Contents = styled.div`
 export const Button = styled.button`
   width: auto;
   padding: 10px;
+  margin-right: 10px;
   border: 3px solid black;
   border-radius: 10px;
+  :hover {
+    background-color: #ff5722;
+    color: white;
+  }
 `;

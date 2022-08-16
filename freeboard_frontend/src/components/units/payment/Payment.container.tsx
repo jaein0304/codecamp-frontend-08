@@ -18,10 +18,10 @@ export default function Payment() {
   );
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
 
-  function onChangeMyPoint(event) {
+  const onChangeMyPoint = (event) => {
     setMyPoint(event.target.value);
-  }
-  function onClickPayment() {
+  };
+  const onClickPayment = () => {
     if (myPoint === "" || isNaN(myPoint) === true) {
       alert("포인트를 입력해주세요");
       return;
@@ -40,21 +40,28 @@ export default function Payment() {
         pay_method: "card",
         name: `${myPoint} 포인트`,
         amount: myPoint,
-        m_redirect_url: "http://localhost:3000/payment",
+        buyer_email: "ddc0406@naver.com",
+        buyer_name: "정재인",
+        buyer_tel: "010-4592-3927",
+        // buyer_addr: "서울특별시 강남구 신사동",
+        // buyer_postcode: "01181",
+        // m_redirect_url: "http://localhost:3000/payment",
+        m_redirect_url: "http://localhost:3000/",
       },
-      function (rsp: any) {
+      async function (rsp: any) {
         // callback
         if (rsp.success) {
+          // 결제 성공 시 로직,
           console.log(rsp);
-          createPointTransactionOfLoading({
+          // 결제 데이터 넘기기
+          const result = await createPointTransactionOfLoading({
             variables: {
               impUid: String(rsp.imp_uid),
             },
           });
+          console.log(result);
           alert(`포인트 ${myPoint} 가 충전되었습니다!`);
           location.reload();
-          // 결제 성공 시 로직,
-          // ...
         } else {
           // 결제 실패 시 로직,
           // ...
@@ -62,7 +69,7 @@ export default function Payment() {
         }
       }
     );
-  }
+  };
   return (
     <>
       <Head>
@@ -75,6 +82,12 @@ export default function Payment() {
           src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
         ></script>
       </Head>
+      <select onChange={onChangeMyPoint}>
+        <option value={100}>100</option>
+        <option value={500}>500</option>
+        <option value={2000}>2,000</option>
+        <option value={5000}>5,000</option>
+      </select>
       <PaymentUI
         onChangeMyPoint={onChangeMyPoint}
         onClickPayment={onClickPayment}

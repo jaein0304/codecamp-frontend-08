@@ -1,3 +1,5 @@
+import InfiniteScroll from "react-infinite-scroller";
+import RecentWatchBox from "../../../../commons/boxes/01/recentwatchbox";
 import * as S from "./ProductList.styles";
 
 export default function ProductListUI(props) {
@@ -62,65 +64,74 @@ export default function ProductListUI(props) {
           </S.SearchWrapper>
         </S.ProductSearchWrapper>
 
-        {!props.soldOut && (
-          <S.ProductListWrapper>
-            <div>
-              <S.Infinite
-                pageStart={0}
-                loadMore={props.onLoadMore}
-                hasMore={true || false}
-                useWindow={false}
+        {/* {!props.soldOut && ( */}
+        {/* <S.ProductListWrapper> */}
+        <div
+          style={{
+            width: "100%",
+            height: "800px",
+            overflow: "auto",
+            padding: "20px",
+            margin: "100px",
+            marginLeft: "-600px",
+          }}
+        >
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={props.onLoadMore}
+            hasMore={true}
+            useWindow={false}
+          >
+            {props.data?.fetchUseditems.map((el) => (
+              <S.ProductRow
+                key={el._id}
+                id={el._id}
+                onClick={props.onClickMoveToProduct(el)}
               >
-                {props.data?.fetchUseditems.map((el) => (
-                  <S.ProductRow
-                    key={el._id}
-                    id={el._id}
-                    onClick={props.onClickMoveToProduct(el)}
-                  >
-                    <S.Line />
-                    <S.ProductWrapperBody>
-                      <S.ProductInfoWrapper>
-                        {/* {el?.images[0] ? (
+                <S.Line />
+                <S.ProductWrapperBody>
+                  <S.ProductInfoWrapper>
+                    {/* {el?.images[0] ? (
                           <S.ProductPhoto
                             src={`https://storage.googleapis.com/${el?.images[0]}`}
                           />
                         ) : (
                           <S.ProductPhoto src={"/images/noimage.jpg"} />
                         )} */}
-                        <S.ProductInfo>
-                          <S.ProductTitle>상품이름 : {el.name}</S.ProductTitle>
-                          <S.ProductSubTitle>
-                            상품설명 : {el.remarks}
-                          </S.ProductSubTitle>
-                          <S.ProductTag>{el.tags}</S.ProductTag>
-                          <S.ProductInfoFooter>
-                            <S.ProductSellerWrapper>
-                              {/* <S.ProductSellerPhoto
+                    <S.ProductInfo>
+                      <S.ProductTitle>상품이름 : {el.name}</S.ProductTitle>
+                      <S.ProductSubTitle>
+                        상품설명 : {el.remarks}
+                      </S.ProductSubTitle>
+                      <S.ProductTag>{el.tags}</S.ProductTag>
+                      <S.ProductInfoFooter>
+                        <S.ProductSellerWrapper>
+                          {/* <S.ProductSellerPhoto
                                 src={
                                   el?.seller.picture
                                     ? `https://storage.googleapis.com/${el?.seller.picture}`
                                     : `/images/photo.png`
                                 }
                               /> */}
-                              <S.ProductSeller>
-                                판매자 : {el.seller?.name}
-                              </S.ProductSeller>
-                            </S.ProductSellerWrapper>
-                          </S.ProductInfoFooter>
-                        </S.ProductInfo>
-                      </S.ProductInfoWrapper>
-                      <S.ProductPriceWrapper>
-                        {/* <S.Money src="/images/money.png" /> */}
-                        <S.ProductPrice>{el.price}원</S.ProductPrice>
-                      </S.ProductPriceWrapper>
-                    </S.ProductWrapperBody>
-                  </S.ProductRow>
-                ))}
-              </S.Infinite>
-            </div>
-          </S.ProductListWrapper>
-        )}
-
+                          <S.ProductSeller>
+                            판매자 : {el.seller?.name}
+                          </S.ProductSeller>
+                        </S.ProductSellerWrapper>
+                      </S.ProductInfoFooter>
+                    </S.ProductInfo>
+                  </S.ProductInfoWrapper>
+                  <S.ProductPriceWrapper>
+                    {/* <S.Money src="/images/money.png" /> */}
+                    <S.ProductPrice>{el.price}원</S.ProductPrice>
+                  </S.ProductPriceWrapper>
+                </S.ProductWrapperBody>
+              </S.ProductRow>
+            ))}
+          </InfiniteScroll>
+        </div>
+        {/* </S.ProductListWrapper> */}
+        {/* )} */}
+        <RecentWatchBox />
         <S.ProductListSoldWrapper>
           {props.soldOut && (
             <div>
@@ -177,7 +188,6 @@ export default function ProductListUI(props) {
           /> */}
         </S.ButtonWrapper>
       </S.Wrapper>
-      {/* <RecentWatchBox /> */}
     </>
   );
 }
