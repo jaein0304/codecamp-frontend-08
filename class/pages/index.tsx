@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Body</div>;
+  return <div style={{ color: "red" }}>Body</div>;
 }
