@@ -1,5 +1,5 @@
 import Editor from "@toast-ui/editor";
-import { MutableRefObject } from "react";
+import { ChangeEvent, MutableRefObject } from "react";
 import {
   FieldValues,
   FormState,
@@ -21,6 +21,11 @@ export interface IProductWriteUIProps {
   onClickButton: (data: any) => void;
   onClickUpdate: (data: any) => Promise<void>;
   onChangeContents: (value: string) => void;
+  onChangeFile: (
+    index: number
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
+  imageUrls: string[];
 }
 
 export interface IProductWriteProps {

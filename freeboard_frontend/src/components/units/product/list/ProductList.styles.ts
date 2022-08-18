@@ -288,3 +288,11 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+export const MarginLeft = styled.div`
+  margin-left: 30px;
+`;
+
+export const Image = styled.img`
+  width: 100px;
+  height: 100px;
+`;

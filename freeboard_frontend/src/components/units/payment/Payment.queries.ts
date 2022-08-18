@@ -5,7 +5,7 @@ export const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
     createPointTransactionOfLoading(impUid: $impUid) {
       _id
       # impUid
-      amount
+      # amount
     }
   }
 `;

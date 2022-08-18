@@ -32,7 +32,7 @@ export default function Payment() {
     }
 
     const IMP = window.IMP;
-    IMP.init("imp65274708");
+    IMP.init("imp49910675");
     IMP.request_pay(
       {
         // param
@@ -40,7 +40,7 @@ export default function Payment() {
         pay_method: "card",
         name: `${myPoint} 포인트`,
         amount: myPoint,
-        buyer_email: "ddc0406@naver.com",
+        // buyer_email: "ddc0406@naver.com",
         buyer_name: "정재인",
         buyer_tel: "010-4592-3927",
         // buyer_addr: "서울특별시 강남구 신사동",
@@ -60,8 +60,9 @@ export default function Payment() {
             },
           });
           console.log(result);
+          pointCharge(rsp);
           alert(`포인트 ${myPoint} 가 충전되었습니다!`);
-          location.reload();
+          // location.reload();
         } else {
           // 결제 실패 시 로직,
           // ...
@@ -69,6 +70,20 @@ export default function Payment() {
         }
       }
     );
+  };
+
+  const pointCharge = async (rsp) => {
+    // try {
+    //   const aaa = await createPointTransactionOfLoading({
+    //     variables: {
+    //       impUid: rsp.imp_uid,
+    //     },
+    //   });
+    //   console.log(aaa);
+    // } catch (error) {
+    //   alert(error.message);
+    // }
+    console.log(rsp);
   };
   return (
     <>

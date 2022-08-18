@@ -1,5 +1,5 @@
 import InfiniteScroll from "react-infinite-scroller";
-import RecentWatchBox from "../../../../commons/boxes/01/recentwatchbox";
+import RecentWatchBox from "../../../../commons/boxes/01/todayList";
 import * as S from "./ProductList.styles";
 
 export default function ProductListUI(props) {
@@ -68,12 +68,12 @@ export default function ProductListUI(props) {
         {/* <S.ProductListWrapper> */}
         <div
           style={{
-            width: "100%",
+            width: "70%",
             height: "800px",
             overflow: "auto",
             padding: "20px",
             margin: "100px",
-            marginLeft: "-600px",
+            marginLeft: "-250px",
           }}
         >
           <InfiniteScroll
@@ -91,13 +91,14 @@ export default function ProductListUI(props) {
                 <S.Line />
                 <S.ProductWrapperBody>
                   <S.ProductInfoWrapper>
-                    {/* {el?.images[0] ? (
-                          <S.ProductPhoto
-                            src={`https://storage.googleapis.com/${el?.images[0]}`}
-                          />
-                        ) : (
-                          <S.ProductPhoto src={"/images/noimage.jpg"} />
-                        )} */}
+                    {el.images
+                      ?.filter((el: string) => el)
+                      .map((el: string) => (
+                        <S.Image
+                          key={el}
+                          src={`https://storage.googleapis.com/${el}`}
+                        />
+                      ))}
                     <S.ProductInfo>
                       <S.ProductTitle>상품이름 : {el.name}</S.ProductTitle>
                       <S.ProductSubTitle>
@@ -131,6 +132,7 @@ export default function ProductListUI(props) {
         </div>
         {/* </S.ProductListWrapper> */}
         {/* )} */}
+
         <RecentWatchBox />
         <S.ProductListSoldWrapper>
           {props.soldOut && (

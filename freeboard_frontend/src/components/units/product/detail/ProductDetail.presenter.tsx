@@ -3,6 +3,7 @@ import * as S from "./ProductDetail.styles";
 import Dompurify from "dompurify";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import router from "next/router";
+import { SideFooter } from "../../myPage/MyPage.styles";
 
 export default function ProductDetailUI(props: IProductDetailUIProps) {
   // 25-03-custom-hooks 참고
@@ -37,6 +38,14 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
           {/* {props.data?.fetchUseditem?.contents}{" "} */}
         </S.Contents>
       </S.InputWrapper>
+      <S.ImageWrapper>
+        {props.data?.fetchUseditem.images
+          ?.filter((el: string) => el)
+          .map((el: string) => (
+            <S.Images key={el} src={`https://storage.googleapis.com/${el}`} />
+          ))}
+      </S.ImageWrapper>
+
       <S.Button onClick={onClickMoveToPage("/products")}>상품목록</S.Button>
       {/* <S.Button
         onClick={onClickMoveToPage(`/products/${router.query.productId}/edit`)}

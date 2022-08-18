@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function RecentWatchBox() {
+export default function TodayList() {
   const [basketItems, setBasketItmes] = useState([]);
   const router = useRouter();
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function RecentWatchBox() {
   const MyBox = styled.div`
     width: 196px;
     position: sticky;
-    left: 85%;
+    left: 100%;
     bottom: 10%;
     box-sizing: border-box;
     display: flex;

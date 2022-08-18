@@ -1,8 +1,8 @@
 import { IProductWriteUIProps } from "./ProductWrite.types";
 import * as S from "./ProductWrite.styles";
-import { v4 as uuidv4 } from "uuid";
 import dynamic from "next/dynamic";
-
+import Uploads02 from "../../../commons/uploads/02/Uploads02.container";
+import { v4 as uuidv4 } from "uuid";
 // prettier-ignore
 const ToastEditor = dynamic(() => import("../../../../..//src/commons/libraries/toast"),
   { ssr: false });
@@ -70,9 +70,23 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
         <S.GPSWrapper>
           <S.GPS id="map"></S.GPS>
           <S.ImgWrapper>
-            <S.Img src="/images/images.webp"></S.Img>
-            <S.Img src="/images/images.webp"></S.Img>
-            <S.Img src="/images/images.webp"></S.Img>
+            {/* {new Array(3).fill(1).map((el, index) => (
+              <Uploads02
+                type="button"
+                key={uuidv4()}
+                index={index}
+                fileUrl={el}
+                onChangeFiles={props.onChangeFile}
+                // onChangeFileUrls={props.onChangeFileUrls}
+                defaultFileUrl={props.data?.fetchUseditem.images?.[index]}
+              />
+            ))} */}
+            <input type="file" onChange={props.onChangeFile(0)} />
+            <input type="file" onChange={props.onChangeFile(1)} />
+            <input type="file" onChange={props.onChangeFile(2)} />
+            <img src={props.imageUrls[0]} />
+            <img src={props.imageUrls[1]} />
+            <img src={props.imageUrls[2]} />
           </S.ImgWrapper>
         </S.GPSWrapper>
       </S.Wrapper>

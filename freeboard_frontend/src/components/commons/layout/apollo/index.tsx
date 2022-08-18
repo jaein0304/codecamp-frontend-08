@@ -33,6 +33,7 @@ export default function ApolloSetting(props: IApolloSettingProps) {
   }, []); */
 
   useEffect(() => {
+    // accessToken을 refreshToken으로 재발급 받아서 state에 넣기
     getAccessToken().then((newAccessToken) => {
       setAccessToken(newAccessToken);
     });
@@ -49,7 +50,7 @@ export default function ApolloSetting(props: IApolloSettingProps) {
               operation.setContext({
                 headers: {
                   ...operation.getContext().headers,
-                  Authorization: `Bearer ${newAccessToken}`,
+                  Authorization: `Bearer ${newAccessToken}`, // accesstoken?
                 },
               });
             })

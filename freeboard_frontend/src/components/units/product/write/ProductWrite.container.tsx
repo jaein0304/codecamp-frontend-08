@@ -4,17 +4,22 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_USE_ITEM, UPDATE_USE_ITEM } from "./ProductWrite.queries";
+import {
+  CREATE_USE_ITEM,
+  UPDATE_USE_ITEM,
+  UPLOAD_FILE,
+} from "./ProductWrite.queries";
 import {
   IMutation,
   IMutationCreateUseditemArgs,
   IMutationUpdateUseditemArgs,
   IUpdateUseditemInput,
 } from "../../../../commons/types/generated/types";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import { IProductUpdateInput, IProductWriteProps } from "./ProductWrite.types";
 import { FETCH_USED_ITEM } from "../detail/ProductDetail.queries";
+import { checkValidationImage } from "../../../commons/uploads/01/Uploads01.validation";
 
 const schema = yup.object({
   name: yup
@@ -38,7 +43,11 @@ declare const window: typeof globalThis & {
 export default function ProductWrite(props: IProductWriteProps) {
   const router = useRouter();
   const editorRef = useRef<Editor>(); // 토스트
-  const [files, setFiles] = useState(["", "", ""]);
+
+  // 이미지
+  const [imageUrls, setImageUrls] = useState(["", "", ""]);
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
@@ -70,20 +79,24 @@ export default function ProductWrite(props: IProductWriteProps) {
     setValue("contents", inputs);
     trigger("contents");
   };
-  
 
   // 상품 등록
   const onClickButton = async (data) => {
-    // console.log("check");
+    // 이미지 (0817)
+    const img = await Promise.all(
+      files.map((el) => el && uploadFile({ variables: { file: el } }))
+    );
+    const imgUrl = img.map((el) => (el ? el.data.uploadFile.url : ""));
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
             ...data,
+            images: imgUrl,
           },
         },
       });
-      console.log("asd");
+      console.log("상품등록");
       console.log(result);
       console.log(result.data?.createUseditem._id);
       router.push(`./${result.data?.createUseditem._id}`);
@@ -91,6 +104,39 @@ export default function ProductWrite(props: IProductWriteProps) {
       alert("상품이 등록되지 않았습니다.");
       console.log(error);
     }
+  };
+
+  // 이미지
+  const onChangeFile =
+    (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const isValid = checkValidationImage(file);
+      if (!isValid) return;
+
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = (data) => {
+        if (typeof data.target?.result === "string") {
+          console.log(data.target?.result);
+
+          const tempUrls = [...imageUrls];
+          tempUrls[index] = data.target?.result;
+          setImageUrls(tempUrls);
+
+          const tempFiles = [...files];
+          tempFiles[index] = file;
+          setFiles(tempFiles);
+        }
+      };
+    };
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
+  const onChangeFileUrls = (fileUrl: string, index: number) => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   };
 
   // 상품 수정
@@ -174,11 +220,15 @@ export default function ProductWrite(props: IProductWriteProps) {
       onClickButton={onClickButton}
       onChangeContents={onChangeContents}
       onClickUpdate={onClickUpdate}
+      onChangeFile={onChangeFile}
+      onChangeFileUrls={onChangeFileUrls}
+      // onChangeFile2={onChangeFile2}
       editorRef={editorRef}
       isEdit={props.isEdit}
       // data={props.data}
       // myAddress={myAddress}
       data={data}
+      imageUrls={imageUrls}
     />
   );
 }

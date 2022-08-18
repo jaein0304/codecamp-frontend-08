@@ -42,6 +42,7 @@ export default function ProductDetail() {
     variables: { useditemId: String(router.query.productId) },
     fetchPolicy: "network-only", // 이걸 사용한다
   });
+
   // 상품 구매
   const onClickBuy = async () => {
     try {

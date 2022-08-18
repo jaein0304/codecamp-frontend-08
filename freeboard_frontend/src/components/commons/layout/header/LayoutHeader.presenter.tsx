@@ -7,7 +7,22 @@ import {
   ClipboardCheckIcon,
   CreditCardIcon,
 } from "@heroicons/react/outline";
+import router from "next/router";
+import { gql, useQuery } from "@apollo/client";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../commons/store";
 
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      name
+      userPoint {
+        amount
+      }
+    }
+  }
+`;
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -33,6 +48,11 @@ const solutions = [
   },
 ];
 export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
+  const [accessToken] = useRecoilState(accessTokenState);
+  const { data } = useQuery(FETCH_USER_LOGGED_IN);
+  const onClickMoveLogin = () => {
+    router.push("/login/");
+  };
   return (
     <Popover className="relative bg-black">
       <div className="max-w-8xl mx-auto px-4 sm:px-6">
@@ -59,6 +79,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
             >
               FIREBASE(안함)
             </a> */}
+
             <a
               href="http://localhost:3000/openApi"
               className="text-base font-medium text-white hover:text-yellow-200"
@@ -145,7 +166,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
             >
               Cart
             </a>
-            <a
+            {/* <a
               href="/login/sign-in/"
               className=" 
               ml-8 whitespace-nowrap 
@@ -157,7 +178,16 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps) {
               font-medium text-white hover:bg-indigo-700 hover:text-white"
             >
               Sign in
-            </a>
+            </a> */}
+            {accessToken ? (
+              <div style={{ color: "white" }}>
+                {data?.fetchUserLoggedIn.name}님
+              </div>
+            ) : (
+              <div style={{ color: "white" }} onClick={onClickMoveLogin}>
+                로그인
+              </div>
+            )}
             <a
               href="/login/sign-up/"
               className="

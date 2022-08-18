@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { Modal } from "antd";
-import { stubTrue } from "lodash";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 

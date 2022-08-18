@@ -36,3 +36,13 @@ export const Button = styled.button`
     color: white;
   }
 `;
+
+export const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+export const Images = styled.img`
+  width: 500px;
+  height: 500px;
+  margin: 30px;
+`;
