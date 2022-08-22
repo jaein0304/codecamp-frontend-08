@@ -10,7 +10,11 @@ import { onError } from "@apollo/client/link/error";
 import { createUploadLink } from "apollo-upload-client";
 import { ReactNode, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { userInfoState, accessTokenState } from "../../../../commons/store";
+import {
+  userInfoState,
+  accessTokenState,
+  isLoadedState,
+} from "../../../../commons/store";
 import { GraphQLClient } from "graphql-request";
 import { getAccessToken } from "../../../../commons/libraries/getAccessToken";
 
@@ -22,6 +26,7 @@ interface IApolloSettingProps {
 export default function ApolloSetting(props: IApolloSettingProps) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   // 새로고침 시 useEffect 으로 accessToken 받아옴
   // useEffect(() => {
@@ -36,11 +41,23 @@ export default function ApolloSetting(props: IApolloSettingProps) {
   // }, []);
 
   // 새로운 방식
+  // ================================================= //
+  // [해결방법 1번째 - restoreAccessToken 2번 요청하기]
   useEffect(() => {
-    getAccessToken().then((newAccessToken) => {
-      setAccessToken(newAccessToken);
-    });
+    // getAccessToken().then((newAccessToken) => {
+    //   setAccessToken(newAccessToken);
+    // });
+    //
+    // ================================================= //
+    // [해결방법 2번째 - 나만의 loading 활용하기 ]
+    // getAccessToken().then((newAccessToken) => {
+    //   setAccessToken(newAccessToken);
+    //   setIsLoaded(true);
+    // });
+    // ================================================= //
+    // [해결방법 3번째 - Recoil Selector 활용하기 ]
   }, []);
+
   // 0815
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // 1-1. 에러 캐치 (graphQLErrors)

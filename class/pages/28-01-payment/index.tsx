@@ -7,7 +7,7 @@ declare const window: typeof globalThis & {
 export default function PaymentPage() {
   const onClickPayment = () => {
     const IMP = window.IMP; // 생략 가능
-    IMP.init("imp65274708"); // Example: imp00000000
+    IMP.init("imp65274708"); // Example: imp00000000 // IMP.init(“imp49910675”)
     IMP.request_pay(
       {
         // param
