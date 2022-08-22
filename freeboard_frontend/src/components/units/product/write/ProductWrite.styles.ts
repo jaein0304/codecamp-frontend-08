@@ -139,6 +139,8 @@ export const ImgWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  width: 100%;
+  margin-top: 50px;
 `;
 
 export const Img = styled.img`
@@ -147,4 +149,53 @@ export const Img = styled.img`
   margin-left: 30px;
   margin-right: 30px;
   cursor: pointer;
+`;
+
+export const AddressWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+`;
+
+export const AddressSearchWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const ZipCode = styled.input`
+  width: 77px;
+  height: 52px;
+  /* background-color: #ffffff; */
+  border: 1px solid #bdbdbd;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #bdbdbd;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+`;
+// 버튼으로 하면 안된다 폼때문인가
+export const AddressSearch = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  gap: 10px;
+  color: white;
+  background-color: black;
+  width: 100%;
+  height: 51px;
+`;
+
+export const Address = styled.input`
+  width: 100%;
+  height: 56px;
+  background-color: #e9e9e9;
+  margin-top: 27px;
+  margin-bottom: 24px;
+  border: none;
 `;

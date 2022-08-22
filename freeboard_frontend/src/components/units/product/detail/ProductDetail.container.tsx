@@ -48,9 +48,10 @@ export default function ProductDetail() {
     try {
       await createPointTransactionOfBuyingAndSelling({
         //  if (typeof data.target?.result === "string") {
-        variables: { useritemId: router.query._id },
+        variables: { useritemId: String(router.query.productId) },
       });
       alert("상품 구매가 완료되었습니다.");
+      router.push("/mainpage");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

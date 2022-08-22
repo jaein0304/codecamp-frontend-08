@@ -1,4 +1,5 @@
 import InfiniteScroll from "react-infinite-scroller";
+import TodayList from "../../../../commons/boxes/01/todayList";
 import RecentWatchBox from "../../../../commons/boxes/01/todayList";
 import * as S from "./ProductList.styles";
 
@@ -133,7 +134,7 @@ export default function ProductListUI(props) {
         {/* </S.ProductListWrapper> */}
         {/* )} */}
 
-        <RecentWatchBox />
+        <TodayList />
         <S.ProductListSoldWrapper>
           {props.soldOut && (
             <div>

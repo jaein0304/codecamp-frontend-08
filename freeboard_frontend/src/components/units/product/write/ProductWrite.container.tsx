@@ -37,9 +37,6 @@ const schema = yup.object({
     .required("내용을 입력해주세요."),
 });
 
-declare const window: typeof globalThis & {
-  kakao: any;
-};
 export default function ProductWrite(props: IProductWriteProps) {
   const router = useRouter();
   const editorRef = useRef<Editor>(); // 토스트
@@ -48,6 +45,15 @@ export default function ProductWrite(props: IProductWriteProps) {
   const [imageUrls, setImageUrls] = useState(["", "", ""]);
   const [files, setFiles] = useState<File[]>([]);
   const [uploadFile] = useMutation(UPLOAD_FILE);
+  // 주소
+  const [zipcode, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [GPS, setGPS] = useState({
+    lat: 0,
+    lng: 0,
+  });
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
@@ -80,6 +86,21 @@ export default function ProductWrite(props: IProductWriteProps) {
     trigger("contents");
   };
 
+  // 주소
+  const onClickAddressSearch = () => {
+    setIsOpen((prev) => !prev); // on off
+  };
+
+  const onClickCompleteAddressSearch = (data: any) => {
+    setIsOpen((prev) => !prev);
+    setAddress(data.address);
+    setZipCode(data.zonecode);
+    setAddressDetail("");
+  };
+
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
   // 상품 등록
   const onClickButton = async (data) => {
     // 이미지 (0817)
@@ -93,6 +114,13 @@ export default function ProductWrite(props: IProductWriteProps) {
           createUseditemInput: {
             ...data,
             images: imgUrl,
+            useditemAddress: {
+              zipcode,
+              address,
+              addressDetail,
+              lat: GPS.lat,
+              lng: GPS.lng,
+            },
           },
         },
       });
@@ -168,50 +196,6 @@ export default function ProductWrite(props: IProductWriteProps) {
     }
   };
 
-  // 지도
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=201efd5d14b849dfe6b2fd1350785ee1&autoload=false";
-    document.head.appendChild(script);
-    script.onload = () => {
-      window.kakao.maps.load(function () {
-        const mapContainer = document.getElementById("map");
-        const mapOption = {
-          center: new window.kakao.maps.LatLng(35.1892, 126.8279),
-          level: 3,
-        };
-        const map = new window.kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-        const markerPosition = new window.kakao.maps.LatLng(
-          37.54699,
-          127.09598
-        ); // 마커가 표시될 위치입니다
-
-        // 지도를 클릭한 위치에 표출할 마커입니다
-        const marker = new window.kakao.maps.Marker({
-          // 지도 중심좌표에 마커를 생성합니다
-          position: markerPosition,
-        });
-        // 지도에 마커를 표시합니다
-        marker.setMap(map);
-
-        // 지도에 클릭 이벤트를 등록합니다
-        // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-        window.kakao.maps.event.addListener(
-          map,
-          "click",
-          function (mouseEvent: { latLng: any }) {
-            // 클릭한 위도, 경도 정보를 가져옵니다
-            const latlng = mouseEvent.latLng;
-
-            // 마커 위치를 클릭한 위치로 옮깁니다
-            marker.setPosition(latlng);
-          }
-        );
-      });
-    };
-  }, []);
   return (
     <ProductWriteUI
       register={register}
@@ -229,6 +213,15 @@ export default function ProductWrite(props: IProductWriteProps) {
       // myAddress={myAddress}
       data={data}
       imageUrls={imageUrls}
+      onClickAddressSearch={onClickAddressSearch}
+      onClickCompleteAddressSearch={onClickCompleteAddressSearch}
+      onChangeAddressDetail={onChangeAddressDetail}
+      GPS={GPS}
+      setGPS={setGPS}
+      isOpen={isOpen}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
     />
   );
 }

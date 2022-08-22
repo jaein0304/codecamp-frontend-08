@@ -3,6 +3,9 @@ import * as S from "./ProductWrite.styles";
 import dynamic from "next/dynamic";
 import Uploads02 from "../../../commons/uploads/02/Uploads02.container";
 import { v4 as uuidv4 } from "uuid";
+import KakaoMapPage from "../../map";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 // prettier-ignore
 const ToastEditor = dynamic(() => import("../../../../..//src/commons/libraries/toast"),
   { ssr: false });
@@ -68,27 +71,70 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
           </S.SubmitButton>
         </form>
         <S.GPSWrapper>
-          <S.GPS id="map"></S.GPS>
-          <S.ImgWrapper>
-            {/* {new Array(3).fill(1).map((el, index) => (
-              <Uploads02
-                type="button"
-                key={uuidv4()}
-                index={index}
-                fileUrl={el}
-                onChangeFiles={props.onChangeFile}
-                // onChangeFileUrls={props.onChangeFileUrls}
-                defaultFileUrl={props.data?.fetchUseditem.images?.[index]}
+          <KakaoMapPage
+            address={
+              props.address
+                ? props.address
+                : props.data?.fetchUseditem.useditemAddress?.address || ""
+            }
+            setGps={props?.setGPS}
+          />
+          <S.AddressWrapper>
+            <S.AddressSearchWrapper>
+              <S.ZipCode
+                placeholder="07250"
+                readOnly={true}
+                value={
+                  props.zipcode
+                    ? props.zipcode
+                    : props.data?.fetchUseditem.useditemAddress?.zipcode
+                }
               />
-            ))} */}
-            <input type="file" onChange={props.onChangeFile(0)} />
+              <S.AddressSearch onClick={props.onClickAddressSearch}>
+                우편번호 검색
+              </S.AddressSearch>
+              {props.isOpen && (
+                <Modal
+                  visible={true}
+                  title={"우편번호 검색"}
+                  onOk={props.onClickAddressSearch}
+                  onCancel={props.onClickAddressSearch}
+                >
+                  <DaumPostcode
+                    onComplete={props.onClickCompleteAddressSearch}
+                  />
+                </Modal>
+              )}
+            </S.AddressSearchWrapper>
+            <S.Address
+              readOnly={true}
+              value={
+                props.address ||
+                props.data?.fetchUseditem.useditemAddress?.address ||
+                ""
+              }
+            />
+          </S.AddressWrapper>
+        </S.GPSWrapper>
+        <S.ImgWrapper>
+          {new Array(3).fill(1).map((el, index) => (
+            <Uploads02
+              type="button"
+              key={uuidv4()}
+              index={index}
+              fileUrl={el}
+              onChangeFiles={props.onChangeFile}
+              // onChangeFileUrls={props.onChangeFileUrls}
+              defaultFileUrl={props.data?.fetchUseditem.images?.[index]}
+            />
+          ))}
+          {/* <input type="file" onChange={props.onChangeFile(0)} />
             <input type="file" onChange={props.onChangeFile(1)} />
             <input type="file" onChange={props.onChangeFile(2)} />
             <img src={props.imageUrls[0]} />
             <img src={props.imageUrls[1]} />
-            <img src={props.imageUrls[2]} />
-          </S.ImgWrapper>
-        </S.GPSWrapper>
+            <img src={props.imageUrls[2]} /> */}
+        </S.ImgWrapper>
       </S.Wrapper>
     </>
   );

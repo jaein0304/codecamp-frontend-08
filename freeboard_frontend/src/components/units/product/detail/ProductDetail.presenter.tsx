@@ -4,6 +4,7 @@ import Dompurify from "dompurify";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import router from "next/router";
 import { SideFooter } from "../../myPage/MyPage.styles";
+import KakaoMapPage from "../../map";
 
 export default function ProductDetailUI(props: IProductDetailUIProps) {
   // 25-03-custom-hooks 참고
@@ -37,6 +38,16 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
           )}
           {/* {props.data?.fetchUseditem?.contents}{" "} */}
         </S.Contents>
+      </S.InputWrapper>
+      <S.InputWrapper>
+        {/* <S.Label>위치</S.Label> */}
+        <KakaoMapPage
+          style={{
+            width: "860px",
+            height: "448px",
+          }}
+          address={props.data?.fetchUseditem?.useditemAddress?.address || ""}
+        />
       </S.InputWrapper>
       <S.ImageWrapper>
         {props.data?.fetchUseditem.images

@@ -55,9 +55,9 @@ export const SideMenu = styled.h2`
   cursor: pointer;
 `;
 
-export const SideFooter = styled(ArrowLeftOutlined)`
+export const SideArrow = styled(ArrowLeftOutlined)`
   /* justify-content: left; */
   cursor: pointer;
-  margin-top: 200px;
+  margin-top: 100px;
   margin-right: 250px;
 `;

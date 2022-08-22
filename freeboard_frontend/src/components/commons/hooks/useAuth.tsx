@@ -22,7 +22,7 @@ export function useAuth() {
         console.log(newAccessToken);
         if (!newAccessToken) {
           alert("로그인을 먼저 해주세요.");
-          router.push("/login");
+          router.push("/login/sign-in");
         }
       });
     }

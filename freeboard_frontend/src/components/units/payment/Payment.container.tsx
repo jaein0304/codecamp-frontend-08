@@ -32,7 +32,7 @@ export default function Payment() {
     }
 
     const IMP = window.IMP;
-    IMP.init("imp49910675");
+    IMP.init("imp49910675"); // // IMP.init(“imp49910675”)
     IMP.request_pay(
       {
         // param

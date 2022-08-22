@@ -1,5 +1,5 @@
 import Editor from "@toast-ui/editor";
-import { ChangeEvent, MutableRefObject } from "react";
+import { ChangeEvent, Dispatch, MutableRefObject, SetStateAction } from "react";
 import {
   FieldValues,
   FormState,
@@ -26,6 +26,19 @@ export interface IProductWriteUIProps {
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeFileUrls: (fileUrl: string, index: number) => void;
   imageUrls: string[];
+  onClickAddressSearch: () => void;
+  onClickCompleteAddressSearch: (data: any) => void;
+  onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  isOpen: boolean;
+  zipcode: string;
+  address: string;
+  addressDetail: string;
+  setGPS: Dispatch<
+    SetStateAction<{
+      lat: number;
+      lng: number;
+    }>
+  >;
 }
 
 export interface IProductWriteProps {
