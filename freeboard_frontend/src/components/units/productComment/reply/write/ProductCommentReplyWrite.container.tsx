@@ -1,34 +1,28 @@
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
+import ProductCommentReplyWriteUI from "./ProductCommentReplyWrite.presenter";
 import {
-  IMutation,
-  IMutationCreateUseditemQuestionAnswerArgs,
-} from "../../../../../commons/types/generated/types";
-import ProductCommentReplyUI from "./ProductCommentReplyWrite.presenter";
-import {
-  CREATE_USED_ITEM_QUESTION_ANSWER,
+  CREATE_USEDITEM_QUESTION_ANSWER,
   FETCH_USEDITEM_QUESTIONS_ANSWERS,
+  UPDATE_USEDITEM_QUESTION_ANSWER,
 } from "./ProductCommentReplyWrite.queries";
+import { IProductCommentReplyWriteProps } from "./ProductCommentReplyWrite.types";
 
-export default function ProductCommentReply(props) {
-  const [contents, setContents] = useState("");
+export default function ProductCommentReplyWrite(props) {
+  const [myAnswer, setMyAnswer] = useState("");
+  const [createUseditemQuestionAnswer] = useMutation(CREATE_USEDITEM_QUESTION_ANSWER);
+  const [updateUseditemQuestionAnswer] = useMutation(UPDATE_USEDITEM_QUESTION_ANSWER);
 
-  const [createUseditemQuestionAnswer] = useMutation<
-    Pick<IMutation, "createUseditemQuestionAnswer">,
-    IMutationCreateUseditemQuestionAnswerArgs
-  >(CREATE_USED_ITEM_QUESTION_ANSWER);
-
-  const onChangeReply = (e) => {
-    setContents(e.target.value);
+  const onChangeMyAnswer = (event) => {
+    setMyAnswer(event.target.value);
   };
-
-  const onClickRegisterReply = async () => {
+  const onClickRegisterAnswer = async () => {
     try {
       await createUseditemQuestionAnswer({
         variables: {
           useditemQuestionId: props.el?._id,
           createUseditemQuestionAnswerInput: {
-            contents,
+            contents: myAnswer,
           },
         },
         refetchQueries: [
@@ -38,17 +32,43 @@ export default function ProductCommentReply(props) {
           },
         ],
       });
-      alert("답글 등록이 완료되었습니다.");
-      props.serIsOpenAnswer(false);
+      alert("대댓글 등록");
+      props.setIsReply?.(false);
+      // props.ReplyEl?.setIsReply(false);
     } catch (error) {
-      alert("답글 등록이 완료되지 않았습니다.");
+      alert(error.message);
     }
   };
 
+  const onClickUpdateAnswer = async (event) => {
+    try {
+      await updateUseditemQuestionAnswer({
+        variables: {
+          updateUseditemQuestionAnswerInput: { contents: myAnswer },
+          useditemQuestionAnswerId: event.target.id,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEM_QUESTIONS_ANSWERS,
+            variables: {
+              useditemQuestionId: props.replyEl?.useditemQuestion._id,
+            },
+          },
+        ],
+      });
+      props.setIsAnswerEdit?.(false);
+      alert("대댓글 수정");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
-    <ProductCommentReplyUI
-      onChangeReply={onChangeReply}
-      onClickRegisterReply={onClickRegisterReply}
+    <ProductCommentReplyWriteUI
+      onChangeMyAnswer={onChangeMyAnswer}
+      onClickRegisterAnswer={onClickRegisterAnswer}
+      onClickUpdateAnswer={onClickUpdateAnswer}
+      isAnswerEdit={props.isAnswerEdit}
+      replyEl={props.replyEl}
     />
   );
 }

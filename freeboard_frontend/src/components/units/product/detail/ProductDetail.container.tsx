@@ -14,7 +14,8 @@ import {
   CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
   DELETE_USED_ITEM,
   FETCH_USED_ITEM,
-  TOGGLE_USEDITEM_PICK,
+  FETCH_USED_ITEM_PICK,
+  TOGGLE_USED_ITEM_PICK,
 } from "./ProductDetail.queries";
 
 export default function ProductDetail() {
@@ -23,7 +24,7 @@ export default function ProductDetail() {
   const [toggleUseditemPick] = useMutation<
     Pick<IMutation, "toggleUseditemPick">,
     IMutationToggleUseditemPickArgs
-  >(TOGGLE_USEDITEM_PICK);
+  >(TOGGLE_USED_ITEM_PICK);
 
   const [createPointTransactionOfBuyingAndSelling] = useMutation<
     Pick<IMutation, "createPointTransactionOfBuyingAndSelling">,
@@ -35,14 +36,45 @@ export default function ProductDetail() {
     IMutationDeleteUseditemArgs
   >(DELETE_USED_ITEM);
 
-  const { data } = useQuery<
-    Pick<IQuery, "fetchUseditem">,
-    IQueryFetchUseditemArgs
-  >(FETCH_USED_ITEM, {
-    variables: { useditemId: String(router.query.productId) },
-    fetchPolicy: "network-only", // 이걸 사용한다
-  });
+  const { data } = useQuery<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs>(
+    FETCH_USED_ITEM,
+    {
+      variables: { useditemId: String(router.query.productId) },
+      fetchPolicy: "network-only", // 이걸 사용한다
+    }
+  );
+  // 찜
+  const onClickPick = async () => {
+    try {
+      await toggleUseditemPick({
+        variables: { useditemId: String(router.query.productId) },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM_PICK,
+            variables: { useditemId: String(router.query.productId) },
+          },
+        ],
 
+        // optimisticResponse: { toggleUseditemPick: data?.fetchUseditem.pickedCount ? 0 : 1 },
+
+        // update(cache, { data }) {
+        //   cache.writeQuery({
+        //     query: FETCH_USED_ITEM,
+        //     variables: { useditemId: String(router.query.productId) },
+        //     data: {
+        //       fetchUseditem: {
+        //         _id: router.query.productId,
+        //         __typename: "Useditem", // backend08에서 확인 가능
+        //         pickedCount: data?.toggleUseditemPick,
+        //       },
+        //     },
+        //   });
+        // },
+      });
+    } catch (error) {
+      if (error instanceof Error) alert(error);
+    }
+  };
   // 상품 구매
   const onClickBuy = async () => {
     try {
@@ -91,6 +123,7 @@ export default function ProductDetail() {
       onClickMoveToEdit={onClickMoveToEdit}
       onClickBuy={onClickBuy}
       // isEdit={undefined}
+      onClickPick={onClickPick}
     />
   );
 }

@@ -49,11 +49,11 @@ export const FETCH_POINT_CHARGE = gql`
 `;
 
 // 구매내역
-export const FETCH_BUY = gql`
-query fetchPointTransactionsOfBuying
-`;
+// export const FETCH_BUY = gql`
+// query fetchPointTransactionsOfBuying
+// `;
 
-// 판매내역
-export const FETCH_SELL = gql`
-query fetchPointTransactionsOfSelling
-`;
+// // 판매내역
+// export const FETCH_SELL = gql`
+// query fetchPointTransactionsOfSelling
+// `;

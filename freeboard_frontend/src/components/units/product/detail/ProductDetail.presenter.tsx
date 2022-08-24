@@ -5,6 +5,7 @@ import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import router from "next/router";
 import { SideFooter } from "../../myPage/MyPage.styles";
 import KakaoMapPage from "../../map";
+import { HeartOutlined, StarOutlined } from "@ant-design/icons";
 
 export default function ProductDetailUI(props: IProductDetailUIProps) {
   // 25-03-custom-hooks 참고
@@ -39,6 +40,10 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
           {/* {props.data?.fetchUseditem?.contents}{" "} */}
         </S.Contents>
       </S.InputWrapper>
+      <S.ProductProfileLike onClick={props.onClickPick}>
+        찜 : {props.data?.fetchUseditem.pickedCount}
+        <HeartOutlined />
+      </S.ProductProfileLike>
       <S.InputWrapper>
         {/* <S.Label>위치</S.Label> */}
         <KakaoMapPage

@@ -5,4 +5,5 @@ export interface IProductDetailUIProps {
   onClickDelete: () => Promise<void>;
   onClickMoveToEdit: () => void;
   onClickBuy: () => void;
+  onClickPick: () => Promise<void>;
 }

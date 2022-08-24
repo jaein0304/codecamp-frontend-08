@@ -51,7 +51,9 @@ export const CreatedAt = styled.div`
   margin-top: 20px;
 `;
 export const ButtonWrapper = styled.div`
-  margin-bottom: 60px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
 `;
 export const Button = styled.img`
   width: 18px;

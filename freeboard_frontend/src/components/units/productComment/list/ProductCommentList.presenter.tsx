@@ -1,10 +1,8 @@
 import InfiniteScroll from "react-infinite-scroller";
-import ProductCommentListUIItem from "./ProductCommentList.presenteritem";
+import ProductCommentListUIItem from "./ProductCommentList.presenterItem";
 import { IProductCommentListUIProps } from "./ProductCommentList.types";
 
-export default function ProductCommentListUI(
-  props: IProductCommentListUIProps
-) {
+export default function ProductCommentListUI(props: IProductCommentListUIProps) {
   return (
     <>
       <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true}>

@@ -30,3 +30,16 @@ export const UPDATE_USED_ITEM_QUESTION = gql`
     }
   }
 `;
+
+export const FETCH_USED_ITEM_QUESTION_ANSWERS = gql`
+  query fetchUseditemQuestionAnswers($page: Int, $useditemQuestionId: ID!) {
+    fetchUseditemQuestionAnswers(page: $page, useditemQuestionId: $useditemQuestionId) {
+      _id
+      contents
+      createdAt
+      useditemQuestion {
+        _id
+      }
+    }
+  }
+`;

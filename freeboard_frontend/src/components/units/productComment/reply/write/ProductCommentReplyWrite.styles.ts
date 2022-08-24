@@ -1,56 +1,49 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
+  width: 1200px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Arrow = styled.img`
+  width: 15px;
+  height: 17px;
+`;
+export const InputCommentBox = styled.div`
+  width: 1096px;
+  height: 117px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 1200px;
-  margin-top: 100px;
-  /* border: 3px solid black; */
+  margin-left: 25px;
 `;
-
-export const Label = styled.label`
-  width: 1200px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  /* padding-right: 30px; */
-`;
-export const InputWrapper = styled.div``;
-
-export const Input = styled.input`
-  width: 180px;
-  height: 52px;
+export const CommentInput = styled.input`
+  height: 65px;
+  border: 1px solid #bdbdbd;
+  resize: none;
   padding-left: 20px;
-  border: 1px solid lightgray;
-  margin-right: 20px;
+  font-size: 16px;
+  line-height: 24px;
 `;
-export const ContentsWrapper = styled.div`
-  border: 1px solid lightgray;
-`;
-
-export const Contents = styled.textarea`
-  width: 1200px;
-  min-height: 108px;
-  padding: 20px;
-  border: none;
-  border-bottom: 1px solid lightgray;
-`;
-
-export const ButtonWrapper = styled.div`
-  width: 1200px;
+export const CommentInfo = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  margin: 10px;
 `;
-export const Button = styled.button`
-  width: 100px;
-  padding: 10px;
-  margin-left: 10px;
+export const CommentCountInput = styled.div`
+  width: 1005px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  border-top: none;
+`;
+export const MyButton = styled.button`
+  width: 91px;
+  height: 52px;
+  text-align: center;
+  display: block;
   border: 3px solid black;
-  border-radius: 20px;
+  cursor: pointer;
+  color: white;
+  background-color: black;
 `;
