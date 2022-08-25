@@ -27,24 +27,16 @@ export const UserInfo = styled.div`
   margin-left: 16px;
 `;
 export const UserName = styled.div`
-  font-family: Noto Sans CJK KR;
-  font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
 `;
 export const Comment = styled.div`
-  font-family: Noto Sans CJK KR;
-  font-style: normal;
-  font-weight: normal;
   font-size: 16px;
   line-height: 24px;
   margin-top: 4px;
 `;
 export const CreatedAt = styled.div`
-  font-family: Noto Sans CJK KR;
-  font-style: normal;
-  font-weight: normal;
   font-size: 12px;
   line-height: 18px;
   color: #bdbdbd;

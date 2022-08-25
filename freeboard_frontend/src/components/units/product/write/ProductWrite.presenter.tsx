@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import KakaoMapPage from "../../map";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
+import Uploads01 from "../../../commons/uploads/01/Uploads01.container";
 // prettier-ignore
 const ToastEditor = dynamic(() => import("../../../../..//src/commons/libraries/toast"),
   { ssr: false });
@@ -63,9 +64,7 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
             defaultValue={props.data?.fetchUseditem.contents}
           />
           <S.SubmitButton
-            onClick={props.handleSubmit(
-              props.isEdit ? props.onClickUpdate : props.onClickButton
-            )}
+            onClick={props.handleSubmit(props.isEdit ? props.onClickUpdate : props.onClickButton)}
           >
             {props.isEdit ? "수정하기" : "등록하기"}
           </S.SubmitButton>
@@ -85,14 +84,10 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
                 placeholder="07250"
                 readOnly={true}
                 value={
-                  props.zipcode
-                    ? props.zipcode
-                    : props.data?.fetchUseditem.useditemAddress?.zipcode
+                  props.zipcode ? props.zipcode : props.data?.fetchUseditem.useditemAddress?.zipcode
                 }
               />
-              <S.AddressSearch onClick={props.onClickAddressSearch}>
-                우편번호 검색
-              </S.AddressSearch>
+              <S.AddressSearch onClick={props.onClickAddressSearch}>우편번호 검색</S.AddressSearch>
               {props.isOpen && (
                 <Modal
                   visible={true}
@@ -100,26 +95,28 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
                   onOk={props.onClickAddressSearch}
                   onCancel={props.onClickAddressSearch}
                 >
-                  <DaumPostcode
-                    onComplete={props.onClickCompleteAddressSearch}
-                  />
+                  <DaumPostcode onComplete={props.onClickCompleteAddressSearch} />
                 </Modal>
               )}
             </S.AddressSearchWrapper>
             <S.Address
               readOnly={true}
-              value={
-                props.address ||
-                props.data?.fetchUseditem.useditemAddress?.address ||
-                ""
-              }
+              value={props.address || props.data?.fetchUseditem.useditemAddress?.address || ""}
             />
           </S.AddressWrapper>
         </S.GPSWrapper>
         <S.ImgWrapper>
-          {new Array(3).fill(1).map((el, index) => (
+          {props.fileUrls.map((el, index) => (
+            <Uploads01
+              key={uuidv4()}
+              index={index}
+              fileUrl={el}
+              onChangeFileUrls={props.onChangeFileUrls}
+            />
+          ))}
+          {/* {new Array(3).fill(1).map((el, index) => (
             <Uploads02
-              type="button"
+              // type="button"
               key={uuidv4()}
               index={index}
               fileUrl={el}
@@ -127,13 +124,7 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
               // onChangeFileUrls={props.onChangeFileUrls}
               defaultFileUrl={props.data?.fetchUseditem.images?.[index]}
             />
-          ))}
-          {/* <input type="file" onChange={props.onChangeFile(0)} />
-            <input type="file" onChange={props.onChangeFile(1)} />
-            <input type="file" onChange={props.onChangeFile(2)} />
-            <img src={props.imageUrls[0]} />
-            <img src={props.imageUrls[1]} />
-            <img src={props.imageUrls[2]} /> */}
+          ))} */}
         </S.ImgWrapper>
       </S.Wrapper>
     </>

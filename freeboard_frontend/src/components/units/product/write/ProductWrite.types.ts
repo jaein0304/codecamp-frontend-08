@@ -1,11 +1,6 @@
 import Editor from "@toast-ui/editor";
 import { ChangeEvent, Dispatch, MutableRefObject, SetStateAction } from "react";
-import {
-  FieldValues,
-  FormState,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from "react-hook-form";
+import { FieldValues, FormState, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IProductWriteUIProps {
@@ -21,10 +16,8 @@ export interface IProductWriteUIProps {
   onClickButton: (data: any) => void;
   onClickUpdate: (data: any) => Promise<void>;
   onChangeContents: (value: string) => void;
-  onChangeFile: (
-    index: number
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFileUrls: (fileUrl: string, index: number) => void;
+  onChangeFile: (index: number) => (event: ChangeEvent<HTMLInputElement>) => void;
+
   imageUrls: string[];
   onClickAddressSearch: () => void;
   onClickCompleteAddressSearch: (data: any) => void;
@@ -39,6 +32,9 @@ export interface IProductWriteUIProps {
       lng: number;
     }>
   >;
+
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
+  fileUrls: string[];
 }
 
 export interface IProductWriteProps {
@@ -46,14 +42,9 @@ export interface IProductWriteProps {
   data?: Pick<IQuery, "fetchUseditem">;
 }
 
-export interface IProductUpdateInput {
-  name?: string;
-  remarks?: string;
-  contents?: string;
-  price?: number;
-}
-
-// 다 입력하면 버튼 색 바꾸기, 아직 안함(08/13)
-export interface ISubmitButtonProps {
-  iseActive: boolean;
-}
+// export interface IProductUpdateInput {
+//   name?: string;
+//   remarks?: string;
+//   contents?: string;
+//   price?: number;
+// }
