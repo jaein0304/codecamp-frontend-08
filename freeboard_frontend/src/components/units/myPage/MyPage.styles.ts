@@ -25,7 +25,7 @@ export const MainWrapper = styled.div`
   height: 700px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   margin-top: 50px;
 `;
 
@@ -60,4 +60,21 @@ export const SideArrow = styled(ArrowLeftOutlined)`
   cursor: pointer;
   margin-top: 100px;
   margin-right: 250px;
+`;
+export const SelectList = styled.div`
+  width: 400px;
+  margin-left: 5%;
+  padding: 30px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+  /* :hover  {
+    color: orange; // <Thing> when hovered
+  } */
+`;
+
+export const List = styled.div`
+  cursor: pointer;
 `;
